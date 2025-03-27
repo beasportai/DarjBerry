@@ -34,20 +34,20 @@ const Plants = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.7 }}
-        className="mt-8"
+        className="mt-8 hidden"
       >
         <h3
           id="plants"
-          className="text-5xl text-green-800 text-center font-bold mb-16"
+          className="text-3xl md:text-5xl text-green-800 text-center font-bold mb-16"
         >
-          Plantito Plants
+          Fresh Blueberries
         </h3>
-        <div className="flex flex-wrap justify-center items-center gap-4 mb-8">
-          {['All', 'Indoor', 'Outdoor', 'Indoor/Outdoor'].map((item, index) => (
+        <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4 mb-8">
+          {['All', '125gm', '250gm', '500gm', '1kg', '5kg', '10kg', '100kg'].map((item, index) => (
             <button
               key={index}
               onClick={() => handleWorkFilter(item)}
-              className={`px-6 py-2 rounded-lg transition-all duration-300 ${
+              className={`px-3 py-1 md:px-6 md:py-2 rounded-lg transition-all duration-300 ${
                 activeFilter === item
                   ? 'bg-green-800 text-white'
                   : 'bg-gray-200 text-gray-700 hover:bg-green-700 hover:text-white'
@@ -61,12 +61,12 @@ const Plants = () => {
         <motion.div
           animate={animateCard}
           transition={{ duration: 0.4, delayChildren: 0.4 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:w-[80%] mx-auto gap-8"
+          className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:w-[80%] max-md:px-8 mx-auto gap-4 md:gap-8"
         >
           {filterWork?.map((product) => (
             <motion.div
               key={product._id}
-              className="bg-white rounded-lg shadow-sm aspect-[3/5] overflow-hidden group cursor-pointer"
+              className="bg-white rounded-lg shadow-sm h-[400px] overflow-hidden group cursor-pointer"
               onClick={() => router.push(`/product/${product._id}`)}
             >
               <div className="relative group overflow-hidden h-[70%]">
@@ -89,16 +89,16 @@ const Plants = () => {
                   priority
                 />
               </div>
-              <div className="p-4 bg-black/80 h-full">
+              <div className="p-2 md:p-4 bg-black/80 space-y-2 h-full">
                 <div className="flex justify-between items-center">
-                  <h4 className="text-xl text-white font-semibold">
+                  <h4 className="md:text-xl text-white font-semibold">
                     {product.variety.name}
                   </h4>
                   <p className="text-green-600 font-medium">
-                    ${product.variety.price}
+                    ₹{product.variety.price}
                   </p>
                 </div>
-                <p className="text-gray-300 text-sm">
+                <p className="text-gray-300 text-xs md:text-sm">
                   {product.variety.description}
                 </p>
               </div>
@@ -107,51 +107,57 @@ const Plants = () => {
         </motion.div>
       </motion.div>
 
-      <h3 className="text-5xl text-green-800 text-center font-bold my-16">
-        Best Seller Plants
-      </h3>
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:w-[80%] mx-auto gap-8"
+        className="mt-16 md:mt-24"
       >
-        {tempBestsellers?.map((bestseller) => (
-          <motion.div
-            key={bestseller._id}
-            className="bg-white rounded-lg shadow-sm aspect-[3/5] overflow-hidden group"
-          >
-            <div className="relative group overflow-hidden h-[70%]">
-              <div className="absolute group-hover:hidden top-2 right-2 z-10 gap-2 mt-2">
-                <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">
-                  Best Seller
-                </span>
+        <h3 className="text-3xl md:text-5xl text-green-800 text-center font-bold mb-8 md:mb-16">
+          Best Seller Blueberries
+        </h3>
+        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:w-[80%] max-md:px-8 mx-auto gap-4 md:gap-8">
+          {tempBestsellers?.map((bestseller) => (
+            <motion.div
+              key={bestseller._id}
+              className="bg-white rounded-lg shadow-sm h-[400px] overflow-hidden group cursor-pointer"
+              onClick={() => router.push(`/product/${bestseller._id}`)}
+            >
+              <div className="relative group overflow-hidden h-[70%]">
+                <div className="absolute group-hover:hidden top-2 right-2 z-10">
+                  <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">
+                    Best Seller
+                  </span>
+                </div>
+                <Image
+                  src={bestseller.image}
+                  alt={bestseller.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-110"
+                  priority
+                />
               </div>
-              <Image
-                src={bestseller.image}
-                alt={bestseller.name}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-cover transition-transform duration-300 group-hover:scale-110"
-                priority
-              />
-            </div>
-            <div className="p-4 bg-black/80 h-full">
-              <div className="flex justify-between items-center">
-                <h4 className="text-xl text-white font-semibold">
-                  {bestseller.name}
-                </h4>
-                <p className="text-green-600 font-medium">
-                  ${bestseller.price}
+              <div className="p-2 md:p-4 bg-black/80 space-y-2 h-full">
+                <div className="flex justify-between items-center">
+                  <h4 className="md:text-xl text-white font-semibold">
+                    {bestseller.name}
+                  </h4>
+                  <p className="text-green-600 font-medium">
+                    ₹{bestseller.price}
+                  </p>
+                </div>
+                <div className="flex items-center gap-1">
+                  <span className="text-yellow-400">★</span>
+                  <span className="text-gray-300 text-xs md:text-sm">{bestseller.rating}</span>
+                </div>
+                <p className="text-gray-300 text-xs md:text-sm">
+                  {bestseller.description}
                 </p>
               </div>
-              <div className="flex items-center mt-2">
-                <span className="text-yellow-400">★</span>
-                <span className="ml-1 text-white">{bestseller.rating}</span>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </motion.div>
     </section>
   )

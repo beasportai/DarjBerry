@@ -1,9 +1,16 @@
 @import "tailwindcss";
 
+@layer base {
+  .wrapper {
+    @apply max-w-[1440px] mx-auto;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 :root{
   --primary-bg :#F8F8F8;
@@ -18,4 +25,21 @@ body {
 * {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee.pause {
+  animation-play-state: paused;
 }

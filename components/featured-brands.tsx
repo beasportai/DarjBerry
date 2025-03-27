@@ -41,13 +41,13 @@ const FeaturedBrands = () => {
       viewport={{ once: true }}
     >
       <motion.p
-        className="text-[1.6rem] font-semibold text-[#a4a4a4] uppercase"
+        className="text-sm md:text-3xl font-semibold text-[#a4a4a4] uppercase"
         variants={itemVariants}
       >
         as Featured in
       </motion.p>
       <motion.div
-        className="mt-12 flex flex-wrap justify-center items-center gap-24 md:gap-16 sm:gap-12 xs:gap-8"
+        className="mt-12 flex flex-wrap justify-center items-center gap-6 md:gap-16 sm:gap-12 xs:gap-8"
         variants={containerVariants}
       >
         {brands.map((brand, index) => (
@@ -55,7 +55,7 @@ const FeaturedBrands = () => {
             key={index}
             variants={itemVariants}
             transition={{ duration: 0.2 }}
-            className="relative w-80 md:w-60 sm:w-48 xs:w-40 h-12"
+            className="relative w-18 md:w-60 sm:w-48 xs:w-40 h-12"
           >
             <Image
               src={brand.src}

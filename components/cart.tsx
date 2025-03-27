@@ -91,9 +91,9 @@ const Cart = () => {
                     <div className="flex-1">
                       <div className="flex justify-between items-start">
                         <h5 className="text-xl text-primary">{item.name}</h5>
-                        <h4 className="text-xl text-primary">${item.price}</h4>
+                        <h4 className="text-xl text-primary">₹{item.price}</h4>
                       </div>
-                      <p className="text-lg mt-1">{item.potColor} Ceramic Pot</p>
+                      <p className="text-lg mt-1">{item.weight}</p>
                       <div className="flex justify-between items-center mt-4">
                         <div>
                           <div className="flex items-center border border-gray-300 rounded">

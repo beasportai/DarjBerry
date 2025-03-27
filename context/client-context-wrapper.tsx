@@ -5,7 +5,7 @@ const ClientContextWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
     <StateContext>
       <Toaster />
-      <div className="flex flex-col max-w-[1440px] mx-auto">
+      <div className="flex flex-col">
         {children}
       </div>
     </StateContext>

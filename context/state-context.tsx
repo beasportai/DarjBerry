@@ -7,7 +7,7 @@ interface Product {
   name: string;
   price: number;
   quantity: number;
-  potColor: string;
+  weight: string;
   image: string;
 }
 
@@ -60,7 +60,8 @@ export const StateContext: React.FC<StateContextProps> = ({ children }) => {
   }, [showCart, active]);
 
   const onAdd = (product: Product, quantity: number) => {
-    const checkProductInCart = cartItems.find((item) => item.id === product.id);
+    const uniqueId = `${product.id}-${product.weight}`;
+    const checkProductInCart = cartItems.find((item) => item.id === uniqueId);
 
     setTotalPrice(
       (prevTotalPrice) => prevTotalPrice + product.price * quantity
@@ -69,7 +70,7 @@ export const StateContext: React.FC<StateContextProps> = ({ children }) => {
 
     if (checkProductInCart) {
       const updatedCartItems = cartItems.map((cartProduct) => {
-        if (product.id === cartProduct.id) {
+        if (uniqueId === cartProduct.id) {
           const newQty = cartProduct.quantity + quantity;
           return {
             ...cartProduct,
@@ -85,11 +86,12 @@ export const StateContext: React.FC<StateContextProps> = ({ children }) => {
       setCartItems(updatedCartItems);
     } else {
       product.quantity = quantity;
+      product.id = uniqueId;
       setCartItems([...cartItems, { ...product }]);
     }
 
     toast.success(
-      `${qty} ${product.name} + ${product.potColor} pot added to the cart.`
+      `${qty} ${product.name} (${product.weight}) added to the cart.`
     );
   };
 

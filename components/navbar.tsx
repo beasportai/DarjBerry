@@ -20,16 +20,16 @@ const Navbar = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.3 }}
-      className="sticky top-0 left-0 right-0 z-[211] bg-[var(--primary-bg)] h-[70px] flex justify-between items-center max-md:px-8"
+      className="sticky top-0 left-0 right-0 z-[211] wrapper bg-[var(--primary-bg)] w-full h-[70px] flex justify-between items-center px-8"
     >
-        <nav className="hidden lg:flex items-center">
+        <nav className="hidden md:flex items-center">
           <ul className="flex items-center gap-12">
             <li>
               <Link
                 href="/#plants"
                 className="text-gray-600 font-medium transition-colors duration-300"
               >
-                Plants
+                Blueberries
               </Link>
             </li>
             <li>
@@ -51,28 +51,34 @@ const Navbar = () => {
           </ul>
         </nav>
 
-        <div className="lg:hidden">
+        <div className="md:hidden">
           <div
-            className={`cursor-pointer transition-all duration-500 ease-in-out ${
-              active ? 'rotate-90' : ''
-            }`}
+            className={`cursor-pointer transition-all duration-500 ease-in-out`}
             onClick={handleClick}
           >
-            <div className="w-8 h-0.5 bg-primary mb-1.5 transition-all duration-300"></div>
-            <div className="w-8 h-0.5 bg-primary mb-1.5 transition-all duration-300"></div>
-            <div className="w-8 h-0.5 bg-primary transition-all duration-300"></div>
+            {active ? (
+              <div className="z-20 relative w-8 h-8">
+                <div className="absolute top-1/2 left-0 w-full h-0.5 bg-black rotate-45"></div>
+                <div className="absolute top-1/2 left-0 w-full h-0.5 bg-black -rotate-45"></div>
+              </div>
+            ) : (
+              <>
+                <div className="w-8 h-0.5 bg-black mb-1.5 transition-all duration-300"></div>
+                <div className="w-8 h-0.5 bg-black mb-1.5 transition-all duration-300"></div>
+                <div className="w-8 h-0.5 bg-black transition-all duration-300"></div>
+              </>
+            )}
           </div>
         </div>
 
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-4 cursor-pointer">
+        <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center gap-4 cursor-pointer">
           <Image
             src="/images/plantito-logo.svg"
-            alt="Plantito Logo"
+            alt="Moberry Logo"
             width={32}
             height={32}
           />
-          <span className="text-2xl text-green-800 sm:text-xl">Plantito</span>
+          <span className="text-2xl text-green-800 sm:text-xl">Moberry</span>
         </Link>
 
         <button
@@ -81,13 +87,13 @@ const Navbar = () => {
           onClick={() => setShowCart(true)}
         >
           <AiOutlineShopping />
-          <span className="absolute -right-2 -top-2 text-sm text-white bg-secondary w-[18px] h-[18px] rounded-full flex items-center justify-center font-semibold">
+          <span className="absolute -right-2 -top-2 text-sm text-green-800 w-[18px] h-[18px] rounded-full flex items-center justify-center font-semibold">
             {totalQuantities}
           </span>
         </button>
 
         <motion.nav
-          className={`lg:hidden fixed left-0 h-screen top-0 bg-[var(--primary-bg)] w-[70%] flex flex-col items-center justify-start pt-20 z-10 transition-transform duration-500 ease-in-out ${
+          className={`md:hidden fixed left-0 h-screen top-0 bg-white w-[80%] flex flex-col items-center justify-center z-10 transition-transform duration-500 ease-in-out ${
             active ? 'translate-x-0' : '-translate-x-full'
           }`}
         >
@@ -98,26 +104,26 @@ const Navbar = () => {
             >
               <Image
                 src="/images/plantito-logo.svg"
-                alt="Plantito Logo"
+                alt="Moberry Logo"
                 width={32}
                 height={32}
               />
-              <span className="text-2xl text-secondary">Plantito</span>
+              <span className="text-2xl text-green-800">Moberry</span>
             </div>
           </Link>
-          <ul className="flex flex-col items-center gap-24">
+          <ul className="flex flex-col items-center gap-12">
             <li onClick={() => setActive(false)}>
               <Link
                 href="/#plants"
-                className="text-4xl font-medium text-primary hover:text-secondary transition-colors duration-300"
+                className="text-2xl hover:text-green-800 transition-all"
               >
-                Plants
+                Blueberries
               </Link>
             </li>
             <li onClick={() => setActive(false)}>
               <Link
                 href="/about"
-                className="text-4xl font-medium text-primary hover:text-secondary transition-colors duration-300"
+                className="text-2xl hover:text-green-800 transition-all"
               >
                 About
               </Link>
@@ -125,7 +131,7 @@ const Navbar = () => {
             <li onClick={() => setActive(false)}>
               <Link
                 href="/#contact"
-                className="text-4xl font-medium text-primary hover:text-secondary transition-colors duration-300"
+                className="text-2xl hover:text-green-800 transition-all"
               >
                 Contact us
               </Link>
@@ -138,7 +144,7 @@ const Navbar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[2] lg:hidden"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[2] md:hidden"
             onClick={() => setActive(false)}
           />
         )}
