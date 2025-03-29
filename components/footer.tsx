@@ -152,7 +152,7 @@ const Footer = () => {
               <li>
                 <Link
                   className="max-md:text-sm text-gray-500 hover:text-gray-700 transition-colors duration-300"
-                  href="linkedin.com"
+                  href="https://wa.me/917047474942"
                 >
                   Careers
                 </Link>
@@ -160,7 +160,7 @@ const Footer = () => {
               <li>
                 <Link
                   className="max-md:text-sm text-gray-500 hover:text-gray-700 transition-colors duration-300"
-                  href="mailto:beasportai@gmail.com"
+                  href="mailto:fursatin@gmail.com"
                 >
                   Have business needs? Get the freshest blueberries to you
                 </Link>
