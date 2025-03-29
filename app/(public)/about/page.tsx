@@ -15,18 +15,7 @@ const About = () => {
         Moberry brings you the freshest, juiciest blueberries packed with flavor and nutrition.
         Grown with care and harvested at peak ripeness, our berries deliver the perfect balance
         of sweetness and tartness. Whether for snacking, smoothies, or baking, Moberry ensures
-        every bite is a taste of pure, natural goodness. This website is built using Next.js,
-        Sanity, Scss, and Stripe. Disclaimer the images used in this website are not mine,
-        it belongs to{" "}
-        <Link
-          href="https://www.beasportai.com/"
-          target="_blank"
-          rel="noreferrer noopener"
-          className="text-blue-600 hover:text-blue-800 underline"
-        >
-          https://www.beasportai.com/
-        </Link>
-        .
+        every bite is a taste of pure, natural goodness.
       </p>
     </motion.div>
   );
