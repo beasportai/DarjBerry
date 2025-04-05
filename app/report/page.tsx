@@ -17,7 +17,6 @@ import {
 const BlueberryThreeScenarioAnalysis = () => {
   const [activeTab, setActiveTab] = useState("financial");
 
-  // Research question and hypothesis from input data
   const researchQuestion = {
     title: "Hydroponic Blueberry Farming",
     date: "04/04/2025",
@@ -32,7 +31,7 @@ const BlueberryThreeScenarioAnalysis = () => {
     opportunity:
       "Build a high-tech hydroponic Blueberry Farm of the tastiest varieties, including Emerald, Jewel, and Biloxi.",
     solution:
-      "Import mature blueberry plants from Peru and grow them in a climate-controlled hydroponic farm setup.",
+      "Import mature blueberry plants from Peru. Grow them in India in a climate-controlled hydroponic farm setup.",
   };
 
   // Financial data for three scenarios from our analysis
@@ -147,12 +146,8 @@ const BlueberryThreeScenarioAnalysis = () => {
     <div className="w-full p-4 space-y-6">
       {/* Research Question and Hypothesis */}
       <div className="bg-blue-50 p-4 rounded-lg shadow border border-blue-200">
-        <h2 className="text-xl font-bold mb-2 text-blue-800">
-          Research Question & Hypothesis ({researchQuestion.date})
-        </h2>
-        <h3 className="text-lg font-semibold mb-1">
-          Proposal for {researchQuestion.title}
-        </h3>
+        <h2 className="text-xl font-bold mb-2">{researchQuestion.title}</h2>
+        <h4 className="text-lg font-semibold mb-1">{researchQuestion.date}</h4>
 
         <h4 className="font-medium mt-3 mb-1">Premise:</h4>
         <ul className="list-disc pl-6 space-y-1 mb-3">
@@ -169,12 +164,10 @@ const BlueberryThreeScenarioAnalysis = () => {
         <h4 className="font-medium mt-3 mb-1">Proposed Solution:</h4>
         <p className="text-sm">{researchQuestion.solution}</p>
 
-        <div className="mt-4 bg-yellow-50 p-2 rounded-md border border-yellow-200">
-          <p className="text-sm font-medium text-yellow-800">
-            What we are most excited about is that the payback period is
-            significantly reduced when importing mature plants from Peru.
-          </p>
-        </div>
+        <p className="text-sm mt-3 mb-1">
+          What we are most excited about is that the payback period is
+          significantly reduced when importing mature plants from Peru.
+        </p>
       </div>
 
       {/* Tabs for different analyses */}
