@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
+    "postinstall": "prisma generate",
     "test:flow": "node test-server.js",
     "test:run": "curl -X POST http://localhost:4000/test/run",
     "test:status": "curl http://localhost:4000/test/status"
