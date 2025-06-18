@@ -29,13 +29,13 @@ const Footer = () => {
             <div className="flex items-start gap-2.5 mb-6 md:mb-16 cursor-pointer">
               <Image
                 src="/images/plantito-logo.svg"
-                alt="Moberry Logo"
+                alt="Darjberry Logo"
                 width={40}
                 height={40}
                 className="w-10 h-10"
               />
               <span className="text-2xl sm:text-4xl text-green-800">
-                Moberry
+                Darjberry
               </span>
             </div>
           </Link>
@@ -44,7 +44,9 @@ const Footer = () => {
             <li>
               <Link
                 className="max-md:text-sm text-gray-500 hover:text-gray-700 transition-colors duration-300"
-                href="#"
+                href="https://instagram.com/darjberry"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <BsInstagram className="size-5 md:size-6" />
               </Link>
@@ -52,7 +54,9 @@ const Footer = () => {
             <li>
               <Link
                 className="max-md:text-sm text-gray-500 hover:text-gray-700 transition-colors duration-300"
-                href="#"
+                href="https://facebook.com/darjberry"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <BsFacebook className="size-5 md:size-6" />
               </Link>
@@ -60,14 +64,16 @@ const Footer = () => {
             <li>
               <Link
                 className="max-md:text-sm text-gray-500 hover:text-gray-700 transition-colors duration-300"
-                href="#"
+                href="https://twitter.com/darjberry"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <BsTwitter className="size-5 md:size-6" />
               </Link>
             </li>
           </ul>
           <p className="text-xs md:text-base text-gray-500 leading-relaxed md:mt-auto">
-            Copyright &copy; 2022 by Fursat Farms Private Limited All rights
+            Copyright &copy; 2024 by Fursat Farms Private Limited All rights
             reserved.
           </p>
         </motion.div>
@@ -82,22 +88,22 @@ const Footer = () => {
           <p className="text-sm md:text-xl md:font-medium mb-8 md:mb-10">Contact us</p>
           <address className="not-italic text-xs md:text-base leading-relaxed">
             <p className="mb-6">
-              Fursat Farms Private Limited, 3rd Floor, Dwarika Heights, Siliguri
+              Fursat Farms Private Limited, 3rd Floor, Dwarika Heights, Near Vega Circle Sevoke Road, Siliguri
               - 734005
             </p>
             <p>
               <Link
                 className="max-md:text-sm text-gray-500 hover:text-gray-700 transition-colors duration-300"
-                href="tel:401-102-7063"
+                href="tel:+917047474942"
               >
-                +917047474942
+                +91 7047 474 942
               </Link>
               <br />
               <Link
                 className="max-md:text-sm text-gray-500 hover:text-gray-700 transition-colors duration-300"
-                href="mailto:plantito@gmail.com"
+                href="mailto:info@darjberry.com"
               >
-                fursatin@gmail.com
+                info@darjberry.com
               </Link>
             </p>
           </address>
@@ -146,7 +152,7 @@ const Footer = () => {
                   className="max-md:text-sm text-gray-500 hover:text-gray-700 transition-colors duration-300"
                   href="/about"
                 >
-                  About Moberry
+                  About Darjberry
                 </Link>
               </li>
               <li>
@@ -160,9 +166,9 @@ const Footer = () => {
               <li>
                 <Link
                   className="max-md:text-sm text-gray-500 hover:text-gray-700 transition-colors duration-300"
-                  href="mailto:fursatin@gmail.com"
+                  href="/fresh-berries"
                 >
-                  Have business needs? Get the freshest blueberries to you
+                  Fresh Berries - Premium Blueberry Store
                 </Link>
               </li>
             </ul>
@@ -180,7 +186,7 @@ const Footer = () => {
               <li>
                 <Link
                   className="max-md:text-sm text-gray-500 hover:text-gray-700 transition-colors duration-300"
-                  href="wa.me/+917047474942"
+                  href="https://wa.me/917047474942"
                 >
                   Help center
                 </Link>

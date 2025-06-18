@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darjberry Flow Test Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+        }
+        
+        .header p {
+            color: #718096;
+            font-size: 1.1rem;
+        }
+        
+        .controls {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: #48bb78;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #38a169;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #4299e1;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #3182ce;
+        }
+        
+        .btn-danger {
+            background: #f56565;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #e53e3e;
+        }
+        
+        .status {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .stat-card {
+            background: #f7fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        
+        .stat-label {
+            color: #718096;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        .results {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .test-result {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+        
+        .test-success {
+            background: #f0fff4;
+            border-color: #48bb78;
+        }
+        
+        .test-error {
+            background: #fed7d7;
+            border-color: #f56565;
+        }
+        
+        .test-icon {
+            margin-right: 12px;
+            font-size: 1.2rem;
+        }
+        
+        .test-details {
+            flex: 1;
+        }
+        
+        .test-step {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .test-data {
+            font-size: 0.9rem;
+            color: #718096;
+            background: rgba(0, 0, 0, 0.05);
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 8px;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #48bb78;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .log {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 1rem;
+        }
+        
+        .timestamp {
+            color: #a0aec0;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🫐 Darjberry Flow Test Dashboard</h1>
+            <p>Automated testing for the complete user journey from landing to subscription</p>
+        </div>
+        
+        <div class="controls">
+            <button id="runTest" class="btn btn-primary">
+                🚀 Run Complete Flow Test
+            </button>
+            <button id="checkStatus" class="btn btn-secondary">
+                📊 Check Status
+            </button>
+            <button id="cleanup" class="btn btn-danger">
+                🧹 Cleanup Browser
+            </button>
+            <div id="testStatus" style="margin-left: auto; font-weight: 600;"></div>
+        </div>
+        
+        <div class="status">
+            <h3>📈 Test Summary</h3>
+            <div class="status-grid">
+                <div class="stat-card">
+                    <div id="totalTests" class="stat-value">-</div>
+                    <div class="stat-label">Total Tests</div>
+                </div>
+                <div class="stat-card">
+                    <div id="passedTests" class="stat-value">-</div>
+                    <div class="stat-label">Passed</div>
+                </div>
+                <div class="stat-card">
+                    <div id="failedTests" class="stat-value">-</div>
+                    <div class="stat-label">Failed</div>
+                </div>
+                <div class="stat-card">
+                    <div id="passRate" class="stat-value">-</div>
+                    <div class="stat-label">Pass Rate</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="results">
+            <h3>🧪 Test Results</h3>
+            <div id="resultsContainer">
+                <p style="color: #718096; text-align: center; padding: 2rem;">
+                    Click "Run Complete Flow Test" to start testing
+                </p>
+            </div>
+            
+            <div id="logContainer" class="log" style="display: none;">
+                <div id="logContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:4000';
+        let isTestRunning = false;
+        
+        document.getElementById('runTest').addEventListener('click', runTest);
+        document.getElementById('checkStatus').addEventListener('click', checkStatus);
+        document.getElementById('cleanup').addEventListener('click', cleanup);
+        
+        async function runTest() {
+            if (isTestRunning) return;
+            
+            isTestRunning = true;
+            updateTestStatus('🔄 Test Running...');
+            document.getElementById('runTest').innerHTML = '<div class="loading"></div>Running Tests...';
+            document.getElementById('runTest').disabled = true;
+            
+            try {
+                const response = await fetch(`${API_BASE}/test/run`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                const result = await response.json();
+                displayResults(result);
+                
+                if (result.summary) {
+                    updateSummary(result.summary);
+                }
+                
+                updateTestStatus(result.status === 'completed' ? '✅ Test Completed' : '❌ Test Failed');
+                
+            } catch (error) {
+                console.error('Test failed:', error);
+                updateTestStatus('❌ Test Server Error');
+                displayError(error.message);
+            } finally {
+                isTestRunning = false;
+                document.getElementById('runTest').innerHTML = '🚀 Run Complete Flow Test';
+                document.getElementById('runTest').disabled = false;
+            }
+        }
+        
+        async function checkStatus() {
+            try {
+                const response = await fetch(`${API_BASE}/test/status`);
+                const result = await response.json();
+                
+                updateTestStatus(result.isRunning ? '🔄 Test Running...' : '⏸️ Test Idle');
+                
+                if (result.summary) {
+                    updateSummary(result.summary);
+                }
+                
+                if (result.lastResults && result.lastResults.length > 0) {
+                    displayResults({ results: result.lastResults, status: 'partial' });
+                }
+                
+            } catch (error) {
+                updateTestStatus('❌ Server Offline');
+                console.error('Status check failed:', error);
+            }
+        }
+        
+        async function cleanup() {
+            try {
+                await fetch(`${API_BASE}/test/cleanup`, { method: 'POST' });
+                updateTestStatus('🧹 Browser Cleaned');
+            } catch (error) {
+                console.error('Cleanup failed:', error);
+            }
+        }
+        
+        function updateTestStatus(status) {
+            document.getElementById('testStatus').textContent = status;
+        }
+        
+        function updateSummary(summary) {
+            document.getElementById('totalTests').textContent = summary.total || '-';
+            document.getElementById('passedTests').textContent = summary.passed || '-';
+            document.getElementById('failedTests').textContent = summary.failed || '-';
+            document.getElementById('passRate').textContent = summary.passRate || '-';
+        }
+        
+        function displayResults(result) {
+            const container = document.getElementById('resultsContainer');
+            container.innerHTML = '';
+            
+            if (!result.results || result.results.length === 0) {
+                container.innerHTML = '<p style="color: #718096; text-align: center; padding: 2rem;">No test results available</p>';
+                return;
+            }
+            
+            result.results.forEach(test => {
+                const testElement = document.createElement('div');
+                testElement.className = `test-result ${test.status === 'success' ? 'test-success' : 'test-error'}`;
+                
+                testElement.innerHTML = `
+                    <div class="test-icon">${test.status === 'success' ? '✅' : '❌'}</div>
+                    <div class="test-details">
+                        <div class="test-step">${test.step}</div>
+                        <div class="timestamp">${new Date(test.timestamp).toLocaleTimeString()}</div>
+                        ${test.data ? `<div class="test-data">${JSON.stringify(test.data, null, 2)}</div>` : ''}
+                        ${test.error ? `<div class="test-data" style="color: #f56565;">${test.error}</div>` : ''}
+                    </div>
+                `;
+                
+                container.appendChild(testElement);
+            });
+        }
+        
+        function displayError(error) {
+            const container = document.getElementById('resultsContainer');
+            container.innerHTML = `
+                <div class="test-result test-error">
+                    <div class="test-icon">❌</div>
+                    <div class="test-details">
+                        <div class="test-step">Test Server Error</div>
+                        <div class="test-data" style="color: #f56565;">${error}</div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Auto-check status on load
+        checkStatus();
+        
+        // Auto-refresh status every 10 seconds
+        setInterval(checkStatus, 10000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model WhatsAppUser {
+  id            String   @id @default(cuid())
+  phoneNumber   String   @unique
+  name          String?
+  email         String?
+  state         String   @default("NEW") // NEW, SELECTING_SERVICE, SIP_ONBOARDING, etc.
+  location      String?
+  landSize      Float?   // in acres
+  landType      String?  // TEA_ESTATE, AGRICULTURE, VACANT, DARJEELING_LEASE
+  leadScore     Int      @default(0)
+  lastInteraction DateTime @default(now())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  referralCode  String?  @unique
+  referredBy    String?
+
+  messages      WhatsAppMessage[]
+  landAnalysis  LandAnalysis[]
+  investments   Investment[]
+  sipInvestments SIPInvestment[]
+  berryPlots    BerryPlot[]
+  memberBenefits MemberBenefits?
+
+  @@map("whatsapp_users")
+}
+
+model WhatsAppMessage {
+  id          String   @id @default(cuid())
+  phoneNumber String
+  messageType String   // SENT, RECEIVED
+  content     String
+  metadata    String?  // JSON for additional data
+  timestamp   DateTime @default(now())
+
+  user WhatsAppUser @relation(fields: [phoneNumber], references: [phoneNumber])
+
+  @@map("whatsapp_messages")
+}
+
+model LandAnalysis {
+  id           String   @id @default(cuid())
+  phoneNumber  String
+  latitude     Float
+  longitude    Float
+  location     String
+  district     String?
+  soilPh       Float?
+  climateScore Int?
+  suitability  String?  // EXCELLENT, GOOD, MODERATE, POOR
+  createdAt    DateTime @default(now())
+
+  user WhatsAppUser @relation(fields: [phoneNumber], references: [phoneNumber])
+
+  @@map("land_analysis")
+}
+
+model Investment {
+  id               String   @id @default(cuid())
+  phoneNumber      String
+  plantsCount      Int
+  acres            Float
+  totalCost        Float
+  expectedYield    Float
+  expectedRevenue  Float
+  roiYears         Float
+  status           String   @default("PROPOSED") // PROPOSED, ACCEPTED, REJECTED
+  proposalSentAt   DateTime @default(now())
+  responseAt       DateTime?
+
+  user WhatsAppUser @relation(fields: [phoneNumber], references: [phoneNumber])
+
+  @@map("investments")
+}
+
+model Lead {
+  id           String   @id @default(cuid())
+  phoneNumber  String
+  name         String?
+  email        String?
+  status       String   @default("NEW") // NEW, CONTACTED, PROPOSAL_SENT, VISIT_SCHEDULED, CONVERTED, LOST
+  source       String   @default("WHATSAPP")
+  assignedTo   String?
+  nextAction   String?
+  notes        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("leads")
+}
+
+model Analytics {
+  id          String   @id @default(cuid())
+  phoneNumber String
+  event       String   // MESSAGE_RECEIVED, LOCATION_SHARED, PROPOSAL_GENERATED, etc.
+  funnelStage String
+  metadata    String?  // JSON
+  timestamp   DateTime @default(now())
+
+  @@map("analytics")
+}
+
+model SIPInvestment {
+  id                String   @id @default(cuid())
+  phoneNumber       String
+  packageType       String   // DAILY_STANDARD, DAILY_PREMIUM, CUSTOM
+  dailyAmount       Float    // ₹10,000 daily amount
+  totalInvested     Float    @default(0)
+  startDate         DateTime @default(now())
+  status            String   @default("ACTIVE") // ACTIVE, PAUSED, CANCELLED
+  nextPaymentDate   DateTime
+  subscriptionId    String?  // Cashfree subscription ID
+  
+  user WhatsAppUser @relation(fields: [phoneNumber], references: [phoneNumber])
+  
+  @@map("sip_investments")
+}
+
+model BerryPlot {
+  id              String   @id @default(cuid())
+  phoneNumber     String
+  plotNumber      String   @unique
+  location        String   @default("Your Own Land") // "Your Own Land" or "Darjeeling Tea Estate"
+  latitude        Float    @default(0) // User's land coordinates
+  longitude       Float    @default(0)
+  plantCount      Int      // Number of plants allocated
+  plotSize        Float    // in acres
+  acquisitionDate DateTime @default(now())
+  
+  user WhatsAppUser @relation(fields: [phoneNumber], references: [phoneNumber])
+  
+  @@map("berry_plots")
+}
+
+model MemberBenefits {
+  id              String   @id @default(cuid())
+  phoneNumber     String   @unique
+  farmStayNights  Int      @default(2)
+  berryBoxes      Int      @default(4) // Annual berry boxes
+  teaEstateTours  Int      @default(1) // Annual tea estate tours
+  referralCredits Float    @default(0)
+  longevityTests  Int      @default(0) // For premium members
+  
+  user WhatsAppUser @relation(fields: [phoneNumber], references: [phoneNumber])
+  
+  @@map("member_benefits")
+}
+
+model DarjeelingInterest {
+  id            String   @id @default(cuid())
+  phoneNumber   String   @unique
+  name          String?
+  email         String?
+  location      String?
+  preferredSize String?  // Acres interested in leasing
+  registeredAt  DateTime @default(now())
+  notified      Boolean  @default(false)
+  
+  @@map("darjeeling_interest")
+}
+
+model SEOPage {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  template        String
+  state           String
+  city            String?
+  district        String?
+  metaTitle       String
+  metaDescription String
+  h1Title         String
+  content         String   // JSON content
+  schemaMarkup    String   // JSON schema
+  keywords        String   // Comma-separated keywords
+  isPublished     Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([state, city])
+  @@index([template])
+  @@index([isPublished])
+  @@map("seo_pages")
+}
+
+model LocationData {
+  id                String   @id @default(cuid())
+  state             String
+  city              String
+  district          String
+  population        Int      @default(0)
+  climateScore      Int      @default(50)
+  soilPh            Float    @default(5.0)
+  teaEstatesCount   Int      @default(0)
+  latitude          Float
+  longitude         Float
+  governmentSchemes String   // JSON array
+  nearbyFarms       String   // JSON array
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([state])
+  @@map("location_data")
+}
+
+model KeywordTracking {
+  id           String    @id @default(cuid())
+  keyword      String
+  searchVolume Int       @default(0)
+  difficulty   Int       @default(50)
+  currentRank  Int?
+  targetPage   String?
+  lastChecked  DateTime?
+  createdAt    DateTime  @default(now())
+
+  @@index([keyword])
+  @@map("keyword_tracking")
+}
+
+model LandOption {
+  id               String   @id @default(cuid())
+  name             String   // e.g., "Ambari T-State Land"
+  location         String   // e.g., "Ambari, West Bengal"
+  state            String   
+  district         String   
+  totalAcres       Float    // e.g., 10
+  availableAcres   Float    // e.g., 10
+  minimumPurchase  Float    // e.g., 0.5 acres
+  pricePerAcre     Float    // e.g., 65 lakhs per 0.5 acre = 130 lakhs per acre
+  totalPrice       Float    // e.g., 13 crores for 10 acres
+  landType         String   // FREEHOLD, LEASEHOLD, T_STATE
+  plantsPerAcre    Int      @default(2500)
+  latitude         Float
+  longitude        Float
+  features         String   // JSON array of features
+  amenities        String   // JSON array of amenities
+  documents        String   // JSON array of available documents
+  status           String   @default("AVAILABLE") // AVAILABLE, SOLD_OUT, COMING_SOON
+  isActive         Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  landAllocations LandAllocation[]
+
+  @@index([state, district])
+  @@index([status])
+  @@map("land_options")
+}
+
+model LandAllocation {
+  id              String   @id @default(cuid())
+  landOptionId    String
+  phoneNumber     String
+  acres           Float    // How many acres allocated
+  plantsCount     Int      // Number of plants in this allocation
+  purchasePrice   Float    // Price paid for this allocation
+  purchaseDate    DateTime @default(now())
+  plotNumbers     String   // JSON array of plot numbers
+  status          String   @default("ACTIVE") // ACTIVE, TRANSFERRED, CANCELLED
+  
+  landOption      LandOption @relation(fields: [landOptionId], references: [id])
+  
+  @@index([phoneNumber])
+  @@map("land_allocations")
+}

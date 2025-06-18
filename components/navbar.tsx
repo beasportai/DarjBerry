@@ -26,10 +26,18 @@ const Navbar = () => {
           <ul className="flex items-center gap-12">
             <li>
               <Link
-                href="/#plants"
+                href="/#investment"
                 className="text-gray-600 font-medium transition-colors duration-300"
               >
-                Blueberries
+                Investment
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/#products"
+                className="text-gray-600 font-medium transition-colors duration-300"
+              >
+                Fresh Berries
               </Link>
             </li>
             <li>
@@ -74,11 +82,11 @@ const Navbar = () => {
         <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center gap-4 cursor-pointer">
           <Image
             src="/images/plantito-logo.svg"
-            alt="Moberry Logo"
+            alt="Darjberry Logo"
             width={32}
             height={32}
           />
-          <span className="text-2xl text-green-800 sm:text-xl">Moberry</span>
+          <span className="text-2xl text-green-800 sm:text-xl">Darjberry</span>
         </Link>
 
         <button
@@ -104,20 +112,28 @@ const Navbar = () => {
             >
               <Image
                 src="/images/plantito-logo.svg"
-                alt="Moberry Logo"
+                alt="Darjberry Logo"
                 width={32}
                 height={32}
               />
-              <span className="text-2xl text-green-800">Moberry</span>
+              <span className="text-2xl text-green-800">Darjberry</span>
             </div>
           </Link>
           <ul className="flex flex-col items-center gap-12">
             <li onClick={() => setActive(false)}>
               <Link
-                href="/#plants"
+                href="/#investment"
                 className="text-2xl hover:text-green-800 transition-all"
               >
-                Blueberries
+                Investment
+              </Link>
+            </li>
+            <li onClick={() => setActive(false)}>
+              <Link
+                href="/#products"
+                className="text-2xl hover:text-green-800 transition-all"
+              >
+                Fresh Berries
               </Link>
             </li>
             <li onClick={() => setActive(false)}>

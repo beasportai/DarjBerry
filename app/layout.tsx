@@ -16,8 +16,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Moberry Blueberry",
-  description: "Tastiest Blueberries ",
+  title: "Darjberry - ₹37.5L Annual Returns | Blueberry Farming Investment",
+  description: "Join India's premium blueberry farming revolution. ₹6L investment → ₹3.75L annual returns from Year 3. 250 bushes, complete setup, tax-free income.",
+  keywords: "darjberry, blueberry farming investment, ₹37.5L returns, agricultural investment, tax free income, northeast india farming",
+  icons: {
+    icon: [
+      { url: '/images/plantito-logo.svg', sizes: '32x32', type: 'image/svg+xml' },
+      { url: '/images/plantito-logo.svg', sizes: '16x16', type: 'image/svg+xml' }
+    ],
+    apple: '/images/plantito-logo.svg',
+  },
 };
 
 export default function RootLayout({
