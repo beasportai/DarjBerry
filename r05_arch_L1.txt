@@ -1,0 +1,292 @@
+DARJBERRY - ARCHITECTURE L1 (HIGH-LEVEL)
+
+## System Architecture Overview
+
+### Architecture Principles
+1. **Mobile-First**: All interfaces optimized for mobile devices
+2. **Offline-First**: Critical operations work without internet
+3. **Event-Driven**: Loosely coupled services communicating via events
+4. **Multi-Tenant**: Secure data isolation between customers
+5. **API-First**: All functionality exposed via APIs
+
+## High-Level Components
+
+### 1. Client Applications
+
+#### Customer Mobile App (PWA)
+- Next.js with offline service workers
+- Responsive design for web + mobile
+- Push notifications via FCM
+- Local storage for offline viewing
+
+#### Operations Dashboard (Web)
+- Next.js admin portal
+- Real-time updates via WebSockets
+- Role-based access control
+- Advanced data visualizations
+
+#### Field Mobile App (Native)
+- React Native for offline capability
+- SQLite for local data storage
+- Background sync when online
+- Camera/GPS integration
+
+### 2. API Gateway Layer
+- Next.js API routes as primary gateway
+- Rate limiting per tenant
+- API key management
+- Request/response transformation
+- Circuit breaker patterns
+
+### 3. Core Services
+
+#### Customer Service
+- User management and authentication
+- Farm ownership and agreements
+- Payment history and documents
+- Communication preferences
+
+#### Farm Service
+- Farm profiles and metadata
+- Infrastructure details
+- Plant inventory management
+- Health scoring algorithms
+
+#### Operations Service
+- Task scheduling and assignment
+- Visit tracking and documentation
+- Maintenance protocols
+- Resource allocation
+
+#### Financial Service
+- Payment processing
+- Revenue calculation engine
+- Distribution management
+- Tax document generation
+
+#### Analytics Service
+- Data aggregation pipelines
+- ML model serving
+- Report generation
+- Predictive insights
+
+### 4. Integration Layer
+
+#### WhatsApp Integration
+- Business API webhook handler
+- Message template management
+- Media handling for photos
+- Conversation state management
+
+#### Payment Gateway
+- Razorpay integration
+- Webhook processing
+- Reconciliation engine
+- Refund handling
+
+#### Satellite Services
+- Google Earth Engine connector
+- Image processing pipeline
+- Feasibility analysis engine
+- Change detection alerts
+
+#### Weather Services
+- Multi-source aggregation
+- Location-based queries
+- Alert generation logic
+- Historical data storage
+
+### 5. Data Layer
+
+#### Primary Database (PostgreSQL)
+- Core transactional data
+- Multi-tenant schema design
+- Row-level security
+- Read replicas for scaling
+
+#### Cache Layer (Redis)
+- Session management
+- API response caching
+- Real-time metrics
+- Pub/sub for events
+
+#### Object Storage (S3-compatible)
+- Farm photos and videos
+- Legal documents
+- Reports and exports
+- Backup archives
+
+#### Time-Series Database (InfluxDB)
+- Sensor data
+- Weather metrics
+- Performance metrics
+- Agricultural measurements
+
+### 6. Infrastructure Services
+
+#### Message Queue (RabbitMQ/SQS)
+- Async task processing
+- Event distribution
+- Retry mechanisms
+- Dead letter queues
+
+#### Background Jobs (BullMQ)
+- Scheduled maintenance
+- Report generation
+- Notification dispatch
+- Data synchronization
+
+#### Search Engine (Elasticsearch)
+- Full-text search
+- Geo-spatial queries
+- Analytics queries
+- Log aggregation
+
+## System Interactions
+
+### Customer Journey Flow
+```
+Customer App → API Gateway → Customer Service → Database
+                    ↓               ↓
+                Analytics ←── Farm Service ←── External APIs
+```
+
+### Field Operations Flow
+```
+Field App → Local DB → Sync Service → Operations Service
+              ↓                            ↓
+           Offline Queue              Task Assignment
+                                           ↓
+                                    Notification Service
+```
+
+### Financial Flow
+```
+Payment Gateway → Webhook → Financial Service → Distribution Engine
+                                ↓                      ↓
+                          Revenue Calculator    Customer Wallet
+```
+
+## Security Architecture
+
+### Authentication & Authorization
+- JWT-based authentication
+- OAuth2 for third-party integrations
+- Role-based access control (RBAC)
+- API key management for services
+
+### Data Security
+- Encryption at rest (AES-256)
+- TLS 1.3 for data in transit
+- PII data masking
+- Audit logging
+
+### Infrastructure Security
+- VPC isolation
+- Web Application Firewall
+- DDoS protection
+- Regular security audits
+
+## Scalability Strategy
+
+### Horizontal Scaling
+- Stateless API services
+- Database read replicas
+- CDN for static assets
+- Queue-based processing
+
+### Performance Optimization
+- Edge caching
+- Database query optimization
+- Lazy loading strategies
+- Image optimization pipeline
+
+### High Availability
+- Multi-AZ deployment
+- Health check monitoring
+- Automated failover
+- Disaster recovery plan
+
+## Development & Deployment
+
+### Tech Stack
+- **Frontend**: Next.js 14, React Native, TailwindCSS
+- **Backend**: Node.js, Express, Prisma ORM
+- **Database**: PostgreSQL, Redis, InfluxDB
+- **Infrastructure**: Vercel/AWS, Docker, Kubernetes
+- **Monitoring**: Sentry, DataDog, CloudWatch
+
+### CI/CD Pipeline
+- Git-based workflows
+- Automated testing
+- Staging environment
+- Blue-green deployments
+- Rollback mechanisms
+
+### Development Practices
+- Microservices architecture
+- API versioning
+- Feature flags
+- A/B testing framework
+- Comprehensive logging
+
+## Integration Architecture
+
+### External API Management
+- Circuit breakers for resilience
+- Response caching strategies
+- Fallback mechanisms
+- Rate limit handling
+- Error retry logic
+
+### Event-Driven Architecture
+- Event sourcing for audit trail
+- CQRS for read/write separation
+- Eventual consistency model
+- Saga pattern for transactions
+
+### Data Synchronization
+- Change data capture (CDC)
+- Conflict resolution strategies
+- Batch vs real-time sync
+- Data consistency checks
+
+## Monitoring & Observability
+
+### Application Monitoring
+- APM with transaction tracing
+- Error tracking and alerting
+- Performance metrics
+- User experience monitoring
+
+### Infrastructure Monitoring
+- Resource utilization
+- Network performance
+- Database performance
+- Queue depths
+
+### Business Monitoring
+- KPI dashboards
+- Anomaly detection
+- Trend analysis
+- Predictive alerts
+
+## Compliance & Governance
+
+### Data Privacy
+- GDPR compliance framework
+- Data retention policies
+- Right to deletion
+- Data portability
+
+### Audit & Compliance
+- Transaction audit logs
+- Access control logs
+- Compliance reporting
+- Regular audits
+
+### Disaster Recovery
+- RPO: 1 hour
+- RTO: 4 hours
+- Daily backups
+- Geo-redundant storage

@@ -1,0 +1,113 @@
+DARJBERRY - DOMAIN ANALYSIS
+
+## Agricultural Domain Knowledge
+
+### Blueberry Cultivation Specifics
+- Soil Requirements: Acidic pH (4.5-5.5), well-drained, high organic matter
+- Climate Needs: 400-1200 chill hours, protected from extreme heat
+- Water Requirements: 1-2 inches per week, consistent moisture critical during fruiting
+- Harvest Window: 60-90 days from flower to harvest
+- Productive Lifespan: 15-20 years with proper care
+- Yield Expectations: 2-5 kg per plant after maturity (year 3-4)
+
+
+### Protected Cultivation Technology
+- Polyhouse Benefits: Climate control, pest reduction, water efficiency, extended growing season
+- Drip Irrigation: 30-50% water savings, precise nutrient delivery, reduced disease
+- Fogger Systems: Humidity control, temperature reduction, microclimate management
+- Infrastructure Lifespan: 10-15 years for polyhouse structure
+
+### Indian Agricultural Context
+- Tax Benefits: Section 10(1) Income Tax Act - agricultural income exempt
+- Capital Gains: Section 54B provides exemption on reinvestment in agricultural land
+- Land Laws: State-specific regulations on agricultural land ownership and leasing
+- Minimum Land Requirements: 0.5-1 acre for viable commercial operation
+
+## Business Model Domain
+
+### Managed Farming Models
+- Revenue Sharing: Industry standard 20-30%, our 10% is highly competitive
+- Contract Farming: Legal framework under state APMC acts
+- Input Supply Models: Company provides all inputs, recovers from revenue
+- Risk Sharing: Company bears operational risk, landowner bears land/weather risk
+
+### Agricultural Finance
+- Working Capital Cycle: High upfront investment, returns start year 2-3
+- Asset Financing: Plants as biological assets, depreciation considerations
+- Insurance Products: Crop insurance, weather-based insurance availability
+- Government Subsidies: Horticulture mission schemes, drip irrigation subsidies
+
+### Market Dynamics
+- Blueberry Market: ₹800-1500/kg retail, ₹400-800/kg wholesale
+- Import Substitution: 95% of Indian blueberries currently imported
+- Export Potential: Middle East, Europe markets accessible from India
+- Value Addition: Frozen, dried, juice, cosmetics - 3-5X value multiplication
+
+## Technology Domain
+
+### Precision Agriculture
+- Satellite Analytics: NDVI for vegetation health, soil moisture mapping
+- IoT Integration: Soil sensors, weather stations, automated irrigation
+- Data Requirements: Historical weather (10 years), soil composition, water availability
+- ML Applications: Yield prediction, disease detection, harvest optimization
+
+### Platform Requirements
+- Multi-tenant Architecture: Separate data for each farm/landowner
+- Real-time Sync: Field data collection in offline mode, sync when online
+- Document Management: Legal agreements, certificates, reports storage
+- Payment Integration: Automated revenue distribution, tax compliance
+
+### Scalability Considerations
+- Operational Scalability: One agronomist can manage 10-15 farms
+- Geographic Expansion: Similar climate zones identified across India
+- Technology Scalability: Cloud-native architecture for 1000+ farms
+- Process Standardization: SOPs for all operations, training modules
+
+## Legal & Compliance Domain
+
+### Agricultural Regulations
+- Land Use: Agricultural land use restrictions, conversion permissions
+- Environmental: Water usage permits, pesticide regulations
+- Organic Certification: 3-year conversion period, documentation requirements
+- Export Compliance: APEDA registration, GlobalGAP certification
+
+### Contract Law
+- Managed Farming Agreement: Service contract, not lease or partnership
+- Dispute Resolution: Arbitration clauses, jurisdiction considerations
+- Termination Clauses: Exit options, asset transfer, notice periods
+- IP Protection: Proprietary cultivation methods, data ownership
+
+### Tax Implications
+- GST on Services: 18% on management fee portion
+- Agricultural Income: Computation, documentation requirements
+- TDS Provisions: Not applicable on agricultural income
+- Corporate Structure: Optimal structure for tax efficiency
+
+## Risk Domain
+
+### Agricultural Risks
+- Climate: Unexpected weather events, climate change impacts
+- Biological: Pests, diseases, plant mortality
+- Market: Price volatility, demand fluctuations
+- Operational: Labor availability, input cost inflation
+
+### Mitigation Strategies
+- Diversification: Multiple locations, staggered planting
+- Insurance: Comprehensive coverage including weather derivatives
+- Contracts: Long-term supply agreements, price floors
+- Technology: Early warning systems, preventive protocols
+
+## Success Factors
+
+### Critical Success Factors
+1. Agronomic Expertise: Experienced team, continuous learning
+2. Technology Adoption: Seamless platform, data-driven decisions
+3. Financial Discipline: Cost control, efficient capital allocation
+4. Market Access: Reliable buyers, fair price realization
+5. Farmer Trust: Transparent operations, consistent communication
+
+### Competitive Moat
+- First Mover: Limited competition in managed blueberry farming
+- Technology Edge: Integrated platform vs traditional methods
+- Network Effects: Shared learning, bulk purchasing power
+- Brand Value: Trust and credibility in farming community

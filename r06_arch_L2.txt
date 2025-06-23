@@ -1,0 +1,1033 @@
+DARJBERRY - ARCHITECTURE L2 (GRANULAR DESIGN)
+
+## Detailed System Architecture
+
+### 1. Frontend Architecture
+
+#### 1.1 Customer Portal (Next.js PWA)
+```
+/app
+├── (auth)
+│   ├── login/page.tsx
+│   ├── register/page.tsx
+│   └── forgot-password/page.tsx
+├── (dashboard)
+│   ├── layout.tsx (auth guard)
+│   ├── page.tsx (overview)
+│   ├── farm/
+│   │   ├── [id]/page.tsx
+│   │   ├── timeline/page.tsx
+│   │   └── health/page.tsx
+│   ├── financials/
+│   │   ├── page.tsx
+│   │   ├── statements/page.tsx
+│   │   └── tax-docs/page.tsx
+│   └── support/
+│       ├── page.tsx
+│       └── tickets/[id]/page.tsx
+├── api/
+│   ├── auth/[...nextauth]/route.ts
+│   ├── farms/route.ts
+│   ├── payments/webhook/route.ts
+│   └── satellite/analyze/route.ts
+└── components/
+    ├── ui/ (shadcn components)
+    ├── farm/ (farm-specific)
+    └── charts/ (data viz)
+```
+
+**State Management**:
+- Zustand for global state
+- React Query for server state
+- Local storage for offline data
+
+**PWA Configuration**:
+```javascript
+// next.config.js
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === 'development',
+  runtimeCaching: [
+    {
+      urlPattern: /^https:\/\/api\.darjberry\.com\/v1/,
+      handler: 'NetworkFirst',
+      options: {
+        cacheName: 'api-cache',
+        expiration: {
+          maxEntries: 100,
+          maxAgeSeconds: 60 * 60 * 24 // 24 hours
+        }
+      }
+    }
+  ]
+})
+```
+
+#### 1.2 Operations Dashboard
+```
+/app/admin
+├── layout.tsx (role-based guard)
+├── page.tsx (mission control)
+├── farms/
+│   ├── page.tsx (list view)
+│   ├── [id]/
+│   │   ├── page.tsx
+│   │   ├── tasks/page.tsx
+│   │   └── analytics/page.tsx
+├── customers/
+│   ├── page.tsx
+│   └── [id]/page.tsx
+├── operations/
+│   ├── schedule/page.tsx
+│   ├── team/page.tsx
+│   └── inventory/page.tsx
+└── reports/
+    ├── page.tsx
+    └── builder/page.tsx
+```
+
+**Real-time Features**:
+```typescript
+// WebSocket connection for live updates
+import { io } from 'socket.io-client'
+
+const socket = io(process.env.NEXT_PUBLIC_WS_URL, {
+  auth: { token: session.accessToken }
+})
+
+// Real-time farm alerts
+socket.on('farm:alert', (data) => {
+  showNotification(data)
+  invalidateQueries(['farms', data.farmId])
+})
+```
+
+#### 1.3 Field Mobile App (React Native)
+```
+/src
+├── screens/
+│   ├── TaskList/
+│   ├── FarmVisit/
+│   ├── DataCapture/
+│   └── Sync/
+├── services/
+│   ├── offline/
+│   │   ├── queue.ts
+│   │   ├── storage.ts
+│   │   └── sync.ts
+│   └── location/
+├── components/
+│   ├── Camera/
+│   ├── Forms/
+│   └── Maps/
+└── native/
+    ├── android/
+    └── ios/
+```
+
+**Offline Sync Architecture**:
+```typescript
+// Offline queue implementation
+class OfflineQueue {
+  private queue: Task[] = []
+  private db: SQLite.Database
+  
+  async addToQueue(task: Task) {
+    await this.db.insert('offline_queue', task)
+    this.queue.push(task)
+  }
+  
+  async sync() {
+    const pending = await this.db.select('offline_queue', { 
+      status: 'pending' 
+    })
+    
+    for (const task of pending) {
+      try {
+        await this.uploadTask(task)
+        await this.markSynced(task.id)
+      } catch (error) {
+        await this.handleSyncError(task, error)
+      }
+    }
+  }
+}
+```
+
+### 2. Backend Services Architecture
+
+#### 2.1 API Gateway Layer
+```typescript
+// middleware/rateLimiter.ts
+export const rateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // per API key
+  keyGenerator: (req) => req.headers['x-api-key'] || req.ip,
+  standardHeaders: true,
+  legacyHeaders: false,
+})
+
+// middleware/tenantIsolation.ts
+export async function tenantIsolation(req: Request) {
+  const tenantId = req.headers['x-tenant-id']
+  const dbContext = await createTenantContext(tenantId)
+  req.dbContext = dbContext
+}
+```
+
+#### 2.2 Core Services Implementation
+
+**Customer Service**:
+```typescript
+// services/customer/index.ts
+export class CustomerService {
+  async createCustomer(data: CreateCustomerDTO) {
+    // Validate land ownership documents
+    const docsValid = await this.validateDocuments(data.documents)
+    
+    // Create customer profile
+    const customer = await prisma.customer.create({
+      data: {
+        ...data,
+        kycStatus: docsValid ? 'verified' : 'pending',
+        tenantId: context.tenantId
+      }
+    })
+    
+    // Initialize wallet
+    await this.walletService.createWallet(customer.id)
+    
+    // Send welcome communication
+    await this.notificationService.sendWelcome(customer)
+    
+    return customer
+  }
+  
+  async calculateCustomerHealth(customerId: string) {
+    const metrics = await prisma.$queryRaw`
+      SELECT 
+        AVG(f.health_score) as avg_farm_health,
+        COUNT(DISTINCT f.id) as total_farms,
+        SUM(p.amount) as total_investment,
+        SUM(r.amount) as total_revenue,
+        COUNT(t.id) FILTER (WHERE t.status = 'resolved') as resolved_tickets
+      FROM customers c
+      LEFT JOIN farms f ON f.customer_id = c.id
+      LEFT JOIN payments p ON p.customer_id = c.id
+      LEFT JOIN revenues r ON r.customer_id = c.id
+      LEFT JOIN tickets t ON t.customer_id = c.id
+      WHERE c.id = ${customerId}
+    `
+    
+    return this.calculateHealthScore(metrics)
+  }
+}
+```
+
+**Farm Service**:
+```typescript
+// services/farm/index.ts
+export class FarmService {
+  async createFarm(customerId: string, data: CreateFarmDTO) {
+    // Validate feasibility
+    const feasibility = await this.satelliteService.analyze(data.coordinates)
+    if (feasibility.score < 0.7) {
+      throw new Error('Land not suitable for blueberry cultivation')
+    }
+    
+    // Calculate infrastructure requirements
+    const infrastructure = this.calculateInfrastructure(data.area)
+    
+    // Create farm with initial setup
+    const farm = await prisma.farm.create({
+      data: {
+        customerId,
+        ...data,
+        infrastructure,
+        plantCount: Math.floor(data.area * 500), // 500 plants per unit
+        setupStatus: 'pending',
+        healthScore: 100, // Initial score
+      }
+    })
+    
+    // Schedule initial tasks
+    await this.scheduleSetupTasks(farm.id)
+    
+    return farm
+  }
+  
+  async updateHealthScore(farmId: string) {
+    const factors = await this.gatherHealthFactors(farmId)
+    
+    // ML model for health scoring
+    const score = await this.mlService.predictHealth({
+      soilHealth: factors.soil,
+      plantGrowth: factors.growth,
+      pestPressure: factors.pests,
+      weatherStress: factors.weather,
+      maintenanceAdherence: factors.maintenance
+    })
+    
+    await prisma.farm.update({
+      where: { id: farmId },
+      data: { 
+        healthScore: score,
+        healthUpdatedAt: new Date()
+      }
+    })
+    
+    // Alert if score drops significantly
+    if (score < 70) {
+      await this.alertService.createFarmHealthAlert(farmId, score)
+    }
+  }
+}
+```
+
+**Operations Service**:
+```typescript
+// services/operations/taskScheduler.ts
+export class TaskScheduler {
+  async generateMonthlySchedule() {
+    const farms = await prisma.farm.findMany({
+      where: { status: 'active' }
+    })
+    
+    for (const farm of farms) {
+      const tasks = await this.generateFarmTasks(farm)
+      
+      // Optimize route for field teams
+      const optimizedTasks = await this.routeOptimizer.optimize(tasks)
+      
+      // Assign to available teams
+      await this.assignTasks(optimizedTasks)
+    }
+  }
+  
+  private async generateFarmTasks(farm: Farm) {
+    const stage = this.calculateGrowthStage(farm.plantingDate)
+    const protocol = await this.getMaintenanceProtocol(stage)
+    
+    return protocol.tasks.map(task => ({
+      farmId: farm.id,
+      type: task.type,
+      priority: task.priority,
+      estimatedDuration: task.duration,
+      requiredInputs: task.inputs,
+      scheduledDate: this.calculateOptimalDate(task, farm)
+    }))
+  }
+}
+```
+
+#### 2.3 Integration Services
+
+**WhatsApp Integration**:
+```typescript
+// services/whatsapp/handler.ts
+export class WhatsAppHandler {
+  private client: WhatsAppBusinessAPI
+  
+  async handleWebhook(payload: WebhookPayload) {
+    if (payload.type === 'message') {
+      await this.processMessage(payload.message)
+    } else if (payload.type === 'status') {
+      await this.updateMessageStatus(payload.status)
+    }
+  }
+  
+  async sendFarmUpdate(customerId: string, update: FarmUpdate) {
+    const template = await this.getTemplate('farm_update')
+    const media = await this.uploadMedia(update.photos)
+    
+    await this.client.sendMessage({
+      to: customer.whatsappNumber,
+      type: 'template',
+      template: {
+        name: template.name,
+        language: { code: customer.preferredLanguage },
+        components: [
+          {
+            type: 'header',
+            parameters: [{ type: 'image', image: { id: media.id } }]
+          },
+          {
+            type: 'body',
+            parameters: [
+              { type: 'text', text: update.farmName },
+              { type: 'text', text: update.activity },
+              { type: 'text', text: update.nextVisit }
+            ]
+          }
+        ]
+      }
+    })
+  }
+}
+```
+
+**Payment Integration**:
+```typescript
+// services/payment/razorpay.ts
+export class PaymentService {
+  async createPaymentLink(order: Order) {
+    const link = await razorpay.paymentLink.create({
+      amount: order.amount * 100, // in paise
+      currency: 'INR',
+      description: `Darjberry Farm Setup - ${order.farmId}`,
+      customer: {
+        name: order.customerName,
+        contact: order.customerPhone,
+        email: order.customerEmail
+      },
+      notify: { sms: true, email: true },
+      reminder_enable: true,
+      notes: {
+        farmId: order.farmId,
+        customerId: order.customerId,
+        orderType: 'farm_setup'
+      },
+      callback_url: `${process.env.APP_URL}/api/payments/callback`,
+      callback_method: 'get'
+    })
+    
+    // Store payment intent
+    await prisma.paymentIntent.create({
+      data: {
+        razorpayLinkId: link.id,
+        orderId: order.id,
+        status: 'pending',
+        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+      }
+    })
+    
+    return link
+  }
+  
+  async distributeRevenue(harvest: Harvest) {
+    const revenue = harvest.quantity * harvest.pricePerKg
+    const platformFee = revenue * 0.1 // 10%
+    const farmerShare = revenue * 0.9
+    
+    // Create payout
+    const payout = await razorpay.payouts.create({
+      account_number: process.env.RAZORPAY_ACCOUNT,
+      fund_account_id: farmer.fundAccountId,
+      amount: farmerShare * 100,
+      currency: 'INR',
+      mode: 'IMPS',
+      purpose: 'payout',
+      queue_if_low_balance: true,
+      reference_id: harvest.id,
+      narration: `Blueberry harvest revenue - ${harvest.date}`,
+      notes: {
+        harvestId: harvest.id,
+        farmId: harvest.farmId
+      }
+    })
+    
+    // Record transaction
+    await prisma.transaction.create({
+      data: {
+        type: 'revenue_distribution',
+        amount: farmerShare,
+        status: 'processing',
+        razorpayPayoutId: payout.id,
+        customerId: farmer.customerId,
+        metadata: { harvest, platformFee }
+      }
+    })
+  }
+}
+```
+
+### 3. Data Layer Architecture
+
+#### 3.1 Database Schema (Prisma)
+```prisma
+// schema.prisma
+model Customer {
+  id            String   @id @default(cuid())
+  phone         String   @unique
+  email         String?
+  name          String
+  whatsappOptIn Boolean  @default(true)
+  preferredLang String   @default("en")
+  kycStatus     KYCStatus
+  
+  farms         Farm[]
+  payments      Payment[]
+  documents     Document[]
+  wallet        Wallet?
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@index([phone])
+  @@map("customers")
+}
+
+model Farm {
+  id              String   @id @default(cuid())
+  customerId      String
+  customer        Customer @relation(fields: [customerId], references: [id])
+  
+  name            String
+  area            Float
+  location        Json     // PostGIS point
+  address         String
+  
+  plantCount      Int
+  plantingDate    DateTime?
+  infrastructure  Json
+  
+  healthScore     Float    @default(100)
+  lastVisit       DateTime?
+  nextMaintenance DateTime?
+  
+  status          FarmStatus
+  stage           GrowthStage
+  
+  plants          Plant[]
+  tasks           Task[]
+  harvests        Harvest[]
+  observations    Observation[]
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([customerId])
+  @@index([status])
+  @@map("farms")
+}
+
+model Task {
+  id              String   @id @default(cuid())
+  farmId          String
+  farm            Farm     @relation(fields: [farmId], references: [id])
+  
+  type            TaskType
+  priority        Priority
+  status          TaskStatus
+  
+  scheduledDate   DateTime
+  completedDate   DateTime?
+  
+  assignedTo      String?
+  assignee        User?    @relation(fields: [assignedTo], references: [id])
+  
+  checklist       Json
+  observations    String?
+  photos          Photo[]
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([farmId, status])
+  @@index([scheduledDate])
+  @@index([assignedTo])
+  @@map("tasks")
+}
+
+model Transaction {
+  id              String   @id @default(cuid())
+  customerId      String
+  customer        Customer @relation(fields: [customerId], references: [id])
+  
+  type            TransactionType
+  amount          Decimal  @db.Decimal(10, 2)
+  currency        String   @default("INR")
+  
+  status          TransactionStatus
+  gatewayRef      String?
+  
+  metadata        Json
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([customerId])
+  @@index([type, status])
+  @@map("transactions")
+}
+```
+
+#### 3.2 Caching Strategy
+```typescript
+// cache/strategies.ts
+export const cacheStrategies = {
+  // User session - 24 hours
+  session: {
+    ttl: 86400,
+    key: (userId: string) => `session:${userId}`
+  },
+  
+  // Farm data - 1 hour
+  farm: {
+    ttl: 3600,
+    key: (farmId: string) => `farm:${farmId}`,
+    invalidate: ['task:complete', 'observation:create']
+  },
+  
+  // Analytics - 15 minutes
+  analytics: {
+    ttl: 900,
+    key: (type: string, id: string) => `analytics:${type}:${id}`
+  },
+  
+  // API responses - 5 minutes
+  api: {
+    ttl: 300,
+    key: (endpoint: string, params: object) => 
+      `api:${endpoint}:${JSON.stringify(params)}`
+  }
+}
+```
+
+#### 3.3 Event Sourcing
+```typescript
+// events/farmEvents.ts
+export interface FarmEvent {
+  id: string
+  farmId: string
+  type: FarmEventType
+  payload: any
+  userId: string
+  timestamp: Date
+}
+
+export class FarmEventStore {
+  async recordEvent(event: FarmEvent) {
+    // Store in event log
+    await prisma.farmEvent.create({ data: event })
+    
+    // Update read models
+    await this.updateProjections(event)
+    
+    // Publish to subscribers
+    await this.eventBus.publish(event)
+  }
+  
+  async rebuildProjection(farmId: string) {
+    const events = await prisma.farmEvent.findMany({
+      where: { farmId },
+      orderBy: { timestamp: 'asc' }
+    })
+    
+    let state = this.getInitialState()
+    for (const event of events) {
+      state = this.applyEvent(state, event)
+    }
+    
+    return state
+  }
+}
+```
+
+### 4. Infrastructure Components
+
+#### 4.1 Message Queue Architecture
+```typescript
+// queues/config.ts
+export const queues = {
+  notifications: {
+    name: 'notifications',
+    concurrency: 10,
+    retries: 3,
+    backoff: 'exponential'
+  },
+  
+  imageProcessing: {
+    name: 'image-processing',
+    concurrency: 5,
+    timeout: 30000,
+    removeOnComplete: 100
+  },
+  
+  analytics: {
+    name: 'analytics',
+    concurrency: 3,
+    schedule: '0 2 * * *' // Daily at 2 AM
+  },
+  
+  sync: {
+    name: 'field-sync',
+    concurrency: 20,
+    priority: true
+  }
+}
+```
+
+#### 4.2 Monitoring Setup
+```typescript
+// monitoring/metrics.ts
+export const metrics = {
+  // Business metrics
+  farms: {
+    total: new promClient.Gauge({
+      name: 'darjberry_farms_total',
+      help: 'Total number of farms'
+    }),
+    
+    health: new promClient.Histogram({
+      name: 'darjberry_farm_health_score',
+      help: 'Farm health score distribution',
+      buckets: [0, 50, 70, 85, 95, 100]
+    })
+  },
+  
+  // Technical metrics
+  api: {
+    duration: new promClient.Histogram({
+      name: 'http_request_duration_seconds',
+      help: 'API request duration',
+      labelNames: ['method', 'route', 'status']
+    }),
+    
+    errors: new promClient.Counter({
+      name: 'api_errors_total',
+      help: 'Total API errors',
+      labelNames: ['endpoint', 'error_type']
+    })
+  },
+  
+  // Queue metrics
+  queue: {
+    depth: new promClient.Gauge({
+      name: 'queue_depth',
+      help: 'Number of messages in queue',
+      labelNames: ['queue_name']
+    }),
+    
+    processingTime: new promClient.Histogram({
+      name: 'queue_processing_duration_seconds',
+      help: 'Queue message processing time',
+      labelNames: ['queue_name', 'job_type']
+    })
+  }
+}
+```
+
+### 5. Security Implementation
+
+#### 5.1 Authentication Flow
+```typescript
+// auth/provider.ts
+export const authConfig: NextAuthConfig = {
+  providers: [
+    CredentialsProvider({
+      name: 'phone',
+      credentials: {
+        phone: { label: "Phone", type: "tel" },
+        otp: { label: "OTP", type: "text" }
+      },
+      async authorize(credentials) {
+        const valid = await verifyOTP(credentials.phone, credentials.otp)
+        if (!valid) return null
+        
+        const user = await prisma.customer.findUnique({
+          where: { phone: credentials.phone }
+        })
+        
+        return {
+          id: user.id,
+          phone: user.phone,
+          role: user.role,
+          tenantId: user.tenantId
+        }
+      }
+    })
+  ],
+  
+  callbacks: {
+    jwt: async ({ token, user }) => {
+      if (user) {
+        token.role = user.role
+        token.tenantId = user.tenantId
+      }
+      return token
+    },
+    
+    session: async ({ session, token }) => {
+      session.user.role = token.role
+      session.user.tenantId = token.tenantId
+      return session
+    }
+  }
+}
+```
+
+#### 5.2 Data Encryption
+```typescript
+// security/encryption.ts
+export class EncryptionService {
+  private algorithm = 'aes-256-gcm'
+  private key: Buffer
+  
+  encryptPII(data: string): EncryptedData {
+    const iv = crypto.randomBytes(16)
+    const cipher = crypto.createCipheriv(this.algorithm, this.key, iv)
+    
+    let encrypted = cipher.update(data, 'utf8', 'hex')
+    encrypted += cipher.final('hex')
+    
+    const authTag = cipher.getAuthTag()
+    
+    return {
+      encrypted,
+      iv: iv.toString('hex'),
+      authTag: authTag.toString('hex')
+    }
+  }
+  
+  decryptPII(encryptedData: EncryptedData): string {
+    const decipher = crypto.createDecipheriv(
+      this.algorithm,
+      this.key,
+      Buffer.from(encryptedData.iv, 'hex')
+    )
+    
+    decipher.setAuthTag(Buffer.from(encryptedData.authTag, 'hex'))
+    
+    let decrypted = decipher.update(encryptedData.encrypted, 'hex', 'utf8')
+    decrypted += decipher.final('utf8')
+    
+    return decrypted
+  }
+}
+```
+
+### 6. Performance Optimizations
+
+#### 6.1 Database Optimizations
+```sql
+-- Indexes for common queries
+CREATE INDEX idx_farms_customer_status ON farms(customer_id, status);
+CREATE INDEX idx_tasks_farm_scheduled ON tasks(farm_id, scheduled_date);
+CREATE INDEX idx_transactions_customer_type ON transactions(customer_id, type);
+
+-- Materialized view for analytics
+CREATE MATERIALIZED VIEW farm_analytics AS
+SELECT 
+  f.id as farm_id,
+  f.customer_id,
+  COUNT(DISTINCT p.id) as plant_count,
+  AVG(p.health_score) as avg_plant_health,
+  SUM(h.quantity) as total_yield,
+  COUNT(DISTINCT h.id) as harvest_count,
+  MAX(t.completed_date) as last_maintenance
+FROM farms f
+LEFT JOIN plants p ON p.farm_id = f.id
+LEFT JOIN harvests h ON h.farm_id = f.id
+LEFT JOIN tasks t ON t.farm_id = f.id AND t.status = 'completed'
+GROUP BY f.id, f.customer_id;
+
+-- Refresh strategy
+CREATE OR REPLACE FUNCTION refresh_farm_analytics()
+RETURNS void AS $$
+BEGIN
+  REFRESH MATERIALIZED VIEW CONCURRENTLY farm_analytics;
+END;
+$$ LANGUAGE plpgsql;
+```
+
+#### 6.2 API Optimizations
+```typescript
+// api/optimizations.ts
+export const apiOptimizations = {
+  // Response compression
+  compression: {
+    threshold: 1024, // bytes
+    level: 6
+  },
+  
+  // Field selection
+  fieldSelection: (query: string) => {
+    const fields = query.split(',')
+    return prisma.farm.findMany({
+      select: fields.reduce((acc, field) => ({
+        ...acc,
+        [field]: true
+      }), {})
+    })
+  },
+  
+  // Pagination
+  pagination: {
+    defaultLimit: 20,
+    maxLimit: 100,
+    cursor: true // Use cursor-based pagination
+  },
+  
+  // Batch loading
+  dataLoader: new DataLoader(async (farmIds: string[]) => {
+    const farms = await prisma.farm.findMany({
+      where: { id: { in: farmIds } }
+    })
+    return farmIds.map(id => farms.find(f => f.id === id))
+  })
+}
+```
+
+### 7. Deployment Architecture
+
+#### 7.1 Container Configuration
+```dockerfile
+# Dockerfile.api
+FROM node:18-alpine AS base
+WORKDIR /app
+
+# Dependencies
+FROM base AS deps
+COPY package*.json ./
+RUN npm ci --only=production
+
+# Build
+FROM base AS build
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# Runtime
+FROM base AS runtime
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/prisma ./prisma
+
+EXPOSE 3000
+CMD ["npm", "run", "start:prod"]
+```
+
+#### 7.2 Kubernetes Manifests
+```yaml
+# k8s/api-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: darjberry-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: darjberry-api
+  template:
+    metadata:
+      labels:
+        app: darjberry-api
+    spec:
+      containers:
+      - name: api
+        image: darjberry/api:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: darjberry-secrets
+              key: database-url
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: darjberry-api-service
+spec:
+  selector:
+    app: darjberry-api
+  ports:
+  - port: 80
+    targetPort: 3000
+  type: LoadBalancer
+```
+
+### 8. Disaster Recovery
+
+#### 8.1 Backup Strategy
+```typescript
+// backup/strategy.ts
+export const backupStrategy = {
+  database: {
+    schedule: '0 3 * * *', // Daily at 3 AM
+    retention: 30, // days
+    type: 'incremental',
+    destination: 's3://darjberry-backups/db/'
+  },
+  
+  files: {
+    schedule: '0 4 * * 0', // Weekly on Sunday
+    retention: 90, // days
+    patterns: ['uploads/', 'documents/'],
+    destination: 's3://darjberry-backups/files/'
+  },
+  
+  config: {
+    schedule: '0 0 * * *', // Daily
+    retention: 365, // days
+    destination: 's3://darjberry-backups/config/'
+  }
+}
+```
+
+#### 8.2 Recovery Procedures
+```typescript
+// recovery/procedures.ts
+export class DisasterRecovery {
+  async initiateFailover() {
+    // 1. Health check primary
+    const primaryHealthy = await this.checkPrimaryHealth()
+    
+    if (!primaryHealthy) {
+      // 2. Promote read replica
+      await this.promoteReadReplica()
+      
+      // 3. Update DNS
+      await this.updateDNS(this.secondaryRegion)
+      
+      // 4. Notify teams
+      await this.notifyOncall('Primary region failure, failover initiated')
+      
+      // 5. Start recovery timer
+      this.startRecoveryTimer()
+    }
+  }
+  
+  async restoreFromBackup(timestamp: Date) {
+    // 1. Find appropriate backup
+    const backup = await this.findBackup(timestamp)
+    
+    // 2. Restore database
+    await this.restoreDatabase(backup.database)
+    
+    // 3. Restore files
+    await this.restoreFiles(backup.files)
+    
+    // 4. Verify integrity
+    await this.verifyDataIntegrity()
+    
+    // 5. Resume operations
+    await this.resumeOperations()
+  }
+}
+```

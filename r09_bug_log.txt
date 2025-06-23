@@ -1,0 +1,314 @@
+DARJBERRY - BUG LOG & PATTERNS
+
+## Common Bugs Encountered During Implementation
+
+### 1. Race Condition in OTP Verification
+**Bug**: Multiple OTP verification attempts could pass with same OTP
+**Root Cause**: No atomic check-and-invalidate operation
+**Fix**: Use database transaction with row-level lock
+```typescript
+// Before: Race condition possible
+const otp = await findOTP(phone, code)
+if (otp && !otp.used) {
+  await markAsUsed(otp.id) // Another request might execute between these
+  return true
+}
+
+// After: Atomic operation
+const result = await prisma.$transaction(async (tx) => {
+  const otp = await tx.oTP.findFirst({
+    where: { phone, code, used: false },
+    select: { id: true }
+  })
+  
+  if (!otp) return false
+  
+  await tx.oTP.update({
+    where: { id: otp.id },
+    data: { used: true }
+  })
+  
+  return true
+})
+```
+
+### 2. Timezone Mismatch in Task Scheduling
+**Bug**: Tasks scheduled for wrong time in different timezones
+**Root Cause**: Server timezone different from user timezone
+**Fix**: Store all times in UTC, convert for display
+```typescript
+// Before: Using local time
+const scheduledDate = new Date('2024-03-15 10:00')
+
+// After: Explicit timezone handling
+const scheduledDate = zonedTimeToUtc('2024-03-15 10:00', 'Asia/Kolkata')
+```
+
+### 3. Memory Leak in WebSocket Connections
+**Bug**: Server memory usage growing over time
+**Root Cause**: WebSocket connections not cleaned up on disconnect
+**Fix**: Proper cleanup in disconnect handler
+```typescript
+// Before: Leaking references
+io.on('connection', (socket) => {
+  activeConnections.set(socket.id, socket)
+})
+
+// After: Cleanup on disconnect
+io.on('connection', (socket) => {
+  activeConnections.set(socket.id, socket)
+  
+  socket.on('disconnect', () => {
+    activeConnections.delete(socket.id)
+    // Clean up any subscriptions
+    eventEmitter.removeAllListeners(`user:${socket.userId}`)
+  })
+})
+```
+
+### 4. Decimal Precision Loss in Financial Calculations
+**Bug**: Revenue calculations showing incorrect amounts
+**Root Cause**: JavaScript floating point arithmetic
+**Fix**: Use Decimal.js or database decimal type
+```typescript
+// Before: Precision loss
+const farmerShare = revenue * 0.9 // Can be 899.9999999 instead of 900
+
+// After: Using Decimal
+const farmerShare = new Decimal(revenue).mul(0.9).toDecimalPlaces(2)
+```
+
+### 5. N+1 Query Problem in Farm Listing
+**Bug**: Dashboard taking 10+ seconds to load
+**Root Cause**: Loading related data in loops
+**Fix**: Use Prisma include or manual JOIN
+```typescript
+// Before: N+1 queries
+const farms = await prisma.farm.findMany()
+for (const farm of farms) {
+  farm.latestTask = await prisma.task.findFirst({
+    where: { farmId: farm.id },
+    orderBy: { createdAt: 'desc' }
+  })
+}
+
+// After: Single query with include
+const farms = await prisma.farm.findMany({
+  include: {
+    tasks: {
+      orderBy: { createdAt: 'desc' },
+      take: 1
+    }
+  }
+})
+```
+
+### 6. Offline Sync Data Conflicts
+**Bug**: Field data overwriting newer server data
+**Root Cause**: No conflict resolution strategy
+**Fix**: Use timestamp-based resolution
+```typescript
+// Before: Last write wins
+await prisma.observation.upsert({
+  where: { id },
+  create: data,
+  update: data
+})
+
+// After: Timestamp comparison
+const existing = await prisma.observation.findUnique({ where: { id } })
+if (!existing || data.updatedAt > existing.updatedAt) {
+  await prisma.observation.upsert({
+    where: { id },
+    create: data,
+    update: data
+  })
+}
+```
+
+### 7. File Upload Memory Exhaustion
+**Bug**: Server crashing on large file uploads
+**Root Cause**: Loading entire file into memory
+**Fix**: Stream processing
+```typescript
+// Before: Memory heavy
+const file = await request.file()
+const buffer = await file.toBuffer()
+await s3.upload({ Body: buffer })
+
+// After: Streaming
+const stream = file.file
+await s3.upload({ 
+  Body: stream,
+  partSize: 10 * 1024 * 1024, // 10MB chunks
+  queueSize: 4
+})
+```
+
+### 8. Silent Webhook Failures
+**Bug**: Payments successful but system not updated
+**Root Cause**: Webhook errors not retried
+**Fix**: Implement exponential backoff retry
+```typescript
+// After: Robust webhook processing
+async function processWebhook(payload: any, attempt = 1) {
+  try {
+    await handlePaymentWebhook(payload)
+  } catch (error) {
+    if (attempt < 5) {
+      const delay = Math.pow(2, attempt) * 1000
+      await queue.add('webhook-retry', payload, { delay, attempt: attempt + 1 })
+    } else {
+      await alertOps('Webhook failed after 5 attempts', payload)
+    }
+  }
+}
+```
+
+### 9. Cache Invalidation Issues
+**Bug**: Users seeing stale data after updates
+**Root Cause**: Cache not invalidated on related changes
+**Fix**: Event-driven cache invalidation
+```typescript
+// After: Automatic cache invalidation
+eventEmitter.on('farm:updated', async (farmId) => {
+  await redis.del(`farm:${farmId}`)
+  await redis.del(`customer:${farm.customerId}:farms`)
+})
+```
+
+### 10. PDF Generation Timeout
+**Bug**: Tax documents timing out for large datasets
+**Root Cause**: Synchronous PDF generation
+**Fix**: Queue-based async generation
+```typescript
+// Before: Blocking request
+app.get('/tax-document', async (req, res) => {
+  const pdf = await generateTaxPDF(req.user.id) // Takes 30+ seconds
+  res.send(pdf)
+})
+
+// After: Async with status polling
+app.post('/tax-document/generate', async (req, res) => {
+  const jobId = await queue.add('generate-pdf', { userId: req.user.id })
+  res.json({ jobId })
+})
+
+app.get('/tax-document/status/:jobId', async (req, res) => {
+  const job = await queue.getJob(req.params.jobId)
+  res.json({ 
+    status: job.status,
+    url: job.result?.url 
+  })
+})
+```
+
+## Debugging Patterns That Helped
+
+### 1. Structured Logging
+```typescript
+logger.info('Farm health calculated', {
+  farmId,
+  previousScore: farm.healthScore,
+  newScore,
+  factors: healthFactors,
+  duration: Date.now() - startTime
+})
+```
+
+### 2. Request Context
+```typescript
+// Trace requests across services
+app.use((req, res, next) => {
+  req.context = {
+    requestId: uuid(),
+    userId: req.user?.id,
+    tenantId: req.tenant?.id,
+    startTime: Date.now()
+  }
+  next()
+})
+```
+
+### 3. Database Query Logging
+```typescript
+// Log slow queries in development
+prisma.$on('query', (e) => {
+  if (e.duration > 100) {
+    logger.warn('Slow query', {
+      query: e.query,
+      duration: e.duration,
+      params: e.params
+    })
+  }
+})
+```
+
+### 4. Error Boundaries
+```typescript
+// Catch and log errors with context
+class ErrorBoundary extends React.Component {
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    logger.error('React error', {
+      error: error.message,
+      stack: error.stack,
+      componentStack: errorInfo.componentStack,
+      props: this.props
+    })
+  }
+}
+```
+
+### 5. Health Check Endpoints
+```typescript
+app.get('/health/deep', async (req, res) => {
+  const checks = await Promise.allSettled([
+    checkDatabase(),
+    checkRedis(),
+    checkS3(),
+    checkWhatsApp()
+  ])
+  
+  const status = checks.every(c => c.status === 'fulfilled') ? 200 : 503
+  res.status(status).json({ checks })
+})
+```
+
+## Performance Issues Discovered
+
+### 1. Unindexed Foreign Keys
+**Impact**: 10x slower queries
+**Fix**: Add indexes to all foreign key columns
+
+### 2. Missing Database Connection Pooling
+**Impact**: Connection exhaustion under load
+**Fix**: Configure connection pool limits
+
+### 3. Unnecessary Re-renders
+**Impact**: Sluggish UI
+**Fix**: Memo and useCallback appropriately
+
+### 4. Large Bundle Size
+**Impact**: Slow initial page load
+**Fix**: Code splitting and lazy loading
+
+### 5. Uncompressed API Responses
+**Impact**: Slow on mobile networks
+**Fix**: Enable gzip compression
+
+## Security Issues Found
+
+### 1. SQL Injection in Search
+**Fix**: Use parameterized queries always
+
+### 2. Missing Rate Limiting
+**Fix**: Add rate limiting to all endpoints
+
+### 3. Exposed Stack Traces
+**Fix**: Generic error messages in production
+
+### 4. Weak Session Management
+**Fix**: Secure, httpOnly, sameSite cookies
+
+### 5. Missing CORS Configuration
+**Fix**: Explicit origin whitelist

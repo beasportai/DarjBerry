@@ -1,0 +1,477 @@
+DARJBERRY - BUG PREVENTION BEST PRACTICES
+
+## Core Principles for Bug Prevention
+
+### 1. Fail Fast, Fail Loudly
+```typescript
+// ❌ Silent failures
+function calculateROI(investment: number) {
+  if (!investment) return 0 // Silent failure
+}
+
+// ✅ Explicit validation
+function calculateROI(investment: number) {
+  if (!investment || investment <= 0) {
+    throw new Error('Investment must be positive number')
+  }
+}
+```
+
+### 2. Type Safety Everywhere
+```typescript
+// ❌ Any types
+function updateFarm(id: any, data: any) {
+  // Runtime surprises waiting to happen
+}
+
+// ✅ Strong typing
+interface UpdateFarmData {
+  name?: string
+  area?: number
+  status?: FarmStatus
+}
+
+function updateFarm(id: string, data: UpdateFarmData): Promise<Farm> {
+  // Compile-time safety
+}
+```
+
+### 3. Immutable by Default
+```typescript
+// ❌ Mutable state
+const farm = { healthScore: 85, lastUpdated: new Date() }
+updateHealthScore(farm) // Mutates original
+console.log(farm.healthScore) // Surprising side effect
+
+// ✅ Immutable updates
+const farm = { healthScore: 85, lastUpdated: new Date() }
+const updatedFarm = updateHealthScore(farm) // Returns new object
+console.log(farm.healthScore) // Original unchanged
+```
+
+## Database Best Practices
+
+### 1. Always Use Transactions for Multi-Step Operations
+```typescript
+// ❌ Partial state if error occurs
+async function createFarmWithPayment(farmData: any, paymentData: any) {
+  const farm = await prisma.farm.create({ data: farmData })
+  const payment = await prisma.payment.create({ 
+    data: { ...paymentData, farmId: farm.id } 
+  }) // If this fails, farm is created but no payment
+}
+
+// ✅ Atomic operations
+async function createFarmWithPayment(farmData: any, paymentData: any) {
+  return prisma.$transaction(async (tx) => {
+    const farm = await tx.farm.create({ data: farmData })
+    const payment = await tx.payment.create({ 
+      data: { ...paymentData, farmId: farm.id } 
+    })
+    return { farm, payment }
+  })
+}
+```
+
+### 2. Validate Data at Database Level
+```sql
+-- Constraints prevent bad data
+ALTER TABLE farms 
+ADD CONSTRAINT check_area_positive 
+CHECK (area > 0);
+
+ALTER TABLE tasks 
+ADD CONSTRAINT check_completion_after_creation 
+CHECK (completed_at >= created_at OR completed_at IS NULL);
+```
+
+### 3. Use Database-Level Defaults
+```sql
+-- Don't rely on application defaults
+CREATE TABLE farms (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  health_score DECIMAL(5,2) DEFAULT 100.00,
+  status farm_status DEFAULT 'pending',
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+```
+
+## API Design Patterns
+
+### 1. Input Validation at Boundary
+```typescript
+import { z } from 'zod'
+
+const CreateFarmSchema = z.object({
+  area: z.number().positive().max(100),
+  coordinates: z.string().regex(/^-?\d+\.?\d*,-?\d+\.?\d*$/),
+  name: z.string().min(1).max(100)
+})
+
+app.post('/api/farms', async (req, res) => {
+  try {
+    const data = CreateFarmSchema.parse(req.body)
+    // Proceed with validated data
+  } catch (error) {
+    return res.status(400).json({ error: error.errors })
+  }
+})
+```
+
+### 2. Consistent Error Responses
+```typescript
+interface APIError {
+  code: string
+  message: string
+  field?: string
+  context?: any
+}
+
+interface APIResponse<T> {
+  success: boolean
+  data?: T
+  error?: APIError
+  meta?: {
+    timestamp: string
+    requestId: string
+  }
+}
+```
+
+### 3. Rate Limiting by Default
+```typescript
+import rateLimit from 'express-rate-limit'
+
+// Different limits for different operations
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // 5 attempts per window
+  skipSuccessfulRequests: true
+})
+
+const apiLimiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 100 // 100 requests per minute
+})
+```
+
+## Frontend Defensive Programming
+
+### 1. Error Boundaries for React Components
+```typescript
+class ErrorBoundary extends React.Component {
+  state = { hasError: false, error: null }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error }
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error('Error caught by boundary:', error, errorInfo)
+    // Send to error tracking service
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <ErrorFallback error={this.state.error} />
+    }
+    return this.props.children
+  }
+}
+```
+
+### 2. Loading and Error States for All Async Operations
+```typescript
+function FarmList() {
+  const { data: farms, isLoading, error } = useQuery('farms', fetchFarms)
+
+  if (isLoading) return <LoadingSpinner />
+  if (error) return <ErrorMessage error={error} />
+  if (!farms?.length) return <EmptyState />
+
+  return <FarmCards farms={farms} />
+}
+```
+
+### 3. Optimistic Updates with Rollback
+```typescript
+const mutation = useMutation(updateFarm, {
+  onMutate: async (newFarm) => {
+    // Cancel outgoing refetches
+    await queryClient.cancelQueries(['farm', newFarm.id])
+
+    // Snapshot previous value
+    const previousFarm = queryClient.getQueryData(['farm', newFarm.id])
+
+    // Optimistically update
+    queryClient.setQueryData(['farm', newFarm.id], newFarm)
+
+    return { previousFarm }
+  },
+  
+  onError: (err, newFarm, context) => {
+    // Rollback on error
+    queryClient.setQueryData(['farm', newFarm.id], context.previousFarm)
+  }
+})
+```
+
+## Testing Strategies
+
+### 1. Test Edge Cases, Not Just Happy Path
+```typescript
+describe('OTP Verification', () => {
+  it('accepts valid OTP', () => {
+    // Happy path
+  })
+
+  it('rejects expired OTP', () => {
+    // Edge case
+  })
+
+  it('rejects already used OTP', () => {
+    // Edge case
+  })
+
+  it('handles invalid phone format', () => {
+    // Edge case
+  })
+
+  it('handles OTP with leading zeros', () => {
+    // Edge case
+  })
+})
+```
+
+### 2. Property-Based Testing for Complex Logic
+```typescript
+import fc from 'fast-check'
+
+test('ROI calculation always positive for positive investment', () => {
+  fc.assert(fc.property(
+    fc.float({ min: 0.1, max: 1000000 }), // investment
+    fc.integer({ min: 1, max: 100 }), // years
+    (investment, years) => {
+      const roi = calculateROI(investment, years)
+      expect(roi).toBeGreaterThan(0)
+    }
+  ))
+})
+```
+
+### 3. Contract Testing for API Integrations
+```typescript
+// Test that our code handles actual API responses
+test('handles Razorpay webhook format', () => {
+  const actualWebhookPayload = loadFixture('razorpay-webhook.json')
+  expect(() => processWebhook(actualWebhookPayload)).not.toThrow()
+})
+```
+
+## Monitoring & Alerting Patterns
+
+### 1. Business Metrics Alerts
+```typescript
+// Alert on business anomalies, not just technical issues
+const alerts = {
+  farmHealthDrop: {
+    condition: 'avg(farm_health_score) < 70',
+    severity: 'high',
+    description: 'Average farm health dropping'
+  },
+  
+  paymentFailureRate: {
+    condition: 'payment_failure_rate > 0.05',
+    severity: 'critical',
+    description: 'Payment failures above 5%'
+  }
+}
+```
+
+### 2. Correlation IDs for Request Tracing
+```typescript
+app.use((req, res, next) => {
+  req.correlationId = req.headers['x-correlation-id'] || uuid()
+  res.setHeader('x-correlation-id', req.correlationId)
+  
+  // Add to all logs
+  logger.defaultMeta = { correlationId: req.correlationId }
+  next()
+})
+```
+
+### 3. Circuit Breaker for External Services
+```typescript
+import CircuitBreaker from 'opossum'
+
+const options = {
+  timeout: 3000,
+  errorThresholdPercentage: 50,
+  resetTimeout: 30000
+}
+
+const satelliteBreaker = new CircuitBreaker(callSatelliteAPI, options)
+
+satelliteBreaker.fallback(() => {
+  // Return cached data or default response
+  return getCachedFeasibilityScore()
+})
+```
+
+## Data Integrity Patterns
+
+### 1. Eventual Consistency with Compensation
+```typescript
+// If sync fails, store action for retry
+async function syncFieldData(data: FieldData[]) {
+  try {
+    await uploadToServer(data)
+    await markAsSync(data)
+  } catch (error) {
+    await storeForRetry(data, error)
+    // Will retry later
+  }
+}
+```
+
+### 2. Idempotent Operations
+```typescript
+// Operations that can be safely retried
+async function createPaymentRecord(paymentId: string, data: PaymentData) {
+  return prisma.payment.upsert({
+    where: { razorpayId: paymentId },
+    create: { razorpayId: paymentId, ...data },
+    update: {} // No update needed if exists
+  })
+}
+```
+
+### 3. Data Validation in Multiple Layers
+```typescript
+// Client-side validation for UX
+const schema = yup.object({ area: yup.number().positive().required() })
+
+// Server-side validation for security
+const serverSchema = z.object({ area: z.number().positive() })
+
+// Database constraints for data integrity
+// area DECIMAL(10,2) CHECK (area > 0)
+```
+
+## Performance Anti-Patterns to Avoid
+
+### 1. Don't Query in Loops
+```typescript
+// ❌ N+1 queries
+const farms = await getFarms()
+for (const farm of farms) {
+  farm.tasks = await getTasks(farm.id) // N queries
+}
+
+// ✅ Batch query
+const farmIds = farms.map(f => f.id)
+const allTasks = await getTasksByFarmIds(farmIds) // 1 query
+```
+
+### 2. Don't Load All Data at Once
+```typescript
+// ❌ Memory exhaustion
+const allCustomers = await prisma.customer.findMany() // Could be millions
+
+// ✅ Pagination
+const customers = await prisma.customer.findMany({
+  take: 20,
+  skip: page * 20
+})
+```
+
+### 3. Don't Block the Event Loop
+```typescript
+// ❌ Blocking operation
+app.get('/report', async (req, res) => {
+  const report = generateHugeReport() // Blocks for 30 seconds
+  res.send(report)
+})
+
+// ✅ Async processing
+app.post('/report/generate', async (req, res) => {
+  const jobId = await queue.add('generate-report', req.body)
+  res.json({ jobId })
+})
+```
+
+## Security Checklist
+
+### 1. Input Sanitization
+- [ ] All user inputs validated
+- [ ] SQL injection prevention (parameterized queries)
+- [ ] XSS prevention (sanitize HTML)
+- [ ] Path traversal prevention
+
+### 2. Authentication & Authorization
+- [ ] Strong password/OTP requirements
+- [ ] Session timeout configured
+- [ ] Role-based access control
+- [ ] API key rotation
+
+### 3. Data Protection
+- [ ] PII encrypted at rest
+- [ ] TLS for data in transit
+- [ ] Secure headers configured
+- [ ] Audit logs for sensitive operations
+
+## Deployment Safety
+
+### 1. Blue-Green Deployments
+```bash
+# Deploy to staging environment first
+kubectl apply -f staging-deployment.yaml
+
+# Run smoke tests
+npm run test:smoke:staging
+
+# If tests pass, deploy to production
+kubectl apply -f production-deployment.yaml
+```
+
+### 2. Feature Flags for Risk Mitigation
+```typescript
+if (featureFlags.isEnabled('new-payment-flow', user)) {
+  return newPaymentFlow()
+} else {
+  return legacyPaymentFlow()
+}
+```
+
+### 3. Database Migration Safety
+```sql
+-- Always backward compatible migrations
+-- Add column (safe)
+ALTER TABLE farms ADD COLUMN new_field TEXT;
+
+-- Don't drop columns in same release
+-- Mark as deprecated first, drop later
+```
+
+## Cultural Practices
+
+### 1. Code Review Checklist
+- [ ] Business logic correct?
+- [ ] Error handling complete?
+- [ ] Security implications considered?
+- [ ] Performance impact assessed?
+- [ ] Tests cover edge cases?
+
+### 2. Post-Incident Reviews
+- Focus on systems, not blame
+- What broke and why?
+- How can we prevent it?
+- What monitoring could catch it earlier?
+
+### 3. Documentation as Code
+- Keep README updated
+- Document deployment procedures
+- Maintain runbooks for common issues
+- Update architecture diagrams
+
+These practices, when consistently applied, significantly reduce bug rates and improve system reliability.

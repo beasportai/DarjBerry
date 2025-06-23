@@ -6,6 +6,7 @@ import { DailySIPCalculator } from '@/lib/daily-sip-calculator';
 import { CashfreeProvider } from '@/lib/cashfree-provider';
 // import { InvestmentCalculator } from '@/lib/investment-calculator';
 import { WhatsAppMessage } from '@/types/whatsapp';
+import { whatsappAuthService } from '@/lib/services/whatsappAuth';
 
 export async function POST(request: NextRequest) {
   try {
@@ -54,6 +55,35 @@ async function processWhatsAppMessage(message: WhatsAppMessage) {
       metadata: JSON.stringify(message),
     },
   });
+
+  // Check if this is an authentication message first
+  if (messageText.includes('Darjberry Authentication') || messageText.includes('Auth Code:')) {
+    const senderInfo = {
+      name: (message as any).contacts?.[0]?.profile?.name || null,
+      profile: (message as any).contacts?.[0]?.profile || null
+    };
+    
+    const authResponse = await whatsappAuthService.handleWhatsAppMessage(
+      phoneNumber, 
+      messageText, 
+      senderInfo
+    );
+    
+    if (authResponse) {
+      await WhatsAppService.sendMessage(phoneNumber, authResponse);
+      
+      // Log sent message
+      await prisma.whatsAppMessage.create({
+        data: {
+          phoneNumber,
+          messageType: 'SENT',
+          content: authResponse,
+        },
+      });
+      
+      return; // Don't process as regular chat message
+    }
+  }
 
   // Get or create user
   let user = await prisma.whatsAppUser.findUnique({

@@ -1,0 +1,174 @@
+DARJBERRY - PRD V1 (HIGH LEVEL USER JOURNEY)
+
+## Product Vision
+Transform unused agricultural land into passive income-generating assets through technology-enabled managed blueberry farming.
+
+## User Personas
+
+### 1. Landowner (Primary User)
+- Has 0.5+ acres of agricultural land
+- Seeks passive income from agriculture
+- Lacks farming expertise or time
+- Values tax benefits and long-term returns
+- Tech-savvy enough to use WhatsApp
+
+### 2. Farm Operations Manager (Internal User)
+- Manages multiple farms
+- Needs efficient tools for tracking and reporting
+- Coordinates with field teams
+- Handles customer communication
+
+### 3. Field Agronomist (Internal User)
+- Visits farms for maintenance
+- Records observations and actions
+- Needs offline-capable mobile tools
+- Follows standardized protocols
+
+## High-Level User Journey
+
+### Phase 1: Discovery & Interest (Landowner)
+1. Landowner discovers Darjberry through marketing channels
+2. Visits landing page, understands value proposition
+3. Uses ROI calculator to see potential returns
+4. Initiates contact via WhatsApp/form
+
+### Phase 2: Feasibility & Proposal
+1. Landowner shares land location (WhatsApp location pin)
+2. System automatically generates feasibility report using satellite data
+3. Sales team reviews and creates customized proposal
+4. Landowner receives proposal with investment details and projected returns
+
+### Phase 3: Agreement & Payment
+1. Landowner reviews and accepts proposal
+2. Digital signing of Managed Farming Agreement
+3. Chooses payment plan (lumpsum/installments/SIP)
+4. Makes initial payment through integrated gateway
+5. Receives confirmation and welcome kit
+
+### Phase 4: Farm Setup
+1. Operations team schedules site visit
+2. Field team conducts detailed soil analysis
+3. Infrastructure setup begins (polyhouse, irrigation)
+4. Landowner receives photo updates via WhatsApp
+5. Planting completed, maintenance schedule activated
+
+### Phase 5: Growth & Maintenance
+1. Regular maintenance visits by field team
+2. Automated irrigation and climate control
+3. Monthly progress reports to landowner
+4. Issue alerts and resolutions tracked
+5. Seasonal activities (pruning, fertilization) executed
+
+### Phase 6: Harvest & Revenue
+1. Yield estimation shared pre-harvest
+2. Harvest scheduling and execution
+3. Quality grading and packaging
+4. Sales through established channels
+5. Revenue calculation and distribution
+6. Payment credited to landowner account
+7. Tax documents provided
+
+### Phase 7: Ongoing Relationship
+1. Annual performance reviews
+2. Reinvestment opportunities
+3. Referral rewards program
+4. Community events and updates
+5. Expansion to additional plots
+
+## Key Features
+
+### For Landowners
+- Land feasibility checker
+- ROI calculator
+- Digital agreement signing
+- Payment flexibility
+- Real-time farm updates
+- Photo progress tracking
+- Revenue dashboard
+- Tax documentation
+- Support tickets
+
+### For Operations Team
+- Multi-farm dashboard
+- Task scheduling
+- Field team coordination
+- Document management
+- Customer communication hub
+- Analytics and reporting
+- Payment reconciliation
+- Performance tracking
+
+### For Field Team
+- Offline-first mobile app
+- Task checklists
+- Photo capture with geotagging
+- Observation recording
+- Material usage tracking
+- Route optimization
+- Knowledge base access
+
+## Success Metrics
+
+### Business Metrics
+- Number of farms onboarded
+- Average investment per farm
+- Customer acquisition cost
+- Revenue per farm
+- Customer lifetime value
+- Referral rate
+
+### Operational Metrics
+- Setup time per farm
+- Maintenance efficiency
+- Yield achievement rate
+- Issue resolution time
+- Customer satisfaction score
+
+### Platform Metrics
+- User engagement rates
+- Feature adoption
+- System uptime
+- API response times
+- Data accuracy
+
+## MVP Scope
+
+### Phase 1 (Month 1-2)
+- Landing page with ROI calculator
+- Lead capture and CRM integration
+- Basic feasibility analysis
+- Proposal generation
+- Payment integration
+
+### Phase 2 (Month 3-4)
+- Customer portal
+- Farm progress tracking
+- WhatsApp integration
+- Basic admin dashboard
+- Document management
+
+### Phase 3 (Month 5-6)
+- Advanced analytics
+- Mobile app for field team
+- Automated reporting
+- Community features
+- Referral system
+
+## Technical Requirements
+- Multi-tenant architecture
+- Role-based access control
+- Real-time data sync
+- Offline capability
+- Secure document storage
+- Payment gateway integration
+- WhatsApp Business API
+- Satellite imagery API
+- Weather data API
+- Mobile responsive design
+
+## Constraints & Assumptions
+- Assumes WhatsApp availability for all users
+- Requires stable internet for admin users
+- Depends on third-party APIs availability
+- Limited to specific geographic regions initially
+- Regulatory compliance for agricultural operations

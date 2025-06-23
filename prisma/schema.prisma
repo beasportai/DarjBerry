@@ -273,3 +273,55 @@ model LandAllocation {
   @@index([phoneNumber])
   @@map("land_allocations")
 }
+
+model OTP {
+  id          String   @id @default(cuid())
+  phoneNumber String
+  otp         String
+  attempts    Int      @default(0)
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+
+  @@index([phoneNumber])
+  @@index([phoneNumber, otp])
+  @@map("otps")
+}
+
+model RateLimitRecord {
+  id          String   @id @default(cuid())
+  phoneNumber String   @unique
+  count       Int      @default(0)
+  resetTime   DateTime
+  createdAt   DateTime @default(now())
+
+  @@index([phoneNumber])
+  @@map("rate_limit_records")
+}
+
+model AuthSession {
+  id          String   @id @default(cuid())
+  userId      String
+  phoneNumber String
+  token       String   @unique
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
+  @@index([phoneNumber])
+  @@index([token])
+  @@map("auth_sessions")
+}
+
+model WhatsAppAuthToken {
+  id          String   @id @default(cuid())
+  phoneNumber String
+  token       String   @unique
+  expiresAt   DateTime
+  used        Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@index([phoneNumber])
+  @@index([token])
+  @@index([expiresAt])
+  @@map("whatsapp_auth_tokens")
+}

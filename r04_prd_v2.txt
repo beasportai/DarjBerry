@@ -1,0 +1,289 @@
+DARJBERRY - PRD V2 (REFINED & PRECISE)
+
+## Product Definition
+A vertically-integrated AgTech platform that enables landowners to convert idle agricultural land into managed blueberry farms, providing passive income through a technology-driven, full-service farming operation.
+
+## Core Value Propositions
+
+### For Landowners
+1. **Zero-Effort Farming**: Complete hands-off management with professional oversight
+2. **5X Returns**: ₹4,000 investment per plant yields ₹20,000 over 15 years
+3. **Tax Optimization**: 100% tax-free agricultural income + capital gains benefits
+4. **Risk Mitigation**: Guaranteed minimum yield, insurance coverage, proven model
+5. **Transparent Tracking**: Real-time visibility into farm operations and finances
+
+### For Business
+1. **Scalable Operations**: Tech-enabled processes supporting 1000+ farms
+2. **Asset-Light Model**: 10% revenue share, no land ownership required
+3. **Network Effects**: Shared learning and bulk purchasing advantages
+4. **Data Moat**: Proprietary cultivation insights from operational data
+5. **Market Leadership**: First-mover in tech-enabled blueberry farming
+
+## Detailed User Flows
+
+### 1. Customer Acquisition Flow
+```
+Landing Page → Feasibility Check → Personalized Proposal → Consultation → Agreement
+     ↓              ↓                    ↓                    ↓            ↓
+ROI Calculator  Satellite Analysis  WhatsApp/Call      Video Demo    Digital Sign
+```
+
+**Key Interactions**:
+- Auto-calculate ROI based on land size and location
+- Instant feasibility report using satellite imagery
+- Personalized proposal within 24 hours
+- Virtual farm tour during consultation
+- One-click digital agreement execution
+
+### 2. Onboarding & Setup Flow
+```
+Payment → Site Survey → Infrastructure → Planting → Handover
+   ↓          ↓              ↓             ↓          ↓
+Invoice   Soil Test    Progress Pics   Quality Check  Welcome Kit
+```
+
+**Key Interactions**:
+- Multiple payment options with EMI calculator
+- Detailed soil report with amendments plan
+- Weekly photo updates during setup
+- Plant health certification
+- Digital handbook and care calendar
+
+### 3. Operations & Maintenance Flow
+```
+Schedule → Visit → Execute → Document → Communicate
+    ↓        ↓        ↓          ↓           ↓
+Calendar  Check-in  Tasks    Photos/Data  WhatsApp Update
+```
+
+**Key Interactions**:
+- Predictive maintenance scheduling
+- Geo-fenced check-in/out for visits
+- Standardized task checklists
+- Timestamped photo documentation
+- Automated customer notifications
+
+### 4. Harvest & Revenue Flow
+```
+Forecast → Harvest → Process → Sell → Distribute
+    ↓         ↓         ↓        ↓        ↓
+Estimate  Schedule  Grade/Pack  Invoice  Payment
+```
+
+**Key Interactions**:
+- ML-based yield forecasting
+- Optimal harvest timing alerts
+- Quality-based pricing transparency
+- Real-time sales tracking
+- Automated revenue distribution
+
+## Feature Specifications
+
+### Customer Portal (Web + Mobile)
+1. **Dashboard**
+   - Farm health score (0-100)
+   - Current growth stage visualization
+   - Revenue projections vs actuals
+   - Next maintenance schedule
+   - Weather conditions
+
+2. **Farm Timeline**
+   - Visual journey from planting to present
+   - Milestone achievements
+   - Photo gallery with AI-tagged events
+   - Maintenance history
+   - Yield records
+
+3. **Financial Center**
+   - Investment summary
+   - Revenue statements
+   - Tax documents (Form 26AS compatible)
+   - Payment history
+   - Referral earnings
+
+4. **Communication Hub**
+   - Direct chat with farm manager
+   - Announcement feed
+   - Knowledge articles
+   - Community forum
+   - Support tickets
+
+### Operations Dashboard (Web)
+1. **Mission Control**
+   - Map view of all farms
+   - Today's tasks across farms
+   - Alert management system
+   - Team deployment status
+   - Weather-based advisories
+
+2. **Farm Management**
+   - Individual farm profiles
+   - Cultivation timeline editor
+   - Input inventory tracking
+   - Yield tracking and analysis
+   - Cost center management
+
+3. **Customer Success**
+   - Customer health scores
+   - Communication history
+   - Satisfaction surveys
+   - Renewal pipeline
+   - Referral tracking
+
+4. **Analytics Suite**
+   - Operational efficiency metrics
+   - Financial performance
+   - Predictive insights
+   - Comparative benchmarks
+   - Custom report builder
+
+### Field Application (Mobile - Offline First)
+1. **Task Management**
+   - Daily route optimization
+   - Farm-specific checklists
+   - Offline data capture
+   - Voice notes support
+   - Barcode scanning for inputs
+
+2. **Documentation**
+   - Guided photo capture
+   - Standardized forms
+   - Digital signatures
+   - GPS tracking
+   - Time tracking
+
+3. **Knowledge Base**
+   - Offline pest/disease guide
+   - Video tutorials
+   - Best practices
+   - Emergency protocols
+   - Expert consultation request
+
+## Data Architecture
+
+### Core Entities
+1. **Farm**: Location, size, infrastructure, health score
+2. **Plant**: Variety, age, health, yield history
+3. **Customer**: Profile, agreements, payments, communication
+4. **Task**: Type, schedule, assignee, status, documentation
+5. **Transaction**: Financial movements, revenue sharing
+6. **Observation**: Field notes, measurements, issues
+
+### Key Integrations
+1. **WhatsApp Business**: Notifications, updates, support
+2. **Payment Gateway**: Razorpay for collections and disbursements
+3. **Satellite APIs**: Google Earth Engine for land analysis
+4. **Weather APIs**: IMD + OpenWeather for hyperlocal data
+5. **Document Storage**: S3-compatible for agreements, photos
+6. **SMS Gateway**: Backup communication channel
+7. **Accounting**: Tally integration for compliance
+
+## Success Metrics (Refined)
+
+### North Star Metric
+**Active Revenue-Generating Farms** (farms that generated revenue in last 12 months)
+
+### Leading Indicators
+1. **Customer Acquisition**
+   - Feasibility requests → Conversion rate (Target: 15%)
+   - CAC payback period (Target: 18 months)
+   - Organic vs paid acquisition ratio
+
+2. **Operational Excellence**
+   - Farm health score average (Target: 85+)
+   - Maintenance SLA compliance (Target: 95%)
+   - Yield achievement rate (Target: 90% of projection)
+
+3. **Customer Success**
+   - NPS score (Target: 70+)
+   - Revenue per farm growth (Target: 15% YoY)
+   - Churn rate (Target: <5% annually)
+
+4. **Platform Performance**
+   - Mobile app DAU/MAU (Target: 60%)
+   - Task completion rate (Target: 98%)
+   - Data sync reliability (Target: 99.9%)
+
+## Competitive Differentiation
+
+### vs Traditional Farming
+- 70% higher yields through precision agriculture
+- 50% lower water usage with smart irrigation
+- 100% transparent operations with digital tracking
+- Guaranteed buyers eliminating market risk
+
+### vs Other Managed Farming
+- Only tech-first platform in the segment
+- Proven success with high-value crops
+- End-to-end integration including sales
+- Strongest ROI proposition in market
+
+### Unique Moats
+1. **Technology**: Proprietary algorithms for Indian conditions
+2. **Operations**: Trained workforce with digital tools
+3. **Market Access**: Direct buyer relationships
+4. **Community**: Network effects from farmer base
+5. **Data**: Largest dataset on blueberry cultivation in region
+
+## Release Strategy
+
+### MVP (Months 1-3)
+- 10 pilot farms in single district
+- Core customer portal
+- Basic operations dashboard
+- WhatsApp integration
+- Payment collection
+
+### Scale (Months 4-6)
+- 50 farms across 3 districts
+- Field mobile app
+- Advanced analytics
+- Automated workflows
+- Community features
+
+### Growth (Months 7-12)
+- 200+ farms statewide
+- AI-powered insights
+- B2B marketplace
+- Value-added products
+- Franchise model prep
+
+## Risk Mitigation
+
+### Technical Risks
+- API dependency: Build fallback mechanisms
+- Offline scenarios: Progressive web app approach
+- Data loss: Real-time replication, daily backups
+- Security: End-to-end encryption, regular audits
+
+### Business Risks
+- Climate events: Insurance + diversified locations
+- Price volatility: Contract farming agreements
+- Operational scaling: Phased expansion with learning
+- Regulatory changes: Legal monitoring and compliance
+
+### User Adoption Risks
+- Tech literacy: Vernacular UI + hand-holding
+- Trust building: Transparency + social proof
+- Payment concerns: Multiple options + guarantees
+- Communication gaps: Multi-channel approach
+
+## Constraints
+
+### Technical Constraints
+- Mobile-first due to user behavior
+- Offline capability mandatory for field ops
+- WhatsApp as primary channel (95% penetration)
+- Low bandwidth optimization required
+
+### Business Constraints
+- Seasonal operations affecting cash flow
+- Geographic limitations initially
+- Agronomist availability for scaling
+- Working capital for infrastructure
+
+### Regulatory Constraints
+- Agricultural land use restrictions
+- GST on service component
+- Data localization requirements
+- Environmental compliance needs

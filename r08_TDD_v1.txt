@@ -1,0 +1,439 @@
+DARJBERRY - TDD IMPLEMENTATION PLAN
+
+## Test-Driven Development Strategy
+
+### Core Principle: Red → Green → Refactor
+Write failing tests first, implement minimal code to pass, then refactor for quality.
+
+## Phase 1: Foundation (Week 1)
+
+### [ ] 1. Project Setup & Configuration
+```bash
+# Test first
+- [ ] Test: Verify Next.js app boots successfully
+- [ ] Test: Environment variables load correctly
+- [ ] Test: Database connection establishes
+
+# Implementation
+- [ ] Create Next.js project with TypeScript
+- [ ] Configure environment variables
+- [ ] Set up Prisma with PostgreSQL
+```
+
+### [✅] 2. Authentication System - COMPLETED
+```typescript
+// Test first - COMPLETED
+- [✅] Test: OTP generation returns 6 digits
+- [✅] Test: OTP expires after 10 minutes
+- [✅] Test: Valid OTP + phone creates session
+- [✅] Test: Invalid OTP rejected
+- [✅] Test: Rate limiting prevents OTP spam
+
+// Implementation - COMPLETED
+- [✅] Implement WhatsApp-based authentication service
+- [✅] Create auth API endpoints (/api/auth/[...nextauth], /api/auth/send-otp, /api/auth/verify-otp)
+- [✅] Add NextAuth configuration with WhatsApp provider
+- [✅] Implement WhatsApp authentication flow (/api/auth/whatsapp/initiate, /api/auth/whatsapp/callback)
+- [✅] Implement rate limiting middleware
+```
+
+### [ ] 3. Customer Model & Basic CRUD
+```typescript
+// Test first
+- [ ] Test: Create customer with valid phone
+- [ ] Test: Duplicate phone number rejected
+- [ ] Test: Customer retrieval by ID
+- [ ] Test: KYC status defaults to pending
+- [ ] Test: Soft delete marks as inactive
+
+// Implementation
+- [ ] Define Prisma schema for Customer
+- [ ] Create customer service
+- [ ] Add validation layer
+- [ ] Implement repository pattern
+```
+
+## Phase 2: Core Domain (Week 2)
+
+### [ ] 4. Farm Feasibility Analysis
+```typescript
+// Test first
+- [ ] Test: Valid coordinates return feasibility score
+- [ ] Test: Invalid coordinates rejected
+- [ ] Test: Feasibility cached for 30 days
+- [ ] Test: Score below 0.7 prevents farm creation
+- [ ] Test: Mock satellite API for tests
+
+// Implementation
+- [ ] Create satellite service interface
+- [ ] Implement Google Earth Engine integration
+- [ ] Add caching layer
+- [ ] Create feasibility endpoint
+```
+
+### [ ] 5. Farm Creation Flow
+```typescript
+// Test first
+- [ ] Test: Valid customer + feasibility creates farm
+- [ ] Test: Farm gets correct plant count (500/unit)
+- [ ] Test: Initial health score is 100
+- [ ] Test: Setup tasks auto-scheduled
+- [ ] Test: Welcome notification sent
+
+// Implementation
+- [ ] Define Farm schema
+- [ ] Create farm service
+- [ ] Implement task scheduler
+- [ ] Add event emitter for notifications
+```
+
+### [ ] 6. Payment Integration
+```typescript
+// Test first
+- [ ] Test: Payment link generation succeeds
+- [ ] Test: Webhook updates payment status
+- [ ] Test: Failed payments retry 3 times
+- [ ] Test: Successful payment triggers farm setup
+- [ ] Test: Payment history tracks all attempts
+
+// Implementation
+- [ ] Integrate Razorpay SDK
+- [ ] Create payment service
+- [ ] Implement webhook handler
+- [ ] Add payment status tracking
+```
+
+## Phase 3: Operations (Week 3)
+
+### [ ] 7. Task Management System
+```typescript
+// Test first
+- [ ] Test: Tasks generated based on growth stage
+- [ ] Test: Tasks assigned by proximity
+- [ ] Test: Overdue tasks escalated
+- [ ] Test: Task completion updates farm health
+- [ ] Test: Batch task assignment optimized
+
+// Implementation
+- [ ] Define Task schema
+- [ ] Create task generation logic
+- [ ] Implement assignment algorithm
+- [ ] Add completion handlers
+```
+
+### [ ] 8. Field App Offline Sync
+```typescript
+// Test first
+- [ ] Test: Offline queue stores tasks locally
+- [ ] Test: Online trigger syncs queue
+- [ ] Test: Conflicts resolved by timestamp
+- [ ] Test: Photos compressed before sync
+- [ ] Test: Partial sync handles failures
+
+// Implementation
+- [ ] Create offline storage service
+- [ ] Implement sync queue
+- [ ] Add conflict resolution
+- [ ] Create sync API endpoints
+```
+
+### [ ] 9. WhatsApp Notifications
+```typescript
+// Test first
+- [ ] Test: Template messages format correctly
+- [ ] Test: Media uploads succeed
+- [ ] Test: Delivery status tracked
+- [ ] Test: Opt-out respected
+- [ ] Test: Fallback to SMS on failure
+
+// Implementation
+- [ ] WhatsApp Business API setup
+- [ ] Create notification service
+- [ ] Implement template management
+- [ ] Add delivery tracking
+```
+
+## Phase 4: Analytics & Monitoring (Week 4)
+
+### [ ] 10. Farm Health Scoring
+```typescript
+// Test first
+- [ ] Test: Health factors aggregate correctly
+- [ ] Test: Score ranges from 0-100
+- [ ] Test: Low scores trigger alerts
+- [ ] Test: Historical scores tracked
+- [ ] Test: ML model predictions validated
+
+// Implementation
+- [ ] Create health calculation engine
+- [ ] Implement factor collection
+- [ ] Add ML model integration
+- [ ] Create alert system
+```
+
+### [ ] 11. Revenue Distribution
+```typescript
+// Test first
+- [ ] Test: 90-10 split calculated correctly
+- [ ] Test: Payouts initiated automatically
+- [ ] Test: Failed payouts retry
+- [ ] Test: Tax documents generated
+- [ ] Test: Distribution audit trail complete
+
+// Implementation
+- [ ] Create revenue calculator
+- [ ] Implement payout service
+- [ ] Add document generation
+- [ ] Create audit logger
+```
+
+### [ ] 12. Dashboard Analytics
+```typescript
+// Test first
+- [ ] Test: Metrics aggregate in real-time
+- [ ] Test: Filters apply correctly
+- [ ] Test: Export generates valid CSV
+- [ ] Test: Charts render with data
+- [ ] Test: Role-based data visibility
+
+// Implementation
+- [ ] Create analytics service
+- [ ] Build aggregation queries
+- [ ] Implement export functionality
+- [ ] Add visualization components
+```
+
+## Phase 5: User Interface (Week 5)
+
+### [ ] 13. Landing Page & ROI Calculator
+```typescript
+// Test first
+- [ ] Test: ROI calculation matches formula
+- [ ] Test: Form validation works
+- [ ] Test: Lead capture saves to CRM
+- [ ] Test: Mobile responsive layout
+- [ ] Test: Page loads under 2 seconds
+
+// Implementation
+- [ ] Create landing page components
+- [ ] Build ROI calculator
+- [ ] Add form handling
+- [ ] Implement CRM integration
+```
+
+### [ ] 14. Customer Portal
+```typescript
+// Test first
+- [ ] Test: Dashboard shows correct farms
+- [ ] Test: Timeline displays events
+- [ ] Test: Documents downloadable
+- [ ] Test: Support tickets creatable
+- [ ] Test: PWA installs correctly
+
+// Implementation
+- [ ] Build dashboard layout
+- [ ] Create farm detail pages
+- [ ] Add document viewer
+- [ ] Implement support system
+```
+
+### [ ] 15. Admin Dashboard
+```typescript
+// Test first
+- [ ] Test: Multi-farm view loads
+- [ ] Test: Filters work correctly
+- [ ] Test: Bulk actions execute
+- [ ] Test: Real-time updates show
+- [ ] Test: Export includes all data
+
+// Implementation
+- [ ] Create admin layout
+- [ ] Build data tables
+- [ ] Add bulk operations
+- [ ] Implement WebSocket updates
+```
+
+## Testing Infrastructure
+
+### Unit Test Examples
+```typescript
+// services/otp.service.test.ts
+describe('OTPService', () => {
+  it('should generate 6-digit OTP', () => {
+    const otp = otpService.generate()
+    expect(otp).toMatch(/^\d{6}$/)
+  })
+  
+  it('should expire OTP after 10 minutes', async () => {
+    const otp = await otpService.create('9876543210')
+    
+    // Fast-forward time
+    jest.advanceTimersByTime(11 * 60 * 1000)
+    
+    const isValid = await otpService.verify('9876543210', otp)
+    expect(isValid).toBe(false)
+  })
+})
+```
+
+### Integration Test Examples
+```typescript
+// api/farms.test.ts
+describe('POST /api/farms', () => {
+  it('should create farm with valid data', async () => {
+    const response = await request(app)
+      .post('/api/farms')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        area: 1.5,
+        coordinates: '26.8467,80.9462',
+        name: 'Test Farm'
+      })
+    
+    expect(response.status).toBe(201)
+    expect(response.body.plantCount).toBe(750) // 500 * 1.5
+  })
+})
+```
+
+### E2E Test Examples
+```typescript
+// e2e/customer-journey.test.ts
+describe('Customer Journey', () => {
+  it('should complete from landing to farm creation', async () => {
+    // Visit landing page
+    await page.goto('/')
+    
+    // Use ROI calculator
+    await page.fill('[data-testid=land-area]', '2')
+    await page.click('[data-testid=calculate-roi]')
+    
+    // Verify ROI displayed
+    await expect(page.locator('[data-testid=roi-result]'))
+      .toContainText('₹40,000')
+    
+    // Continue to registration...
+  })
+})
+```
+
+## Implementation Guidelines
+
+### 1. Minimal Implementation First
+```typescript
+// ❌ Don't start with this
+class ComplexFarmService {
+  // 500 lines of features
+}
+
+// ✅ Start with this
+class FarmService {
+  async create(data: CreateFarmDTO): Promise<Farm> {
+    return this.repository.create(data)
+  }
+}
+```
+
+### 2. One Test, One Assertion
+```typescript
+// ❌ Multiple assertions
+it('should create and validate farm', () => {
+  const farm = service.create(data)
+  expect(farm.id).toBeDefined()
+  expect(farm.plants).toBe(500)
+  expect(farm.health).toBe(100)
+})
+
+// ✅ Single responsibility
+it('should assign correct plant count', () => {
+  const farm = service.create({ area: 1 })
+  expect(farm.plants).toBe(500)
+})
+```
+
+### 3. Test Boundaries, Not Implementation
+```typescript
+// ❌ Testing implementation details
+it('should call calculatePlants method', () => {
+  const spy = jest.spyOn(service, 'calculatePlants')
+  service.create(data)
+  expect(spy).toHaveBeenCalled()
+})
+
+// ✅ Testing behavior
+it('should create farm with calculated plants', () => {
+  const farm = service.create({ area: 2 })
+  expect(farm.plants).toBe(1000)
+})
+```
+
+## Success Criteria
+
+### Code Coverage Targets
+- Unit tests: 80% coverage
+- Integration tests: Critical paths covered
+- E2E tests: Main user journeys
+
+### Performance Targets
+- API response: < 200ms (p95)
+- Page load: < 2 seconds
+- Database queries: < 50ms
+
+### Quality Gates
+- All tests pass
+- No critical security issues
+- Code review approved
+- Documentation updated
+
+## Continuous Integration
+
+```yaml
+# .github/workflows/test.yml
+name: Test Suite
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Run unit tests
+        run: npm run test:unit
+        
+      - name: Run integration tests
+        run: npm run test:integration
+        
+      - name: Generate coverage
+        run: npm run test:coverage
+        
+      - name: Upload coverage
+        uses: codecov/codecov-action@v2
+```
+
+## Development Workflow
+
+1. **Pick a task from the TDD plan**
+2. **Write failing test(s)**
+3. **Implement minimal code to pass**
+4. **Refactor if needed**
+5. **Commit with descriptive message**
+6. **Move to next task**
+
+## Notes
+
+- Each checkbox represents a testable feature
+- Tests should be written before implementation
+- Keep implementations minimal initially
+- Refactor only after tests pass
+- Document any deviations from plan
+
+This TDD plan ensures we build exactly what's needed, with confidence that it works correctly.
