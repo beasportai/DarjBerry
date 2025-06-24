@@ -1,10 +1,8 @@
 # Darjberry - Complete Project Documentation & Strategy
 
-.
-
 ---
 
-# The Grand Slam Offer: The Blueberry Wealth Project (v2.1)
+# The Blueberry Wealth Project
 
 This document outlines the core business model, value proposition, and operational framework for our managed blueberry farming venture. It is the single source of truth for our team, partners, and AI agents.
 
@@ -18,7 +16,7 @@ Traditional landowners and investors face significant barriers to profiting from
 - **Market Access & Sales:** They struggle to find reliable buyers, negotiate fair prices, and manage the logistics of getting produce to market, often falling prey to middlemen.
 - **Scalability Issues:** Fragmented land holdings and lack of mechanization make scaling a profitable operation nearly impossible for an individual.
 
-Our Blueberry Wealth Project is designed to eliminate every single one of these problems, turning a liability (unused land) into a high-yield, passive, tax-advantaged asset.
+Our Blueberry Wealth Project is designed to eliminate every single one of these problems, turning unused land into a high-yield, passive, tax-advantaged asset.
 
 ## 2. The Dream Outcome: Your 5X Tax-Free Agricultural Asset
 
@@ -110,3 +108,14 @@ year 2 yield 1 kg
 year 3 yield 2 kg
 year 4 yield 3 kg
 stable yields of 3kg from year 4 till year 20
+3.5 years Payback period
+800 per kg market price
+3kg yield from year 3
+year 1 yield 1kg
+year 2 yield 2kg
+year 3 yield 3kg
+year 4 yield 3kg
+stable yields of 3kg from year 4 till year 20
+Fursat Farms Private Limited, 3rd Floor, Dwarika Heights, Near Vega Circle Sevoke Road, Siliguri - 734005
++91 7047 474 942
+darjberry@gmail.com

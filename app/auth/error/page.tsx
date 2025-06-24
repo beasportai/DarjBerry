@@ -1,6 +1,7 @@
 'use client';
 
 import { useSearchParams, useRouter } from 'next/navigation';
+import { Suspense } from 'react';
 
 const ERROR_MESSAGES = {
   missing_token: 'Authentication link is missing required information',
@@ -9,7 +10,7 @@ const ERROR_MESSAGES = {
   default: 'Authentication failed due to unknown error'
 };
 
-export default function AuthError() {
+function AuthErrorContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const errorType = searchParams.get('error') as keyof typeof ERROR_MESSAGES || 'default';
@@ -73,5 +74,13 @@ export default function AuthError() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function AuthError() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50 flex items-center justify-center"><div>Loading...</div></div>}>
+      <AuthErrorContent />
+    </Suspense>
   );
 }

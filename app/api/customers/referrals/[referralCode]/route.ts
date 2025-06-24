@@ -3,9 +3,10 @@ import { customerService } from '@/lib/services/customerService';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { referralCode: string } }
+  context: { params: Promise<{ referralCode: string }> }
 ) {
   try {
+    const params = await context.params;
     const { referralCode } = params;
 
     if (!referralCode) {

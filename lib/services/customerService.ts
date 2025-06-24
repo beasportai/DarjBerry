@@ -22,6 +22,7 @@ export interface UpdateCustomerDTO {
   landType?: string;
   state?: string;
   leadScore?: number;
+  lastInteraction?: Date;
 }
 
 export interface CustomerFilter {

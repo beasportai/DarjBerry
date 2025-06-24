@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { AuthProvider, useAuth } from '@/lib/contexts/AuthContext';
 
@@ -152,7 +152,9 @@ function WhatsAppSuccessContent() {
 export default function WhatsAppAuthSuccess() {
   return (
     <AuthProvider>
-      <WhatsAppSuccessContent />
+      <Suspense fallback={<div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center"><div>Loading...</div></div>}>
+        <WhatsAppSuccessContent />
+      </Suspense>
     </AuthProvider>
   );
 }

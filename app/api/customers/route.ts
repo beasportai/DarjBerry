@@ -6,7 +6,7 @@ import { checkRateLimit } from '@/lib/middleware/auth';
 export async function GET(request: NextRequest) {
   try {
     // Check rate limit
-    const clientIP = request.ip || 'unknown';
+    const clientIP = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown';
     const withinLimit = await checkRateLimit(clientIP, 100, 15);
     
     if (!withinLimit) {
@@ -71,7 +71,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     // Check rate limit
-    const clientIP = request.ip || 'unknown';
+    const clientIP = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown';
     const withinLimit = await checkRateLimit(clientIP, 10, 15);
     
     if (!withinLimit) {
