@@ -51,7 +51,7 @@ export default function RootLayout({
       <body className="bg-darj-cream text-darj-slate antialiased">
         <ClientContextWrapper>
           <Navbar />
-          <div className="flex flex-col gap-2 wrapper">{children}</div>
+          <div className="flex flex-col gap-2">{children}</div>
           <Footer />
         </ClientContextWrapper>
       </body>

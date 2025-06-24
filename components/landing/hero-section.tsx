@@ -34,7 +34,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
   return (
     <>
-      <div className="relative w-full h-screen text-white overflow-hidden font-sans">
+      <div className="relative w-screen h-screen text-white overflow-hidden font-sans">
         {/* Background Image */}
         <Image
           src={bgImage}
@@ -42,69 +42,73 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           fill
           priority
           className="object-cover object-center z-0"
+          sizes="100vw"
         />
 
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/30 z-10" />
 
-        {/* Captions - Left */}
-        <div className="absolute top-6 left-6 md:top-auto md:left-12 md:bottom-12 text-xs md:text-sm max-w-[180px] z-20">
-          <div className="text-lg">★★★★★</div>
-          <p className="mt-2 leading-snug">
+        {/* Desktop Captions - Hidden on mobile */}
+        <div className="absolute bottom-12 left-6 md:left-12 text-xs md:text-sm max-w-[250px] z-20 hidden md:block">
+          <div className="text-base mb-2">★★★★★</div>
+          <p className="leading-relaxed text-xs md:text-sm opacity-90">
             Transform your land into a profitable blueberry farm
           </p>
         </div>
 
-        {/* Captions - Right */}
-        <div className="absolute top-6 right-6 md:top-auto md:right-12 md:bottom-12 text-xs md:text-sm max-w-[180px] text-right z-20">
-          <div className="text-lg">★★★★★</div>
-          <p className="mt-2 leading-snug">
+        <div className="absolute bottom-12 right-6 md:right-12 text-xs md:text-sm max-w-[250px] text-right z-20 hidden md:block">
+          <div className="text-base mb-2">★★★★★</div>
+          <p className="leading-relaxed text-xs md:text-sm opacity-90">
             Complete done-for-you service with 500% ROI guarantee
+          </p>
+        </div>
+
+        {/* Mobile Star Rating - Only visible on mobile, positioned absolutely */}
+        <div className="block md:hidden absolute left-6 top-[20%] z-20">
+          <div className="text-base mb-1">★★★★★</div>
+          <p className="text-xs opacity-90 max-w-[60%] leading-relaxed">
+            Transform your land into a profitable blueberry farm
           </p>
         </div>
 
         {/* Hero Text */}
         <div className="relative z-20 flex flex-col justify-center items-center h-full px-6 text-center">
-          <h1 className="text-[3.5rem] md:text-[6rem] leading-[1] font-light">
-            <span className="block font-sans">Simple</span>
-            <span className="block font-serif italic -mt-4">things</span>
+          <h1 className="text-[4.5rem] md:text-[7rem] leading-[0.85] font-light">
+            <span className="block font-sans">Blueberry</span>
+            <span className="block font-serif italic -mt-3 md:-mt-4">
+              wealth
+            </span>
           </h1>
-          <p className="mt-6 text-sm md:text-base max-w-xl">
-            <strong>Transform your unused land</strong> into a passive income
-            engine with our complete "Done-For-You" blueberry farming service
-          </p>
-          <p className="mt-2 text-sm md:text-base max-w-xl">
-            Supported by expert agronomy and guaranteed sales, Darjberry works
-            to restore nature, create wealth, and promote sustainable farming
-            for a greener future.
-          </p>
+          <div className="mt-6 md:mt-12 text-center">
+            <p className="text-sm md:text-base leading-relaxed">
+              <span className="block">
+                <strong>Transform your unused land</strong> into a passive income
+              </span>
+              <span className="block mt-1">
+                engine with our complete "Done-For-You" blueberry farming service
+              </span>
+            </p>
+          </div>
+          <div className="mt-4 md:mt-8 text-xs md:text-sm max-w-2xl opacity-80 text-center px-6">
+            <p className="leading-relaxed">
+              Supported by expert agronomy and guaranteed sales, Darjberry works
+              to restore nature, create wealth, and promote sustainable farming
+              for a greener future.
+            </p>
+          </div>
 
           {/* CTA Button */}
-          <div className="mt-8">
+          <div className="mt-8 text-center">
             <Button
               size="lg"
               className="bg-darj-accent hover:bg-darj-accent/90 text-darj-slate font-semibold py-4 px-8 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
               onClick={onCtaClick}
             >
-              {ctaText}
+              Start Your Farm Today
             </Button>
           </div>
         </div>
       </div>
-
-      {/* Image Grid Section */}
-      <section className="grid grid-cols-2 md:grid-cols-6 gap-1 md:gap-2 px-2 py-4 bg-white">
-        {[1, 2, 3, 4, 5, 6].map((n) => (
-          <div key={n} className="aspect-square relative">
-            <Image
-              src={`/images/leaf${n}.png`}
-              alt={`Blueberry farming ${n}`}
-              fill
-              className="object-cover rounded"
-            />
-          </div>
-        ))}
-      </section>
     </>
   );
 };

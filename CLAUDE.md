@@ -92,3 +92,20 @@ To ensure complete transparency and security for both parties, we use a robust l
   1.  **Land & Topography Analysis:** We use the **Google Earth Engine API** to analyze satellite imagery of your plot. This instantly gives us boundaries, elevation data, slope, and current land use, which is critical for planning the polyhouse orientation and water flow.
   2.  **Soil Composition Data:** We query the **ISRIC World Soil Information Service API**. By providing the GPS coordinates of your land, we can retrieve data on soil type, pH levels, and organic carbon content, allowing us to pre-plan the specific nutrient mix required for the grow bags.
   3.  **Climate Viability:** We use the **OpenWeatherMap API** to pull decades of historical weather data for your specific location. This helps us confirm temperature ranges and rainfall patterns to ensure the micro-climate within the polyhouse can be managed effectively.
+
+## 8. Thesis
+
+Bryan Johnson includes blueberries in his diet due to their rich antioxidant content, particularly anthocyanins, which help reduce oxidative stress, improve metabolic function, and decrease inflammation. These benefits are linked to better cognition, memory, and overall cellular health, making blueberries a key component of his longevity-focused nutrition plan. Youtube video: Bryan Johnson making his blueberry nutty pudding, can be added https://www.youtube.com/watch?v=8eb_41ZpyOQ to the website
+
+## 10. Some Facts
+
+3.5 years Payback period
+800 per kg market price
+3kg yield from year 3
+year 1 yield 1kg
+year 2 yield 2kg
+year 3 yield 3kg
+year 4 yield 3kg
+plant lifespan 15-20 years
+per acre 2500 plants
+we can kickoff a project on

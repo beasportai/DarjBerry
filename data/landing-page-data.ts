@@ -205,12 +205,11 @@ export const ctaData = {
 
 // Navigation Data
 export const navigationData = {
-  brandName: "DARJBERRY",
+  brandName: "",
   navigationItems: [
     { label: "ABOUT us", href: "#about" },
     { label: "HOW it WORKS", href: "#how-it-works" },
-    { label: "our RESOURCES", href: "#technology" },
-    { label: "FAQs", href: "#faq" },
+    { label: "our RESOURCE", href: "#technology" },
   ],
   ctaText: "Contact Us",
 };

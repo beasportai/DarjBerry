@@ -63,45 +63,47 @@ const DarjberryLandingPage: NextPage = () => {
           onCtaClick={handleCtaClick}
         />
 
-        <ProblemSolutionSection
-          problems={problemSolutionData.problems}
-          solutionTitle={problemSolutionData.solutionTitle}
-          solutionDescription={problemSolutionData.solutionDescription}
-        />
+        <div className="wrapper">
+          <ProblemSolutionSection
+            problems={problemSolutionData.problems}
+            solutionTitle={problemSolutionData.solutionTitle}
+            solutionDescription={problemSolutionData.solutionDescription}
+          />
 
-        <div id="how-it-works">
-          <HowItWorksSection steps={howItWorksData.steps} />
-        </div>
+          <div id="how-it-works">
+            <HowItWorksSection steps={howItWorksData.steps} />
+          </div>
 
-        <div id="offer">
-          <OfferSection
-            offerItems={offerData.offerItems}
-            bonusItems={offerData.bonusItems}
-            totalValue={offerData.totalValue}
-            investmentAmount={offerData.investmentAmount}
-            investmentNote={offerData.investmentNote}
-            availabilityText={offerData.availabilityText}
-            availabilityCount={offerData.availabilityCount}
+          <div id="offer">
+            <OfferSection
+              offerItems={offerData.offerItems}
+              bonusItems={offerData.bonusItems}
+              totalValue={offerData.totalValue}
+              investmentAmount={offerData.investmentAmount}
+              investmentNote={offerData.investmentNote}
+              availabilityText={offerData.availabilityText}
+              availabilityCount={offerData.availabilityCount}
+            />
+          </div>
+
+          <div id="technology">
+            <TechnologySection features={technologyData.features} />
+          </div>
+
+          <RoiCalculatorSection />
+
+          <div id="faq">
+            <FaqSection faqs={faqData.faqs} />
+          </div>
+
+          <CtaSection
+            title={ctaData.title}
+            subtitle={ctaData.subtitle}
+            ctaText={ctaData.ctaText}
+            note={ctaData.note}
+            onCtaClick={handleCtaClick}
           />
         </div>
-
-        <div id="technology">
-          <TechnologySection features={technologyData.features} />
-        </div>
-
-        <RoiCalculatorSection />
-
-        <div id="faq">
-          <FaqSection faqs={faqData.faqs} />
-        </div>
-
-        <CtaSection
-          title={ctaData.title}
-          subtitle={ctaData.subtitle}
-          ctaText={ctaData.ctaText}
-          note={ctaData.note}
-          onCtaClick={handleCtaClick}
-        />
       </main>
     </div>
   );
