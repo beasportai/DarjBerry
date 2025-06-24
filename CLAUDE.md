@@ -99,13 +99,14 @@ Bryan Johnson includes blueberries in his diet due to their rich antioxidant con
 
 ## 10. Some Facts
 
+plant lifespan 15-20 years
+per plant 1.8 sq. mt spacing
+in an acre 2200 plants
 3.5 years Payback period
 800 per kg market price
 3kg yield from year 3
-year 1 yield 1kg
-year 2 yield 2kg
-year 3 yield 3kg
-year 4 yield 3kg
-plant lifespan 15-20 years
-per acre 2500 plants
-we can kickoff a project on
+year 1 yield .5 kg
+year 2 yield 1 kg
+year 3 yield 2 kg
+year 4 yield 3 kg
+stable yields of 3kg from year 4 till year 20
