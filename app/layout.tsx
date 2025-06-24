@@ -48,10 +48,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="bg-darj-cream text-darj-slate antialiased">
+      <body className="bg-darj-cream text-darj-slate antialiased overflow-x-hidden">
         <ClientContextWrapper>
           <Navbar />
-          <div className="flex flex-col gap-2">{children}</div>
+          <div className="flex flex-col gap-2 w-full">{children}</div>
           <Footer />
         </ClientContextWrapper>
       </body>

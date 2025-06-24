@@ -26,17 +26,19 @@ import {
 
 const DarjberryLandingPage: NextPage = () => {
   const handleCtaClick = () => {
-    // Handle CTA button click - could open a form, scroll to contact, etc.
-    console.log("CTA clicked");
+    // Redirect to WhatsApp with pre-filled message for farming inquiry  
+    const whatsappUrl = `https://wa.me/917047474942?text=${encodeURIComponent("Hi! I'm interested in starting a blueberry farm. Can you help me with more details?")}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   const handleContactClick = () => {
-    // Handle contact button click
-    console.log("Contact clicked");
+    // Redirect to WhatsApp for general contact
+    const whatsappUrl = `https://wa.me/917047474942?text=${encodeURIComponent("Hi! I'd like to know more about Darjberry.")}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-white w-full overflow-x-hidden">
       <Head>
         <title>
           Darjberry - Turn Your Land into a High-Yield Blueberry Farm
@@ -48,7 +50,7 @@ const DarjberryLandingPage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main className="w-full">
         <LandingNavigation
           brandName={navigationData.brandName}
           navigationItems={navigationData.navigationItems}

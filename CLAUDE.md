@@ -23,32 +23,33 @@ Our Blueberry Wealth Project is designed to eliminate every single one of these 
 We provide a completely "Done-For-You" solution to transform your land into a passive income engine. Here's the dream we deliver:
 
 - **Earn Passive, Tax-Free Income:** Generate substantial annual returns completely hands-off. All income from agricultural activities is tax-exempt under Indian law.
-- **Achieve a 500% ROI:** Your initial investment of ₹4,000 per plant is projected to return over ₹20,000 over 15 years, a 5X return on capital.
+- **Achieve a 500% ROI:** Your initial investment of ₹4,000 per plant is returned in 3.5 years and then is projected to return over ₹20,000 over 15 years, a 5X return on capital.
 - **Benefit from Capital Gains Tax Savings:** Reinvesting capital gains from another asset into agricultural land can provide significant tax waivers.
 - **Enjoy Land Appreciation:** While earning from the produce, the underlying value of your land continues to appreciate.
 - **Savor Fresh, Anti-Aging Superfoods:** Enjoy a personal supply of fresh, healthy blueberries, a fruit renowned for its wellness and longevity benefits, grown on your own land.
 - **Build a Legacy:** Create a long-term, profitable, and sustainable asset that can be passed down for generations.
 
-## 3. The Value Equation (Why This is a "Stupid Good" Offer)
+## 3. The Value Equation:
 
 - **(↑) The Dream Outcome:** Passive wealth, tax savings, and health benefits.
-- **(↑) Perceived Likelihood of Achievement:** Validated by local success stories (Farm2Fam), backed by expert agronomists, and de-risked with modern technology.
-- **(↓) Time Delay:** You see tangible setup progress in 30 days and start earning returns from Year 2.
+- **(↑) Perceived Likelihood of Achievement:** Validated by local success stories (Farm2Fam: source https://thebetterindia.com/345037/growing-blueberries-raspberries-in-india-lawyer-quits-start-farm2fam-low-cost-tunnel-method/), backed by expert agronomists, and de-risked with modern technology.
+- **(↓) Time Delay:** You see tangible setup progress in 90 days and start earning returns from Year 2.
 - **(↓) Effort & Sacrifice:** Virtually zero. You provide the land and capital; we handle 100% of the work.
 
 ## 4. The Grand Slam Offer Stack
 
-| Deliverable                                 | Description                                                                                                                                                 | Perceived Value                 |
+Note: can we have calculator, that uses unit economics and then helps calculate the offer for the person realtime. For example, we ask the size of land the user has. Recommendation from Expert agronomist: Commercial Profitability comes from farming at 2 acres+.
+| Deliverable | Description | Perceived Value |
 | :------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------ | ----------------- |
-| **Core Offer: Turnkey Blueberry Farm**      | 500 High-Yield Blueberry Plants with a 15-20 year lifespan.                                                                                                 | ₹20,00,000 (Initial Investment) |
-| **Infrastructure: Polyhouse & Drip System** | Complete setup of a climate-controlled polyhouse, drip irrigation, and fogger system.                                                                       | ₹12,50,000                      |
-| **Agronomy & Management Service**           | 15 years of expert management, including planting, nutrition, pest control, and harvesting.                                                                 | ₹15,00,000                      |
-| **Sales & Marketing Service**               | We handle all B2B and D2C sales, logistics, and distribution.                                                                                               | **10% of Gross Revenue**        |
-| **BONUS #1: Satellite & Soil Analysis**     | A comprehensive feasibility report for your specific plot of land. [See FN-7]                                                                               | ₹25,000                         |
-| **BONUS #2: Future Brand Stakeholder**      | First-right to be a stakeholder in any successful value-added product brand we launch using your farm's produce.                                            | Priceless                       |
-| **BONUS #3: Guarantee**                     | If your farm does not produce a minimum of 2 kgs per plant by the end of Year 4, we will manage your farm for FREE in Year 5, until it hits that benchmark. | Peace of Mind                   |
-| **TOTAL UPFRONT VALUE**                     |                                                                                                                                                             | **₹47,75,000+**                 |
-| **YOUR PRICE TODAY**                        |                                                                                                                                                             | **₹20,00,000 (for 500 plants)** | OR SIP @5,599/day |
+| **Core Offer: Turnkey Blueberry Farm** | 500 High-Yield Blueberry Plants with a 15-20 year lifespan. | ₹20,00,000 (Initial Investment) |
+| **Infrastructure: Polyhouse & Drip System** | Complete setup of a climate-controlled polyhouse, drip irrigation, and fogger system. | ₹12,50,000 |
+| **Agronomy & Management Service** | 15 years of expert management, including planting, nutrition, pest control, and harvesting. | ₹15,00,000 |
+| **Sales & Marketing Service** | We handle all B2B and D2C sales, logistics, and distribution. | **10% of Gross Revenue** |
+| **BONUS #1: Satellite & Soil Analysis** | A comprehensive feasibility report for your specific plot of land. [See FN-7] | ₹25,000 |
+| **BONUS #2: Future Brand Stakeholder** | First-right to be a stakeholder in any successful value-added product brand we launch using your farm's produce. | Priceless |
+| **BONUS #3: Guarantee** | If your farm does not produce a minimum of 2 kgs per plant by the end of Year 4, we will manage your farm for FREE in Year 5, until it hits that benchmark. | Peace of Mind |
+| **TOTAL UPFRONT VALUE** | | **₹47,75,000+** |
+| **YOUR PRICE TODAY** | | **₹20,00,000 (for 500 plants)** | OR SIP @5,599/day |
 
 Notes
 Scarcity and Exclusivity: An industry-leading offer is not available to everyone. You need to create desirability.

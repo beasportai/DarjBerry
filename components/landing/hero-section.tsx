@@ -34,7 +34,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
   return (
     <>
-      <div className="relative w-screen h-screen text-white overflow-hidden font-sans">
+      <div className="relative w-full h-screen text-white overflow-hidden font-sans">
         {/* Background Image */}
         <Image
           src={bgImage}
@@ -64,41 +64,43 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </div>
 
         {/* Mobile Star Rating - Only visible on mobile, positioned absolutely */}
-        <div className="block md:hidden absolute left-6 top-[20%] z-20">
-          <div className="text-base mb-1">★★★★★</div>
-          <p className="text-xs opacity-90 max-w-[60%] leading-relaxed">
+        <div className="block md:hidden absolute left-4 top-[12%] z-20 py-2">
+          <div className="text-base mb-2">★★★★★</div>
+          <p className="text-xs opacity-90 max-w-[70%] leading-relaxed">
             Transform your land into a profitable blueberry farm
           </p>
         </div>
 
         {/* Hero Text */}
-        <div className="relative z-20 flex flex-col justify-center items-center h-full px-6 text-center">
-          <h1 className="text-[4.5rem] md:text-[7rem] leading-[0.85] font-light">
-            <span className="block font-sans">Blueberry</span>
-            <span className="block font-serif italic -mt-3 md:-mt-4">
-              wealth
-            </span>
-          </h1>
-          <div className="mt-6 md:mt-12 text-center">
-            <p className="text-sm md:text-base leading-relaxed">
-              <span className="block">
+        <div className="relative z-20 flex flex-col justify-center items-center h-full px-4 md:px-6 text-center">
+          <div className="py-4 md:py-0">
+            <h1 className="text-[4rem] md:text-[7rem] leading-[0.85] font-light mb-2 md:mb-0">
+              <span className="block font-sans">Blueberry</span>
+              <span className="block font-serif italic -mt-2 md:-mt-4">
+                wealth
+              </span>
+            </h1>
+          </div>
+          
+          <div className="mt-4 md:mt-12 text-center py-3 md:py-0">
+            <p className="text-sm md:text-base leading-relaxed px-2">
+              <span className="block mb-2">
                 <strong>Transform your unused land</strong> into a passive income
               </span>
-              <span className="block mt-1">
+              <span className="block">
                 engine with our complete "Done-For-You" blueberry farming service
               </span>
             </p>
           </div>
-          <div className="mt-4 md:mt-8 text-xs md:text-sm max-w-2xl opacity-80 text-center px-6">
+          
+          <div className="mt-4 md:mt-8 text-xs md:text-sm max-w-2xl opacity-80 text-center px-4 md:px-6 py-2 md:py-0">
             <p className="leading-relaxed">
-              Supported by expert agronomy and guaranteed sales, Darjberry works
-              to restore nature, create wealth, and promote sustainable farming
-              for a greener future.
+              Supported by expert agronomist with 25+ years of experience working for DS GROUP, IG INTERNATIONAL & FARM2FAM. Growing on over 100 acres.
             </p>
           </div>
 
           {/* CTA Button */}
-          <div className="mt-8 text-center">
+          <div className="mt-8 md:mt-8 text-center py-4 md:py-0">
             <Button
               size="lg"
               className="bg-darj-accent hover:bg-darj-accent/90 text-darj-slate font-semibold py-4 px-8 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
