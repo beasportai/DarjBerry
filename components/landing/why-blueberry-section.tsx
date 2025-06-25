@@ -30,7 +30,6 @@ export const WhyBlueberrySection: React.FC = () => {
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
                     className="w-full h-full"
-                    style={{ volume: 0.5 }}
                   />
                 </div>
                 
