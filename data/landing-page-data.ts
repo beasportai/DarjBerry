@@ -21,7 +21,7 @@ export const problemSolutionData = {
     {
       title: "⏰ Zero Time Commitment",
       description:
-        "Share WhatsApp location, sign papers, collect profits. ₹4,000/plant setup (including protected cultivation, soil, nutrients, drip irrigation, fogger systems) + ₹15k/month operations. We handle 100% of the work.",
+        "Share WhatsApp location, sign papers, collect profits. ₹4,000/plant setup (including protected cultivation, soil, nutrients, drip irrigation, fogger systems, and imported high-yielding plants aged 1.5 years or more) + ₹15k/month operations. We handle 100% of the work.",
       emoji: "⏰",
     },
     {

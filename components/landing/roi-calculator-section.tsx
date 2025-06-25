@@ -283,6 +283,7 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = () => {
                         </div>
                         <div className="text-xs bg-orange-500/20 px-2 md:px-3 py-2 rounded-lg mt-2 leading-relaxed">
                           <div className="font-semibold mb-1">₹4,000/plant includes:</div>
+                          <div>• Imported high-yielding plants (1.5+ years old)</div>
                           <div>• Setup & soil preparation</div>
                           <div>• Protected cultivation infrastructure</div>
                           <div>• Expert agronomy services</div>
