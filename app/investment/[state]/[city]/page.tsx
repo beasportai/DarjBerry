@@ -7,8 +7,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { LandingNavigation } from "@/components/landing";
-import { navigationData } from "@/data/landing-page-data";
+import { LandingNavigation, RoiCalculatorSection, FaqSection, HowItWorksSection } from "@/components/landing";
+import { navigationData, faqData, howItWorksData } from "@/data/landing-page-data";
 import { 
   Calculator, MapPin, Leaf, TrendingUp, Phone, MessageCircle, 
   CheckCircle, Users, Award, Sprout, DollarSign, Clock,
@@ -296,187 +296,84 @@ Please provide detailed proposal and next steps.`;
         </section>
 
         {/* ROI Calculator Section */}
-        <section className="py-16 bg-darj-cream">
+        <RoiCalculatorSection />
+
+        {/* Location-Specific Benefits */}
+        <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="text-4xl font-bold text-darj-slate mb-4">
-                  {pageData.city} Investment Calculator
+                  Why {pageData.city} is Perfect for Blueberry Farming
                 </h2>
                 <p className="text-lg text-gray-600">
-                  Customize your investment and see projected returns for {pageData.state}
+                  Location-specific advantages for your investment in {pageData.state}
                 </p>
               </div>
 
-              <div className="grid lg:grid-cols-2 gap-8">
-                {/* Calculator Controls */}
-                <Card className="bg-white shadow-lg">
+              <div className="grid md:grid-cols-2 gap-8">
+                <Card className="bg-gradient-to-br from-darj-green/10 to-emerald-50 border-darj-green/20">
                   <CardHeader>
                     <CardTitle className="flex items-center text-darj-slate">
-                      <Calculator className="h-6 w-6 mr-2 text-darj-green" />
-                      Investment Parameters
+                      <MapPin className="h-6 w-6 mr-2 text-darj-green" />
+                      {pageData.city} Advantages
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-6">
-                    {/* Investment Type Toggle */}
-                    <div>
-                      <label className="block text-sm font-medium text-darj-slate mb-3">
-                        Investment Type
-                      </label>
-                      <div className="flex gap-2">
-                        <Button
-                          variant={investmentType === 'sip' ? 'default' : 'outline'}
-                          onClick={() => setInvestmentType('sip')}
-                          className={investmentType === 'sip' ? 'bg-darj-green hover:bg-darj-green/90' : ''}
-                        >
-                          Daily SIP
-                        </Button>
-                        <Button
-                          variant={investmentType === 'lumpsum' ? 'default' : 'outline'}
-                          onClick={() => setInvestmentType('lumpsum')}
-                          className={investmentType === 'lumpsum' ? 'bg-darj-green hover:bg-darj-green/90' : ''}
-                        >
-                          Lump Sum
-                        </Button>
-                      </div>
-                    </div>
-
-                    {/* Land Size Slider */}
-                    <div>
-                      <label className="block text-sm font-medium text-darj-slate mb-3">
-                        Land Size: {landSize[0]} acres
-                      </label>
-                      <Slider
-                        value={landSize}
-                        onValueChange={setLandSize}
-                        min={0.25}
-                        max={10}
-                        step={0.25}
-                        className="w-full"
-                      />
-                      <div className="flex justify-between text-xs text-gray-500 mt-1">
-                        <span>0.25 acres</span>
-                        <span>10 acres</span>
-                      </div>
-                    </div>
-
-                    {/* Daily Amount Slider (if SIP) */}
-                    {investmentType === 'sip' && (
+                  <CardContent className="space-y-3">
+                    <div className="flex items-start">
+                      <CheckCircle className="h-5 w-5 mr-3 text-darj-green flex-shrink-0 mt-0.5" />
                       <div>
-                        <label className="block text-sm font-medium text-darj-slate mb-3">
-                          Daily Investment: ₹{dailyAmount[0].toLocaleString()}
-                        </label>
-                        <Slider
-                          value={dailyAmount}
-                          onValueChange={setDailyAmount}
-                          min={5000}
-                          max={50000}
-                          step={1000}
-                          className="w-full"
-                        />
-                        <div className="flex justify-between text-xs text-gray-500 mt-1">
-                          <span>₹5,000</span>
-                          <span>₹50,000</span>
-                        </div>
+                        <h4 className="font-semibold text-darj-slate">Optimal Climate</h4>
+                        <p className="text-sm text-gray-600">Perfect temperature range and chill hours for premium blueberry cultivation</p>
                       </div>
-                    )}
-
-                    {/* Location Advantages */}
-                    <div className="bg-darj-cream p-4 rounded-lg">
-                      <h4 className="font-semibold text-darj-slate mb-3">
-                        {pageData.city} Specific Advantages:
-                      </h4>
-                      <div className="space-y-2 text-sm text-darj-slate">
-                        <div className="flex items-center">
-                          <CheckCircle className="h-4 w-4 mr-2 text-darj-green" />
-                          Optimal soil pH for blueberry cultivation
-                        </div>
-                        <div className="flex items-center">
-                          <CheckCircle className="h-4 w-4 mr-2 text-darj-green" />
-                          Established cold chain infrastructure
-                        </div>
-                        <div className="flex items-center">
-                          <CheckCircle className="h-4 w-4 mr-2 text-darj-green" />
-                          {pageData.state} government scheme benefits
-                        </div>
-                        <div className="flex items-center">
-                          <CheckCircle className="h-4 w-4 mr-2 text-darj-green" />
-                          Premium market access and pricing
-                        </div>
+                    </div>
+                    <div className="flex items-start">
+                      <CheckCircle className="h-5 w-5 mr-3 text-darj-green flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h4 className="font-semibold text-darj-slate">Infrastructure</h4>
+                        <p className="text-sm text-gray-600">Established cold chain and transport facilities in {pageData.city}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <CheckCircle className="h-5 w-5 mr-3 text-darj-green flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h4 className="font-semibold text-darj-slate">Government Support</h4>
+                        <p className="text-sm text-gray-600">{pageData.state} offers agricultural subsidies and tax benefits</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <CheckCircle className="h-5 w-5 mr-3 text-darj-green flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h4 className="font-semibold text-darj-slate">Market Access</h4>
+                        <p className="text-sm text-gray-600">Strategic location for domestic and export markets</p>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                {/* ROI Results */}
-                <Card className="bg-gradient-to-br from-darj-green to-green-600 text-white shadow-lg">
+                <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
                   <CardHeader>
-                    <CardTitle className="flex items-center">
-                      <TrendingUp className="h-6 w-6 mr-2 text-darj-accent" />
-                      Projected Returns for {pageData.city}
+                    <CardTitle className="flex items-center text-darj-slate">
+                      <Target className="h-6 w-6 mr-2 text-blue-600" />
+                      Investment Options
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-6">
-                    {/* Key Metrics */}
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="bg-white/10 p-4 rounded-lg text-center">
-                        <div className="text-2xl font-bold text-darj-accent">
-                          {roi.totalPlants.toLocaleString()}
-                        </div>
-                        <div className="text-sm text-green-100">Plants Allocated</div>
-                      </div>
-                      <div className="bg-white/10 p-4 rounded-lg text-center">
-                        <div className="text-2xl font-bold text-darj-accent">
-                          ₹{(roi.setupCost / 100000).toFixed(1)}L
-                        </div>
-                        <div className="text-sm text-green-100">Total Investment</div>
-                      </div>
+                  <CardContent className="space-y-4">
+                    <div className="bg-white p-4 rounded-lg border border-gray-200">
+                      <h4 className="font-semibold text-darj-slate mb-2">Daily SIP Investment</h4>
+                      <p className="text-sm text-gray-600 mb-2">Start with as low as ₹10,000 per day</p>
+                      <p className="text-xs text-blue-600">Perfect for salaried professionals</p>
                     </div>
-
-                    {/* Timeline */}
-                    <div className="space-y-4">
-                      {investmentType === 'sip' && roi.investmentYears > 0 && (
-                        <div className="flex justify-between items-center p-3 bg-white/10 rounded">
-                          <span className="font-medium">Investment Period:</span>
-                          <span className="font-bold text-darj-accent">{roi.investmentYears} years</span>
-                        </div>
-                      )}
-                      
-                      <div className="flex justify-between items-center p-3 bg-white/10 rounded">
-                        <span className="font-medium">Year 3 Revenue:</span>
-                        <span className="font-bold text-darj-accent">₹{(roi.year3Revenue / 100000).toFixed(1)}L</span>
-                      </div>
-                      
-                      <div className="flex justify-between items-center p-3 bg-white/10 rounded">
-                        <span className="font-medium">Year 5+ Revenue:</span>
-                        <span className="font-bold text-darj-accent">₹{(roi.year5Revenue / 100000).toFixed(1)}L</span>
-                      </div>
-                      
-                      <div className="flex justify-between items-center p-3 bg-white/10 rounded">
-                        <span className="font-medium">Breakeven:</span>
-                        <span className="font-bold text-darj-accent">{roi.breakeven} years</span>
-                      </div>
+                    <div className="bg-white p-4 rounded-lg border border-gray-200">
+                      <h4 className="font-semibold text-darj-slate mb-2">Lump Sum Investment</h4>
+                      <p className="text-sm text-gray-600 mb-2">₹88 lakhs for 1 acre (2,200 plants)</p>
+                      <p className="text-xs text-green-600">Immediate returns from Year 1</p>
                     </div>
-
-                    {/* Tax Benefits */}
-                    <div className="bg-yellow-400/20 p-4 rounded-lg">
-                      <h4 className="font-semibold mb-2 text-yellow-100">
-                        Tax-Free Income Benefits:
-                      </h4>
-                      <p className="text-sm text-yellow-100">
-                        Save ₹{((roi.year5Revenue * 0.3) / 100000).toFixed(1)}L+ annually in taxes 
-                        (30% bracket) with agricultural income exemption.
-                      </p>
+                    <div className="bg-white p-4 rounded-lg border border-gray-200">
+                      <h4 className="font-semibold text-darj-slate mb-2">Flexible Payment Plans</h4>
+                      <p className="text-sm text-gray-600 mb-2">EMI options available</p>
+                      <p className="text-xs text-purple-600">Customize based on your needs</p>
                     </div>
-
-                    <Button 
-                      onClick={handleContactClick}
-                      className="w-full bg-darj-accent hover:bg-darj-accent/90 text-darj-slate font-semibold"
-                      size="lg"
-                    >
-                      Get Detailed Proposal for {pageData.city}
-                      <ChevronRight className="h-5 w-5 ml-2" />
-                    </Button>
                   </CardContent>
                 </Card>
               </div>
@@ -588,6 +485,12 @@ Please provide detailed proposal and next steps.`;
             </div>
           </div>
         </section>
+
+        {/* How It Works Section */}
+        <HowItWorksSection steps={howItWorksData.steps} />
+
+        {/* FAQ Section */}
+        <FaqSection faqs={faqData.faqs} />
 
         {/* CTA Section */}
         <section className="py-16 bg-darj-green text-white">

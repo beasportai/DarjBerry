@@ -1,0 +1,31 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://darjberry.com/sitemap.xml
+
+# Allow all search engines to crawl
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Disallow admin and API routes
+User-agent: *
+Disallow: /admin/
+Disallow: /api/
+Disallow: /auth/
+
+# Allow crawling of static assets
+Allow: /images/
+Allow: /*.js
+Allow: /*.css
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.webp
+Allow: /*.svg
+
+# Crawl delay to be respectful of server resources
+Crawl-delay: 1
