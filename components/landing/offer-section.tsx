@@ -336,53 +336,6 @@ export const OfferSection: React.FC<OfferSectionProps> = ({
             </CardContent>
           </Card>
         </div>
-        
-        {/* Investment Considerations */}
-        <div className="mt-12 max-w-4xl mx-auto">
-          <Card className="bg-gradient-to-r from-emerald-600 to-green-600 text-white shadow-xl">
-            <CardContent className="p-8">
-              <h3 className="text-2xl font-bold mb-6 text-center">
-                Investment Considerations
-              </h3>
-              <div className="grid md:grid-cols-2 gap-6 text-sm">
-                <div className="space-y-4">
-                  <h4 className="font-semibold text-green-100">Investment Benefits:</h4>
-                  <div className="space-y-2">
-                    <div className="flex items-center">
-                      <CheckCircle className="w-4 h-4 mr-3 text-green-300" />
-                      <span>Tax-free agricultural income</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-4 h-4 mr-3 text-green-300" />
-                      <span>Professional farm management</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-4 h-4 mr-3 text-green-300" />
-                      <span>Long-term income potential</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <h4 className="font-semibold text-green-100">Important Notes:</h4>
-                  <div className="space-y-2">
-                    <div className="flex items-start">
-                      <span className="w-2 h-2 bg-green-300 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span>Agricultural investments carry inherent risks</span>
-                    </div>
-                    <div className="flex items-start">
-                      <span className="w-2 h-2 bg-green-300 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span>Returns are subject to market conditions</span>
-                    </div>
-                    <div className="flex items-start">
-                      <span className="w-2 h-2 bg-green-300 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span>Minimum 1 acre investment required</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
       </div>
     </section>
   );
