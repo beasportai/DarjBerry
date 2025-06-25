@@ -98,18 +98,13 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/images/plantito-logo.svg",
-        sizes: "32x32",
-        type: "image/svg+xml",
-      },
-      {
-        url: "/images/plantito-logo.svg",
-        sizes: "16x16",
+        url: "/favicon.svg",
+        sizes: "any",
         type: "image/svg+xml",
       },
     ],
-    apple: "/images/plantito-logo.svg",
-    shortcut: "/favicon.ico",
+    apple: "/favicon.svg",
+    shortcut: "/favicon.svg",
   },
   manifest: "/manifest.json",
   category: "Agriculture",
@@ -120,8 +115,47 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Darjberry",
+    "legalName": "Fursat Farms Private Limited",
+    "url": "https://darjberry.com",
+    "logo": "https://darjberry.com/images/plantito-logo.svg",
+    "description": "Transform your land into a profitable blueberry farm with our complete Done-For-You service. ₹88,00,000 investment for 1 acre → ₹44+ lakhs annual tax-free income from Year 4.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "3rd Floor, Dwarika Heights, Near Vega Circle Sevoke Road",
+      "addressLocality": "Siliguri",
+      "addressRegion": "West Bengal",
+      "postalCode": "734005",
+      "addressCountry": "IN"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91-7047-474-942",
+      "contactType": "customer service",
+      "areaServed": "IN",
+      "availableLanguage": ["English", "Hindi", "Bengali"]
+    },
+    "sameAs": [
+      "https://www.facebook.com/darjberry",
+      "https://www.instagram.com/darjberry",
+      "https://www.linkedin.com/company/darjberry"
+    ]
+  };
+
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#134e4a" />
+        <link rel="canonical" href="https://darjberry.com" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="bg-darj-cream text-darj-slate antialiased overflow-x-hidden">
         <ClientContextWrapper>
           <Navbar />
