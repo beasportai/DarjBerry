@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | Darjberry",
   },
   description:
-    "Transform your land into a profitable blueberry farm with our complete Done-For-You service. ₹88,00,000 investment for 1 acre → ₹44+ lakhs annual tax-free income from Year 4. 500% ROI over 15 years with expert management included.",
+    "Turn your idle land into a cash flow asset. Professional managed blueberry farming with 500% ROI, tax-free income, and complete Done-For-You service. Transform unused land into passive agricultural wealth.",
   keywords: [
     "darjberry",
     "managed blueberry farming",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: "https://darjberry.com",
     title: "Darjberry - Premium Managed Blueberry Farming Investment",
-    description: "Join India's leading managed blueberry farming program. Complete Done-For-You service with ₹88L investment generating ₹44L+ annual tax-free returns. Expert management, guaranteed yields, 15-year partnership.",
+    description: "Turn your idle land into a cash flow asset. Professional managed blueberry farming with 500% ROI, tax-free income, and complete Done-For-You service. Transform unused land into passive agricultural wealth.",
     siteName: "Darjberry",
     images: [
       {
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Darjberry - ₹88L → ₹44L+ Annual Tax-Free Returns",
-    description: "Transform your land into a profitable blueberry farm with our complete Done-For-You managed farming service.",
+    description: "Turn your idle land into a cash flow asset. Professional managed blueberry farming with 500% ROI and tax-free income.",
     creator: "@darjberry",
     images: ["/images/hero-desktop.jpg"],
   },
@@ -122,7 +122,7 @@ export default function RootLayout({
     "legalName": "Fursat Farms Private Limited",
     "url": "https://darjberry.com",
     "logo": "https://darjberry.com/images/plantito-logo.svg",
-    "description": "Transform your land into a profitable blueberry farm with our complete Done-For-You service. ₹88,00,000 investment for 1 acre → ₹44+ lakhs annual tax-free income from Year 4.",
+    "description": "Turn your idle land into a cash flow asset. Professional managed blueberry farming with 500% ROI, tax-free income, and complete Done-For-You service. Transform unused land into passive agricultural wealth.",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "3rd Floor, Dwarika Heights, Near Vega Circle Sevoke Road",
