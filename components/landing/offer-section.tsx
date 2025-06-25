@@ -283,24 +283,24 @@ export const OfferSection: React.FC<OfferSectionProps> = ({
                   </div>
                   
                   {/* Key Investment Details */}
-                  <div className="bg-white border-2 border-gray-200 p-6 rounded-xl">
-                    <h4 className="text-lg font-bold text-gray-900 mb-3">Key Investment Details</h4>
-                    <div className="space-y-2 text-gray-700">
-                      <div className="flex justify-between">
-                        <span>Payback Period:</span>
-                        <span className="font-semibold">3.5 years</span>
+                  <div className="bg-white border-2 border-gray-200 p-4 sm:p-6 rounded-xl">
+                    <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-4">Key Investment Details</h4>
+                    <div className="space-y-3 sm:space-y-2 text-sm sm:text-base text-gray-700">
+                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0">
+                        <span className="font-medium">Payback Period:</span>
+                        <span className="font-semibold text-green-600 sm:text-gray-900">3.5 years</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span>Projected ROI:</span>
-                        <span className="font-semibold">500% over 15 years</span>
+                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0">
+                        <span className="font-medium">Projected ROI:</span>
+                        <span className="font-semibold text-green-600 sm:text-gray-900">500% over 15 years</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span>Management Period:</span>
-                        <span className="font-semibold">15 years included</span>
+                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0">
+                        <span className="font-medium">Management Period:</span>
+                        <span className="font-semibold text-green-600 sm:text-gray-900">15 years included</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span>Production Guarantee:</span>
-                        <span className="font-semibold">2kg/plant by Year 4</span>
+                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0">
+                        <span className="font-medium">Production Guarantee:</span>
+                        <span className="font-semibold text-green-600 sm:text-gray-900">2kg/plant by Year 4</span>
                       </div>
                     </div>
                   </div>

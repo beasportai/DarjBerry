@@ -5,11 +5,17 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
+import { Button } from "@/components/ui/button";
 import { SectionTitle } from "./section-title";
 import {
   InvestmentCalculator,
   InvestmentCalculation,
 } from "@/lib/investment-calculator";
+import { 
+  formatCurrency, 
+  generateWhatsAppURL, 
+  DARJBERRY_CONSTANTS 
+} from "@/lib/shared-constants";
 
 interface RoiCalculatorSectionProps {
   plantsPerAcre?: number;
@@ -18,8 +24,8 @@ interface RoiCalculatorSectionProps {
 }
 
 export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = () => {
-  const [acres, setAcres] = useState(1);
-  const [pricePerKg, setPricePerKg] = useState(800);
+  const [acres, setAcres] = useState<number>(1);
+  const [pricePerKg, setPricePerKg] = useState<number>(DARJBERRY_CONSTANTS.DEFAULT_PRICE_PER_KG);
   const [calculation, setCalculation] = useState<InvestmentCalculation | null>(
     null
   );
@@ -45,14 +51,19 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = () => {
     setAcres(value);
   };
 
-  // Removed unused fallback calculations - now using InvestmentCalculator for all calculations
-
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat("en-IN", {
-      style: "currency",
-      currency: "INR",
-      maximumFractionDigits: 0,
-    }).format(amount);
+  // Generate WhatsApp contact URL with calculation data
+  const getWhatsAppURL = () => {
+    if (!calculation) return `https://wa.me/${DARJBERRY_CONSTANTS.WHATSAPP_NUMBER}`;
+    
+    return generateWhatsAppURL({
+      acres,
+      plants: calculation.plants,
+      totalCost: calculation.totalCost,
+      expectedRevenue: calculation.expectedRevenue,
+      netProfit: calculation.netProfit,
+      paybackPeriod: calculation.paybackPeriod,
+      pricePerKg,
+    });
   };
 
   return (
@@ -121,7 +132,7 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = () => {
                     onValueChange={(value) => handleAcresChange(value[0])}
                     className="flex-1"
                   />
-                  <div className="relative">
+                  <div className="flex items-center gap-2">
                     <Input
                       type="number"
                       min={1}
@@ -131,9 +142,9 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = () => {
                       onChange={(e) =>
                         handleAcresChange(Number(e.target.value))
                       }
-                      className="w-36 bg-white/20 border-2 border-blue-400/50 text-center font-bold text-2xl text-white rounded-xl focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30"
+                      className="w-24 bg-white/20 border-2 border-blue-400/50 text-center font-bold text-2xl text-white rounded-xl focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30"
                     />
-                    <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-blue-200">
+                    <span className="text-sm text-blue-200 font-medium">
                       acres
                     </span>
                   </div>
@@ -190,7 +201,7 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = () => {
                     onValueChange={(value) => setPricePerKg(value[0])}
                     className="flex-1"
                   />
-                  <div className="relative">
+                  <div className="flex items-center gap-2">
                     <Input
                       type="number"
                       min={600}
@@ -198,9 +209,9 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = () => {
                       step={50}
                       value={pricePerKg}
                       onChange={(e) => setPricePerKg(Number(e.target.value))}
-                      className="w-36 bg-white/20 border-2 border-emerald-400/50 text-center font-bold text-2xl text-white rounded-xl focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/30"
+                      className="w-24 bg-white/20 border-2 border-emerald-400/50 text-center font-bold text-2xl text-white rounded-xl focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/30"
                     />
-                    <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-emerald-200">
+                    <span className="text-sm text-emerald-200 font-medium">
                       ₹/kg
                     </span>
                   </div>
@@ -228,20 +239,20 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = () => {
               {calculation ? (
                 <>
                   {/* Key Metrics with Psychological Impact */}
-                  <div className="grid md:grid-cols-3 gap-6">
-                    <div className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 p-6 rounded-2xl border border-blue-400/30 transform hover:scale-105 transition-all duration-300">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <div className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 p-4 md:p-6 rounded-2xl border border-blue-400/30 transform hover:scale-105 transition-all duration-300">
                       <div className="flex items-center gap-3 mb-3">
-                        <span className="text-3xl">🌿</span>
+                        <span className="text-2xl md:text-3xl">🌿</span>
                         <div>
-                          <p className="text-sm uppercase tracking-wider text-blue-200 font-semibold">
+                          <p className="text-xs md:text-sm uppercase tracking-wider text-blue-200 font-semibold">
                             Your Farm Scale
                           </p>
                         </div>
                       </div>
-                      <p className="text-3xl font-bold text-white mb-2">
+                      <p className="text-2xl md:text-3xl font-bold text-white mb-2 break-words">
                         {calculation.plants.toLocaleString("en-IN")} plants
                       </p>
-                      <div className="text-sm text-blue-200">
+                      <div className="text-xs md:text-sm text-blue-200">
                         <div className="flex justify-between">
                           <span>Density:</span>
                           <span className="font-semibold">2,200/acre</span>
@@ -253,48 +264,47 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = () => {
                       </div>
                     </div>
 
-                    <div className="bg-gradient-to-br from-orange-500/20 to-red-500/20 p-6 rounded-2xl border border-orange-400/30 transform hover:scale-105 transition-all duration-300">
+                    <div className="bg-gradient-to-br from-orange-500/20 to-red-500/20 p-4 md:p-6 rounded-2xl border border-orange-400/30 transform hover:scale-105 transition-all duration-300">
                       <div className="flex items-center gap-3 mb-3">
-                        <span className="text-3xl">💎</span>
+                        <span className="text-2xl md:text-3xl">💎</span>
                         <div>
-                          <p className="text-sm uppercase tracking-wider text-orange-200 font-semibold">
+                          <p className="text-xs md:text-sm uppercase tracking-wider text-orange-200 font-semibold">
                             One-Time Investment
                           </p>
                         </div>
                       </div>
-                      <p className="text-3xl font-bold text-white mb-2">
+                      <p className="text-xl md:text-3xl font-bold text-white mb-2 break-words">
                         {formatCurrency(calculation.totalCost)}
                       </p>
-                      <div className="text-sm text-orange-200">
+                      <div className="text-xs md:text-sm text-orange-200">
                         <div className="flex justify-between">
                           <span>Per plant:</span>
                           <span className="font-semibold">₹4,000</span>
                         </div>
-                        <div className="text-xs bg-orange-500/20 px-3 py-2 rounded-lg mt-2 leading-relaxed">
+                        <div className="text-xs bg-orange-500/20 px-2 md:px-3 py-2 rounded-lg mt-2 leading-relaxed">
                           <div className="font-semibold mb-1">₹4,000/plant includes:</div>
                           <div>• Setup & soil preparation</div>
                           <div>• Protected cultivation infrastructure</div>
                           <div>• Expert agronomy services</div>
                           <div>• Professional irrigation system</div>
-                          <div>• 15 years management (₹15k/month maintenance)</div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="bg-gradient-to-br from-emerald-500/30 to-green-500/30 p-6 rounded-2xl border-2 border-emerald-400/50 ring-2 ring-emerald-400/20 transform hover:scale-105 transition-all duration-300">
+                    <div className="bg-gradient-to-br from-emerald-500/30 to-green-500/30 p-4 md:p-6 rounded-2xl border-2 border-emerald-400/50 ring-2 ring-emerald-400/20 transform hover:scale-105 transition-all duration-300">
                       <div className="flex items-center gap-3 mb-3">
-                        <span className="text-3xl">⚡</span>
+                        <span className="text-2xl md:text-3xl">⚡</span>
                         <div>
-                          <p className="text-sm uppercase tracking-wider text-emerald-200 font-semibold">
+                          <p className="text-xs md:text-sm uppercase tracking-wider text-emerald-200 font-semibold">
                             Money Back In
                           </p>
                         </div>
                       </div>
-                      <p className="text-4xl font-bold text-white mb-2">
+                      <p className="text-3xl md:text-4xl font-bold text-white mb-2">
                         {calculation.paybackPeriod.toFixed(1)} years
                       </p>
-                      <div className="text-sm text-emerald-200">
-                        <div className="bg-emerald-500/20 px-3 py-1 rounded-full text-center">
+                      <div className="text-xs md:text-sm text-emerald-200">
+                        <div className="bg-emerald-500/20 px-2 md:px-3 py-1 rounded-full text-center">
                           <span className="font-semibold">
                             Faster than fixed deposits!
                           </span>
@@ -749,13 +759,13 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = () => {
                       </div>
 
                       <div className="mb-6">
-                        <p className="text-6xl sm:text-7xl font-extrabold text-white drop-shadow-2xl mb-2">
+                        <p className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white drop-shadow-2xl mb-2 break-words">
                           {formatCurrency(calculation.expectedRevenue)}
                         </p>
-                        <div className="flex items-center justify-center gap-4 text-lg">
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-base sm:text-lg">
                           <span className="text-yellow-200">Gross Revenue</span>
-                          <span className="text-yellow-400">•</span>
-                          <span className="text-emerald-200 font-bold">
+                          <span className="text-yellow-400 hidden sm:inline">•</span>
+                          <span className="text-emerald-200 font-bold text-center">
                             {formatCurrency(calculation.netProfit)} Net Profit
                           </span>
                         </div>
@@ -819,6 +829,27 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = () => {
                         </div>
                       </div>
                     </div>
+                  </div>
+
+                  {/* WhatsApp Contact Button */}
+                  <div className="mt-12 text-center">
+                    <a
+                      href={getWhatsAppURL()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block"
+                    >
+                      <Button className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 px-4 sm:py-4 sm:px-8 text-sm sm:text-lg rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 border-2 border-white/20 w-full max-w-sm sm:max-w-none sm:w-auto">
+                        <span className="text-xl sm:text-2xl mr-2 sm:mr-3">💬</span>
+                        <span className="block sm:inline">
+                          <span className="sm:hidden">Get Proposal on WhatsApp</span>
+                          <span className="hidden sm:inline">Get Your Personalized Proposal on WhatsApp</span>
+                        </span>
+                      </Button>
+                    </a>
+                    <p className="text-green-200 text-xs sm:text-sm mt-3 px-4 sm:px-0">
+                      Your calculation details will be shared automatically
+                    </p>
                   </div>
                 </>
               ) : (

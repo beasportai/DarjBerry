@@ -1,4 +1,5 @@
 import { BarChart, Bot, BrainCircuit, Map } from "lucide-react";
+import { DARJBERRY_CONSTANTS, formatCurrency } from "@/lib/shared-constants";
 
 // Hero Section Data
 export const heroData = {
@@ -90,21 +91,21 @@ export const offerData = {
     {
       title: "🏭 Complete Turnkey Farm Setup",
       description:
-        "2,200 premium blueberry plants + climate-controlled polyhouse + drip irrigation + fogger systems. Everything ready for 20-year production.",
+        `${DARJBERRY_CONSTANTS.PLANTS_PER_ACRE.toLocaleString()} premium blueberry plants + climate-controlled polyhouse + drip irrigation + fogger systems. Everything ready for ${DARJBERRY_CONSTANTS.PLANT_LIFESPAN}-year production.`,
       value: "₹1,43,00,000",
       included: "Infrastructure + Plants + Setup",
     },
     {
       title: "🧑‍🌾 15-Year Expert Management",
       description:
-        "Our 25+ year experienced agronomists handle 100% of operations: soil prep, planting, maintenance, harvest, pest control.",
+        `Our 25+ year experienced agronomists handle 100% of operations: soil prep, planting, maintenance, harvest, pest control. Monthly maintenance: ${formatCurrency(DARJBERRY_CONSTANTS.MONTHLY_MAINTENANCE_COST)}.`,
       value: "₹45,00,000",
       included: "Complete Done-For-You Service",
     },
     {
       title: "🚚 Sales & Distribution Network",
       description:
-        "Direct access to Zepto, Blinkit, BigBasket, hotels & restaurants. Premium market positioning at ₹800+/kg.",
+        `Direct access to Zepto, Blinkit, BigBasket, hotels & restaurants. Premium market positioning at ${formatCurrency(DARJBERRY_CONSTANTS.DEFAULT_PRICE_PER_KG)}+/kg.`,
       value: "₹36,00,000",
       included: "15-Year Marketing & Sales",
     },
@@ -133,23 +134,23 @@ export const offerData = {
     {
       title: "🎁 BONUS #3: The Darjberry Promise",
       description:
-        "If you don't hit 2kg/plant by Year 4, we manage your farm FREE until you do. Your success is guaranteed.",
+        `If you don't hit ${DARJBERRY_CONSTANTS.MINIMUM_YIELD_GUARANTEE}kg/plant by Year 4, we manage your farm FREE until you do. Your success is guaranteed.`,
       value: "₹15,00,000+",
       urgency: "Lifetime guarantee",
     },
     {
       title: "🎁 BONUS #4: Tax-Free Legacy Builder",
       description:
-        "Complete documentation for 100% tax-free agricultural income. Build generational wealth without tax burden.",
+        `Complete documentation for 100% tax-free agricultural income. Build generational wealth without tax burden over ${DARJBERRY_CONSTANTS.PLANT_LIFESPAN} years.`,
       value: "₹20,00,000+",
-      urgency: "Tax savings over 20 years",
+      urgency: `Tax savings over ${DARJBERRY_CONSTANTS.PLANT_LIFESPAN} years`,
     },
   ],
   totalValue: "₹2,62,00,000+",
-  investmentAmount: "₹88,00,000",
+  investmentAmount: formatCurrency(DARJBERRY_CONSTANTS.SERVICE_PACKAGE_COST_PER_ACRE),
   savings: "₹1,74,00,000",
   investmentNote:
-    "One-time investment for 1-acre unit (2,200 plants). Flexible payment plans: Lump sum, installments, or daily SIP available.",
+    `One-time investment for 1-acre unit (${DARJBERRY_CONSTANTS.PLANTS_PER_ACRE.toLocaleString()} plants). Flexible payment plans: Lump sum, installments, or daily SIP available. Monthly maintenance: ${formatCurrency(DARJBERRY_CONSTANTS.MONTHLY_MAINTENANCE_COST)}.`,
   urgencyText: "⚠️ URGENT: Only 9 Spots Remaining for 2025",
   availabilityReason: "Our expert agronomy team can only handle limited projects to ensure 100% success rate.",
   scarcityFactors: [
@@ -192,6 +193,11 @@ export const faqData = {
       question: "What are the biggest risks and how do you mitigate them?",
       answer:
         "The main risks are climate events and pests. We mitigate these with climate-controlled polyhouses, advanced pest management protocols, and comprehensive crop insurance. Our tech-driven approach also allows for early detection and prevention of potential issues.",
+    },
+    {
+      question: "Are there any ongoing costs after the initial investment?",
+      answer:
+        "Yes, there is a monthly maintenance fee of ₹15,000 to cover ongoing farm operations including plant care, irrigation management, pest control, fertilization, and regular monitoring. This operational cost is separate from your initial ₹4,000 per plant setup investment and ensures professional maintenance throughout the 15-year management period.",
     },
   ],
 };

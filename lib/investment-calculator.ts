@@ -34,18 +34,17 @@ export interface InvestmentCalculation {
   }>;
 }
 
+import { DARJBERRY_CONSTANTS } from './shared-constants';
+
 export class InvestmentCalculator {
-  // Constants from CLAUDE.md
-  private static readonly COST_PER_PLANT = 4000; // ₹4,000 per plant initial cost
-  private static readonly PLANTS_PER_ACRE = 2200; // 2,200 plants per acre (1.8 sq mt per plant)
-  private static readonly FURSAT_COMMISSION = 0.10; // 10% of gross revenue
-  private static readonly AVERAGE_PRICE_PER_KG = 800; // ₹800/kg market price
-  
-  // Service package: ₹88,00,000 for 1 acre / 2,200 plants (includes everything)
-  private static readonly SERVICE_PACKAGE_COST_PER_ACRE = 8800000; // ₹88,00,000
-  
-  // Production pattern (kg per plant per year) - from CLAUDE.md
-  private static readonly PRODUCTION_PATTERN = [0, 0.5, 1, 2, 3, 3]; // Year 0-5
+  // Constants from shared constants to ensure consistency
+  private static readonly COST_PER_PLANT = DARJBERRY_CONSTANTS.COST_PER_PLANT;
+  private static readonly PLANTS_PER_ACRE = DARJBERRY_CONSTANTS.PLANTS_PER_ACRE;
+  private static readonly FURSAT_COMMISSION = DARJBERRY_CONSTANTS.FURSAT_COMMISSION;
+  private static readonly AVERAGE_PRICE_PER_KG = DARJBERRY_CONSTANTS.DEFAULT_PRICE_PER_KG;
+  private static readonly SERVICE_PACKAGE_COST_PER_ACRE = DARJBERRY_CONSTANTS.SERVICE_PACKAGE_COST_PER_ACRE;
+  private static readonly MONTHLY_MAINTENANCE_COST = DARJBERRY_CONSTANTS.MONTHLY_MAINTENANCE_COST;
+  private static readonly PRODUCTION_PATTERN = DARJBERRY_CONSTANTS.PRODUCTION_PATTERN;
 
   static calculate(acres: number, pricePerKg: number = this.AVERAGE_PRICE_PER_KG): InvestmentCalculation {
     const plants = Math.round(acres * this.PLANTS_PER_ACRE);
@@ -71,9 +70,8 @@ export class InvestmentCalculator {
       contingency: acres * 100000, // Buffer
     };
 
-    // Annual operating cost is part of the 15-year management service
-    // Optimized to achieve 3.5 year payback as per CLAUDE.md
-    const annualOperatingCost = acres * 350000; // ₹3,50,000 per acre per year
+    // Annual operating cost based on monthly maintenance fees
+    const annualOperatingCost = this.MONTHLY_MAINTENANCE_COST * 12; // ₹15,000 * 12 = ₹1,80,000 per year
 
     // Calculate production and revenue using dynamic price
     const matureYield = plants * this.PRODUCTION_PATTERN[4]; // kg per year from year 4+ (3kg/plant)

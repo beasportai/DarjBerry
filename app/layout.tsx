@@ -19,11 +19,82 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Darjberry - ₹37.5L Annual Returns | Blueberry Farming Investment",
+  title: {
+    default: "Darjberry - ₹88L Investment → ₹44L+ Annual Tax-Free Returns | Managed Blueberry Farming",
+    template: "%s | Darjberry",
+  },
   description:
-    "Join India's premium blueberry farming revolution. ₹6L investment → ₹3.75L annual returns from Year 3. 250 bushes, complete setup, tax-free income.",
-  keywords:
-    "darjberry, blueberry farming investment, ₹37.5L returns, agricultural investment, tax free income, northeast india farming",
+    "Transform your land into a profitable blueberry farm with our complete Done-For-You service. ₹88,00,000 investment for 1 acre → ₹44+ lakhs annual tax-free income from Year 4. 500% ROI over 15 years with expert management included.",
+  keywords: [
+    "darjberry",
+    "managed blueberry farming",
+    "agricultural investment India",
+    "tax-free farming income",
+    "passive income agriculture",
+    "polyhouse farming",
+    "climate controlled farming",
+    "done for you farming",
+    "premium blueberry cultivation",
+    "northeast india farming"
+  ],
+  authors: [{ name: "Fursat Farms Private Limited" }],
+  creator: "Darjberry",
+  publisher: "Fursat Farms Private Limited",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL("https://darjberry.com"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: "https://darjberry.com",
+    title: "Darjberry - Premium Managed Blueberry Farming Investment",
+    description: "Join India's leading managed blueberry farming program. Complete Done-For-You service with ₹88L investment generating ₹44L+ annual tax-free returns. Expert management, guaranteed yields, 15-year partnership.",
+    siteName: "Darjberry",
+    images: [
+      {
+        url: "/images/hero-desktop.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Darjberry Premium Blueberry Farm - Managed Agricultural Investment",
+      },
+      {
+        url: "/images/Blueberry Plant in a Polyhouse.jpg",
+        width: 800,
+        height: 600,
+        alt: "Climate-Controlled Blueberry Cultivation in Polyhouse",
+      },
+      {
+        url: "/images/Blueberry Rows in Polytunnel in Fruiting Phase.jpg",
+        width: 800,
+        height: 600,
+        alt: "Premium Blueberry Plants in Production Phase",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Darjberry - ₹88L → ₹44L+ Annual Tax-Free Returns",
+    description: "Transform your land into a profitable blueberry farm with our complete Done-For-You managed farming service.",
+    creator: "@darjberry",
+    images: ["/images/hero-desktop.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: [
       {
@@ -38,7 +109,10 @@ export const metadata: Metadata = {
       },
     ],
     apple: "/images/plantito-logo.svg",
+    shortcut: "/favicon.ico",
   },
+  manifest: "/manifest.json",
+  category: "Agriculture",
 };
 
 export default function RootLayout({

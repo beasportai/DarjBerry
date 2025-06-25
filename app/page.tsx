@@ -1,7 +1,5 @@
 "use client";
 
-import type { NextPage } from "next";
-import Head from "next/head";
 import {
   HeroSection,
   ProblemSolutionSection,
@@ -23,7 +21,8 @@ import {
   navigationData,
 } from "@/data/landing-page-data";
 
-const DarjberryLandingPage: NextPage = () => {
+
+export default function DarjberryLandingPage() {
   const handleCtaClick = () => {
     // Redirect to WhatsApp with pre-filled message for farming inquiry
     const whatsappUrl = `https://wa.me/917047474942?text=${encodeURIComponent(
@@ -42,16 +41,6 @@ const DarjberryLandingPage: NextPage = () => {
 
   return (
     <div className="bg-white w-full overflow-x-hidden">
-      <Head>
-        <title>
-          Darjberry - Turn Your Land into a High-Yield Blueberry Farm
-        </title>
-        <meta
-          name="description"
-          content="Darjberry offers a complete 'Done-For-You' managed farming service to transform your unused land into a passive, tax-free income source with a 5X ROI."
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
 
       <main className="w-full">
         <LandingNavigation
@@ -112,6 +101,4 @@ const DarjberryLandingPage: NextPage = () => {
       </main>
     </div>
   );
-};
-
-export default DarjberryLandingPage;
+}
