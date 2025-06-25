@@ -328,70 +328,88 @@ export default function InsightsPage() {
           </div>
 
           {/* Articles Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {paginatedArticles.map(article => (
-              <article key={article.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+              <article key={article.id} className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
                 {/* Article Image */}
-                <div className="h-48 relative">
+                <div className="h-48 relative overflow-hidden">
                   <Image
                     src={article.image}
                     alt={article.title}
                     fill
-                    className="object-cover"
+                    className="object-cover group-hover:scale-110 transition-transform duration-300"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
-                </div>
-                
-                {/* Article Content */}
-                <div className="p-6">
-                  {/* Category Badge */}
-                  <span className="inline-block px-3 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full mb-3">
-                    {article.category}
-                  </span>
+                  {/* Image Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  {/* Category Badge on Image */}
+                  <div className="absolute top-4 left-4">
+                    <span className="inline-block px-3 py-1 text-xs font-bold text-white bg-green-600 rounded-full shadow-lg">
+                      {article.category}
+                    </span>
+                  </div>
                   
                   {/* Source Badge */}
                   {article.source === 'pseo' && (
-                    <span className="inline-block px-2 py-1 text-xs font-medium text-blue-700 bg-blue-100 rounded-full mb-2">
-                      Location Guide
-                    </span>
+                    <div className="absolute top-4 right-4">
+                      <span className="inline-block px-2 py-1 text-xs font-medium text-white bg-blue-600 rounded-full shadow-lg">
+                        📍 Location Guide
+                      </span>
+                    </div>
                   )}
-                  
+                </div>
+                
+                {/* Article Content */}
+                <div className="p-6">                  
                   {/* Title */}
-                  <h2 className="text-lg font-bold text-gray-900 mb-3 line-clamp-2">
+                  <h2 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-green-700 transition-colors duration-200">
                     {article.title}
                   </h2>
                   
                   {/* Excerpt */}
-                  <p className="text-gray-600 mb-4 line-clamp-3">
+                  <p className="text-gray-600 mb-4 line-clamp-3 text-sm leading-relaxed">
                     {article.excerpt}
                   </p>
                   
                   {/* Meta Info */}
-                  <div className="flex items-center text-sm text-gray-500 mb-4">
-                    <Calendar className="h-4 w-4 mr-1" />
-                    <span className="mr-4">{article.date}</span>
-                    <Clock className="h-4 w-4 mr-1" />
-                    <span>{article.readTime}</span>
+                  <div className="flex items-center text-xs text-gray-500 mb-4 space-x-4">
+                    <div className="flex items-center">
+                      <Calendar className="h-3 w-3 mr-1" />
+                      <span>{article.date}</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Clock className="h-3 w-3 mr-1" />
+                      <span>{article.readTime}</span>
+                    </div>
                   </div>
                   
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {article.tags.map(tag => (
-                      <span key={tag} className="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded">
+                  <div className="flex flex-wrap gap-1 mb-4">
+                    {article.tags.slice(0, 3).map(tag => (
+                      <span key={tag} className="text-xs text-gray-600 bg-gray-50 hover:bg-gray-100 px-2 py-1 rounded-md transition-colors duration-200">
                         {tag}
                       </span>
                     ))}
+                    {article.tags.length > 3 && (
+                      <span className="text-xs text-gray-500 px-2 py-1">
+                        +{article.tags.length - 3} more
+                      </span>
+                    )}
                   </div>
                   
                   {/* Read More Link */}
                   <Link
                     href={`/insights/${article.slug}`}
-                    className="inline-flex items-center text-green-600 hover:text-green-700 font-medium"
+                    className="group inline-flex items-center text-green-600 hover:text-green-700 font-semibold text-sm transition-all duration-200 hover:gap-2"
                   >
                     Read More
-                    <ArrowRight className="h-4 w-4 ml-1" />
+                    <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-200" />
                   </Link>
                 </div>
+
+                {/* Hover Effect Border */}
+                <div className="absolute inset-0 border-2 border-green-400 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               </article>
             ))}
           </div>

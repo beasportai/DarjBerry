@@ -14,30 +14,31 @@ export const problemSolutionData = {
     {
       title: "🧠 Complete Agronomy Service",
       description:
-        "25+ year expert team handles everything from soil prep to harvest. Proven polytunnel technology from DS Group & IG International farms.",
+        "25+ year experienced team handles everything from soil prep to harvest. Proven low cost polytunnel technology from Farm2Fam.",
       emoji: "🧠",
     },
     {
       title: "⏰ Zero Time Commitment",
-      description: "Share WhatsApp location, sign papers, collect profits. ₹4,000/plant setup + ₹15k/month operations. We handle 100% of the work.",
+      description:
+        "Share WhatsApp location, sign papers, collect profits. ₹4,000/plant setup (including protected cultivation, soil, nutrients, drip irrigation, fogger systems) + ₹15k/month operations. We handle 100% of the work.",
       emoji: "⏰",
     },
     {
       title: "🛡️ Protected Investment",
       description:
-        "135MT production track record. Climate-controlled polyhouses + <a href='https://pmfby.gov.in/faq' target='_blank' rel='noopener noreferrer' class='text-purple-600 hover:text-purple-700 underline'>PMFBY crop insurance</a> at 5% premium.",
+        "135MT production track record by agronomists. Climate-controlled polyhouses + <a href='https://pmfby.gov.in/faq' target='_blank' rel='noopener noreferrer' class='text-purple-600 hover:text-purple-700 underline'>PMFBY crop insurance</a> at 5% premium.",
       emoji: "🛡️",
     },
     {
       title: "💰 Direct Market Access",
       description:
-        "Pre-contracted with Zepto, Blinkit, BigBasket + B2B hotels. Premium ₹800+/kg buyers secured. 10% commission on sales.",
+        "Zepto, Blinkit, BigBasket + Hyperpure (B2B hotels & restaurants). Instituitional buyers for icecream brands, jams, spreads, museli and skincare. 10% commission on sales.",
       emoji: "💰",
     },
   ],
   solutionTitle: "Our Berry Good Solution",
   solutionDescription:
-    'Blueberries deliver a 500% ROI (650% tax adjusted) over 15 years through a passive, tax-exempt agricultural asset. Our team of expert agronomists have worked on 100+ acres of farms at DS Group, IG International & Farm2Fam.',
+    "Blueberries deliver a 500% ROI (650% tax adjusted) over 15 years through a passive, tax-exempt agricultural asset. Our team of expert agronomists have worked on 100+ acres of farms at DS Group, IG International & Farm2Fam.",
 };
 
 // How It Works Section Data
@@ -77,7 +78,8 @@ export const howItWorksData = {
     },
     {
       title: "Build a Legacy",
-      description: "Enjoy a long-term, profitable, and sustainable asset. Future option to build a retirement/vacation home from yields.",
+      description:
+        "Enjoy a long-term, profitable, and sustainable asset. Future option to build a retirement/vacation home from yields.",
     },
   ],
 };
@@ -86,84 +88,75 @@ export const howItWorksData = {
 export const offerData = {
   offerItems: [
     {
-      title: "Turnkey Blueberry Farm",
+      title: "🏭 Complete Turnkey Farm Setup",
       description:
-        "2,200 High-Yield Blueberry Plants with a 15-20 year lifespan (1 acre coverage).",
-      value: "₹88,00,000",
+        "2,200 premium blueberry plants + climate-controlled polyhouse + drip irrigation + fogger systems. Everything ready for 20-year production.",
+      value: "₹1,43,00,000",
+      included: "Infrastructure + Plants + Setup",
     },
     {
-      title: "Complete Infrastructure",
+      title: "🧑‍🌾 15-Year Expert Management",
       description:
-        "Climate-controlled polyhouse, drip irrigation, and fogger system for 1 acre.",
-      value: "₹55,00,000",
+        "Our 25+ year experienced agronomists handle 100% of operations: soil prep, planting, maintenance, harvest, pest control.",
+      value: "₹45,00,000",
+      included: "Complete Done-For-You Service",
     },
     {
-      title: "Expert Agronomy Service",
+      title: "🚚 Sales & Distribution Network",
       description:
-        "15 years of end-to-end management, from planting to harvest.",
-      value: "₹66,00,000",
+        "Direct access to Zepto, Blinkit, BigBasket, hotels & restaurants. Premium market positioning at ₹800+/kg.",
+      value: "₹36,00,000",
+      included: "15-Year Marketing & Sales",
     },
     {
-      title: "Sales & Marketing",
+      title: "🛡️ Risk Protection Package",
       description:
-        "We handle all B2B and D2C sales, logistics, and distribution.",
-      value: "10% of Gross Revenue",
+        "PMFBY crop insurance + performance guarantee + 24/7 monitoring. Your investment is fully protected.",
+      value: "₹18,00,000",
+      included: "Insurance + Monitoring + Guarantee",
     },
   ],
   bonusItems: [
     {
-      title: "BONUS #1: Satellite & Soil Analysis",
-      description: "A comprehensive feasibility report for your specific plot.",
-      value: "₹25,000 Value",
+      title: "🎁 BONUS #1: Land Optimization Report",
+      description: "AI-powered satellite analysis + soil testing + climate viability report for your specific location.",
+      value: "₹35,000",
+      urgency: "Free for next 9 farms only",
     },
     {
-      title: "BONUS #2: Future Brand Stakeholder",
+      title: "🎁 BONUS #2: Future Equity Opportunity",
       description:
-        "First-right to be a stakeholder in our future value-added product brands.",
-      value: "Priceless",
+        "First right to invest in our value-added brands (jams, skincare, supplements) as they scale.",
+      value: "Unlimited Potential",
+      urgency: "Exclusive to founding farmers",
     },
     {
-      title: "BONUS #3: The Darjberry Guarantee",
+      title: "🎁 BONUS #3: The Darjberry Promise",
       description:
-        "If your farm doesn't hit the benchmark by Year 4, we manage it for FREE in Year 5.",
-      value: "Peace of Mind",
+        "If you don't hit 2kg/plant by Year 4, we manage your farm FREE until you do. Your success is guaranteed.",
+      value: "₹15,00,000+",
+      urgency: "Lifetime guarantee",
+    },
+    {
+      title: "🎁 BONUS #4: Tax-Free Legacy Builder",
+      description:
+        "Complete documentation for 100% tax-free agricultural income. Build generational wealth without tax burden.",
+      value: "₹20,00,000+",
+      urgency: "Tax savings over 20 years",
     },
   ],
-  totalValue: "₹2,09,25,000+",
+  totalValue: "₹2,62,00,000+",
   investmentAmount: "₹88,00,000",
+  savings: "₹1,74,00,000",
   investmentNote:
-    "(for a standard 1-acre unit with 2,200 plants, flexible payment plans available)",
-  availabilityText: "Limited Availability!",
-  availabilityCount: "9 new projects",
-};
-
-// Technology Section Data
-export const technologyData = {
-  features: [
-    {
-      icon: Map,
-      title: "Satellite Land Analysis",
-      description:
-        "We use satellite imagery to analyze your plot's boundaries, elevation, slope, and current land use for optimal planning.",
-    },
-    {
-      icon: BrainCircuit,
-      title: "AI-Powered Soil Data",
-      description:
-        "Our system queries global soil databases using your GPS coordinates to pre-plan the perfect nutrient mix for your blueberries.",
-    },
-    {
-      icon: BarChart,
-      title: "Historical Climate Viability",
-      description:
-        "We analyze decades of weather data for your specific location to ensure the micro-climate is perfect for cultivation.",
-    },
-    {
-      icon: Bot,
-      title: "Automated Farm Management",
-      description:
-        "IoT sensors for soil moisture and automated drip irrigation ensure your farm gets exactly what it needs, 24/7.",
-    },
+    "One-time investment for 1-acre unit (2,200 plants). Flexible payment plans: Lump sum, installments, or daily SIP available.",
+  urgencyText: "⚠️ URGENT: Only 9 Spots Remaining for 2025",
+  availabilityReason: "Our expert agronomy team can only handle limited projects to ensure 100% success rate.",
+  scarcityFactors: [
+    "25+ year expert agronomists (limited availability)",
+    "Premium plant sourcing (seasonal constraints)", 
+    "Dedicated farm management (quality over quantity)",
+    "Established buyer network (limited new partnerships)"
   ],
 };
 

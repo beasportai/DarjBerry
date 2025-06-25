@@ -7,7 +7,6 @@ import {
   ProblemSolutionSection,
   HowItWorksSection,
   OfferSection,
-  TechnologySection,
   WhyBlueberrySection,
   RoiCalculatorSection,
   FaqSection,
@@ -19,7 +18,6 @@ import {
   problemSolutionData,
   howItWorksData,
   offerData,
-  technologyData,
   faqData,
   ctaData,
   navigationData,
@@ -27,15 +25,19 @@ import {
 
 const DarjberryLandingPage: NextPage = () => {
   const handleCtaClick = () => {
-    // Redirect to WhatsApp with pre-filled message for farming inquiry  
-    const whatsappUrl = `https://wa.me/917047474942?text=${encodeURIComponent("Hi! I'm interested in starting a blueberry farm. Can you help me with more details?")}`;
-    window.open(whatsappUrl, '_blank');
+    // Redirect to WhatsApp with pre-filled message for farming inquiry
+    const whatsappUrl = `https://wa.me/917047474942?text=${encodeURIComponent(
+      "Hi! I'm interested in starting a blueberry farm. Can you help me with more details?"
+    )}`;
+    window.open(whatsappUrl, "_blank");
   };
 
   const handleContactClick = () => {
     // Redirect to WhatsApp for general contact
-    const whatsappUrl = `https://wa.me/917047474942?text=${encodeURIComponent("Hi! I'd like to know more about Darjberry.")}`;
-    window.open(whatsappUrl, '_blank');
+    const whatsappUrl = `https://wa.me/917047474942?text=${encodeURIComponent(
+      "Hi! I'd like to know more about Darjberry."
+    )}`;
+    window.open(whatsappUrl, "_blank");
   };
 
   return (
@@ -79,10 +81,6 @@ const DarjberryLandingPage: NextPage = () => {
             <HowItWorksSection steps={howItWorksData.steps} />
           </div>
 
-          <div id="technology">
-            <TechnologySection features={technologyData.features} />
-          </div>
-
           <RoiCalculatorSection />
 
           <div id="offer">
@@ -91,9 +89,11 @@ const DarjberryLandingPage: NextPage = () => {
               bonusItems={offerData.bonusItems}
               totalValue={offerData.totalValue}
               investmentAmount={offerData.investmentAmount}
+              savings={offerData.savings}
               investmentNote={offerData.investmentNote}
-              availabilityText={offerData.availabilityText}
-              availabilityCount={offerData.availabilityCount}
+              urgencyText={offerData.urgencyText}
+              availabilityReason={offerData.availabilityReason}
+              scarcityFactors={offerData.scarcityFactors}
             />
           </div>
 
