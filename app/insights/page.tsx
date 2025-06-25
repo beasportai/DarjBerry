@@ -541,19 +541,16 @@ export default function InsightsPage() {
             <p className="text-lg mb-8">
               Get the latest articles on market trends, farming techniques, and investment opportunities delivered to your inbox.
             </p>
-            <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <Input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 bg-white text-gray-900"
-              />
-              <button
-                type="submit"
-                className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+            <div className="max-w-md mx-auto">
+              <a 
+                href="https://wa.me/917047474942?text=Hi,%20I'd%20like%20to%20receive%20updates%20on%20blueberry%20farming%20insights" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-medium transition-colors w-full"
               >
-                Subscribe
-              </button>
-            </form>
+                Say Hi to Us on WhatsApp
+              </a>
+            </div>
           </div>
         </div>
       </section>

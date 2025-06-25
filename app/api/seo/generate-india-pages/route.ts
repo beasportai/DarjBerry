@@ -46,12 +46,57 @@ export async function POST(request: Request) {
       targetPages = targetPages.slice(0, limit);
     }
 
-    // Return basic statistics for now (TODO: Implement full page generation)
+    // Save pages to database
+    const saved: any[] = [];
+    const errors: any[] = [];
+    
+    for (const page of targetPages) {
+      try {
+        // Check if page already exists
+        const existing = await prisma.sEOPage.findUnique({
+          where: { slug: page.slug }
+        });
+        
+        if (!existing) {
+          const savedPage = await prisma.sEOPage.create({
+            data: {
+              slug: page.slug,
+              template: page.template,
+              state: page.state,
+              city: page.city || null,
+              district: page.district || null,
+              metaTitle: page.metaTitle,
+              metaDescription: page.metaDescription,
+              h1Title: page.h1Title,
+              content: page.content as any,
+              schemaMarkup: page.schemaMarkup as any,
+              keywords: page.keywords,
+              longtailKeywords: page.longtailKeywords,
+              investmentKeywords: page.investmentKeywords,
+              relatedPages: page.relatedPages,
+              isPublished: true
+            }
+          });
+          saved.push(savedPage);
+        }
+      } catch (error) {
+        errors.push({
+          slug: page.slug,
+          error: error instanceof Error ? error.message : 'Unknown error'
+        });
+      }
+    }
+
     return NextResponse.json({
       success: true,
       message: 'SEO page generation completed',
-      generated: targetPages.length,
-      pages: targetPages.map(page => ({
+      total: targetPages.length,
+      saved: saved.length,
+      skipped: targetPages.length - saved.length - errors.length,
+      errors: errors.length,
+      errorDetails: errors.slice(0, 5), // First 5 errors only
+      pages: saved.slice(0, 10).map(page => ({
+        id: page.id,
         slug: page.slug,
         template: page.template,
         state: page.state,
