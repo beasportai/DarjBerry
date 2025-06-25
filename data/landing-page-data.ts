@@ -90,29 +90,30 @@ export const offerData = {
   offerItems: [
     {
       title: "🏭 Complete Turnkey Farm Setup",
-      description:
-        `${DARJBERRY_CONSTANTS.PLANTS_PER_ACRE.toLocaleString()} premium blueberry plants + climate-controlled polyhouse + drip irrigation + fogger systems. Everything ready for ${DARJBERRY_CONSTANTS.PLANT_LIFESPAN}-year production.`,
+      description: `${DARJBERRY_CONSTANTS.PLANTS_PER_ACRE.toLocaleString()} premium blueberry plants + climate-controlled polyhouse + drip irrigation + fogger systems. Everything ready for ${
+        DARJBERRY_CONSTANTS.PLANT_LIFESPAN
+      }-year production.`,
       value: "₹1,43,00,000",
       included: "Infrastructure + Plants + Setup",
     },
     {
       title: "🧑‍🌾 15-Year Expert Management",
-      description:
-        `Our 25+ year experienced agronomists handle 100% of operations: soil prep, planting, maintenance, harvest, pest control. Monthly maintenance: ${formatCurrency(DARJBERRY_CONSTANTS.MONTHLY_MAINTENANCE_COST)}.`,
+      description: `Our 25+ year experienced agronomists handle 100% of operations: soil prep, planting, maintenance, harvest, pest control. Monthly maintenance: ${formatCurrency(
+        DARJBERRY_CONSTANTS.MONTHLY_MAINTENANCE_COST
+      )}.`,
       value: "₹45,00,000",
       included: "Complete Done-For-You Service",
     },
     {
       title: "🚚 Sales & Distribution Network",
-      description:
-        `Direct access to Zepto, Blinkit, BigBasket, hotels & restaurants. Premium market positioning at ${formatCurrency(DARJBERRY_CONSTANTS.DEFAULT_PRICE_PER_KG)}+/kg.`,
+      description: `Direct access to Zepto, Blinkit, BigBasket, hotels & restaurants. 10% commission on sales. Your produce is sold at the best market rates.`,
       value: "₹36,00,000",
       included: "15-Year Marketing & Sales",
     },
     {
       title: "🛡️ Risk Protection Package",
       description:
-        "PMFBY crop insurance + performance guarantee + 24/7 monitoring. Your investment is fully protected.",
+        "Optional <a href='https://pmfby.gov.in/' target='_blank' rel='noopener noreferrer' class='text-purple-600 hover:text-purple-700 underline'>PMFBY crop insurance</a> + <a href='#faq' class='text-purple-600 hover:text-purple-700 underline'>performance guarantee</a> + <a href='#technology' class='text-purple-600 hover:text-purple-700 underline'>24/7 monitoring</a>. This is a capital protected investment.",
       value: "₹18,00,000",
       included: "Insurance + Monitoring + Guarantee",
     },
@@ -120,7 +121,8 @@ export const offerData = {
   bonusItems: [
     {
       title: "🎁 BONUS #1: Land Optimization Report",
-      description: "AI-powered satellite analysis + soil testing + climate viability report for your specific location.",
+      description:
+        "AI-powered satellite analysis + soil testing + climate viability report for your specific location.",
       value: "₹35,000",
       urgency: "Free for next 9 farms only",
     },
@@ -133,31 +135,33 @@ export const offerData = {
     },
     {
       title: "🎁 BONUS #3: The Darjberry Promise",
-      description:
-        `If you don't hit ${DARJBERRY_CONSTANTS.MINIMUM_YIELD_GUARANTEE}kg/plant by Year 4, we manage your farm FREE until you do. Your success is guaranteed.`,
+      description: `If you don't hit ${DARJBERRY_CONSTANTS.MINIMUM_YIELD_GUARANTEE}kg/plant by Year 4, we manage your farm FREE until you do. Your success is guaranteed.`,
       value: "₹15,00,000+",
       urgency: "Lifetime guarantee",
     },
     {
       title: "🎁 BONUS #4: Tax-Free Legacy Builder",
-      description:
-        `Complete documentation for 100% tax-free agricultural income. Build generational wealth without tax burden over ${DARJBERRY_CONSTANTS.PLANT_LIFESPAN} years.`,
+      description: `Complete documentation for 100% tax-free agricultural income. Build generational wealth without tax burden over ${DARJBERRY_CONSTANTS.PLANT_LIFESPAN} years.`,
       value: "₹20,00,000+",
       urgency: `Tax savings over ${DARJBERRY_CONSTANTS.PLANT_LIFESPAN} years`,
     },
   ],
   totalValue: "₹2,62,00,000+",
-  investmentAmount: formatCurrency(DARJBERRY_CONSTANTS.SERVICE_PACKAGE_COST_PER_ACRE),
+  investmentAmount: formatCurrency(
+    DARJBERRY_CONSTANTS.SERVICE_PACKAGE_COST_PER_ACRE
+  ),
   savings: "₹1,74,00,000",
-  investmentNote:
-    `One-time investment for 1-acre unit (${DARJBERRY_CONSTANTS.PLANTS_PER_ACRE.toLocaleString()} plants). Flexible payment plans: Lump sum, installments, or daily SIP available. Monthly maintenance: ${formatCurrency(DARJBERRY_CONSTANTS.MONTHLY_MAINTENANCE_COST)}.`,
+  investmentNote: `One-time investment for 1-acre unit (${DARJBERRY_CONSTANTS.PLANTS_PER_ACRE.toLocaleString()} plants). Flexible payment plans: Lump sum, installments, or daily SIP available. Monthly maintenance: ${formatCurrency(
+    DARJBERRY_CONSTANTS.MONTHLY_MAINTENANCE_COST
+  )}.`,
   urgencyText: "⚠️ URGENT: Only 9 Spots Remaining for 2025",
-  availabilityReason: "Our expert agronomy team can only handle limited projects to ensure 100% success rate.",
+  availabilityReason:
+    "Our expert agronomy team can only handle limited projects to ensure 100% success rate.",
   scarcityFactors: [
     "25+ year expert agronomists (limited availability)",
-    "Premium plant sourcing (seasonal constraints)", 
+    "Premium plant sourcing (seasonal constraints)",
     "Dedicated farm management (quality over quantity)",
-    "Established buyer network (limited new partnerships)"
+    "Established buyer network (limited new partnerships)",
   ],
 };
 
