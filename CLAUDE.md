@@ -29,7 +29,7 @@ Darjberry is a comprehensive managed blueberry farming platform that connects la
 
 - **Infrastructure**: Climate-controlled polyhouse, drip irrigation, fogger system
 - **Management**: 15 years of expert agronomy services
-- **Sales & Marketing**: Complete B2B/D2C sales handling (10% of gross revenue)
+- **Sales & Marketing**: Complete B2B/D2C sales handling (20% of gross revenue)
 - **Guarantee**: Minimum 2kg per plant by Year 4, or free Year 5 management
 
 ## Technical Implementation
@@ -57,7 +57,7 @@ Darjberry is a comprehensive managed blueberry farming platform that connects la
 ## Legal Framework
 
 - **Managed Farming Agreement (MFA)**: 15-20 year contracts
-- **Revenue Share**: 10% of gross revenue
+- **Revenue Share**: 20% of gross revenue
 - **Required Documentation**: Title deed, property tax receipts, encumbrance certificate
 
 ## Development Guidelines

@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 interface HeroSectionProps {
@@ -17,31 +16,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   ctaText,
   onCtaClick,
 }) => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const bgImage = isMobile
-    ? "/images/hero-mobile.jpg"
-    : "/images/hero-desktop.jpg";
-
   return (
     <>
       <div className="relative w-full h-screen text-white overflow-hidden font-sans">
-        {/* Background Image */}
+        {/* Mobile Background Image (Default - loads first) */}
         <Image
-          src={bgImage}
+          src="/images/hero-mobile.jpg"
           alt="Darjberry blueberry farming landscape"
           fill
           priority
-          className="object-cover object-center z-0"
+          className="object-cover object-center z-0 md:hidden"
+          sizes="100vw"
+        />
+        
+        {/* Desktop Background Image (Hidden on mobile) */}
+        <Image
+          src="/images/hero-desktop.jpg"
+          alt="Darjberry blueberry farming landscape"
+          fill
+          className="object-cover object-center z-0 hidden md:block"
           sizes="100vw"
         />
 

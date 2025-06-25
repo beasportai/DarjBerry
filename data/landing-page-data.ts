@@ -33,7 +33,7 @@ export const problemSolutionData = {
     {
       title: "💰 Direct Market Access",
       description:
-        "Zepto, Blinkit, BigBasket + Hyperpure (B2B hotels & restaurants). Instituitional buyers for icecream brands, jams, spreads, museli and skincare. 10% commission on sales.",
+        "Zepto, Blinkit, BigBasket + Hyperpure (B2B hotels & restaurants). Instituitional buyers for icecream brands, jams, spreads, museli and skincare. 20% commission on sales.",
       emoji: "💰",
     },
   ],
@@ -106,7 +106,7 @@ export const offerData = {
     },
     {
       title: "🚚 Sales & Distribution Network",
-      description: `Direct access to Zepto, Blinkit, BigBasket, hotels & restaurants. 10% commission on sales. Your produce is sold at the best market rates.`,
+      description: `Direct access to Zepto, Blinkit, BigBasket, hotels & restaurants. 20% commission on sales. Your produce is sold at the best market rates.`,
       value: "₹36,00,000",
       included: "15-Year Marketing & Sales",
     },

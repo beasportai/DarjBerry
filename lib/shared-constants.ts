@@ -5,7 +5,7 @@ export const DARJBERRY_CONSTANTS = {
   PLANTS_PER_ACRE: 2200, // 2,200 plants per acre (1.8 sq mt per plant)
   SERVICE_PACKAGE_COST_PER_ACRE: 8800000, // ₹88,00,000 per acre (from CLAUDE.md)
   MONTHLY_MAINTENANCE_COST: 15000, // ₹15,000 per month ongoing operational cost
-  FURSAT_COMMISSION: 0.10, // 10% of gross revenue
+  FURSAT_COMMISSION: 0.20, // 20% of gross revenue
   DEFAULT_PRICE_PER_KG: 800, // ₹800/kg market price
   
   // Production Schedule (kg per plant per year)

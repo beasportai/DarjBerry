@@ -52,7 +52,7 @@ export const OfferSection: React.FC<OfferSectionProps> = ({
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSI0Ii8+PC9nPjwvZz48L3N2Zz4=')] repeat"></div>
       </div>
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-3 sm:px-4 relative z-10">
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full mb-6">
             <span className="text-2xl">🌱</span>
@@ -121,20 +121,20 @@ export const OfferSection: React.FC<OfferSectionProps> = ({
               </div>
             </CardHeader>
             
-            <CardContent className="p-10">
+            <CardContent className="p-4 sm:p-8 lg:p-10">
               {/* Core Package */}
-              <div className="mb-12">
-                <div className="text-center mb-10">
-                  <h3 className="text-3xl font-bold text-gray-900 mb-4 flex items-center justify-center">
-                    <Shield className="w-8 h-8 mr-4 text-green-600" />
-                    Complete Service Package
+              <div className="mb-8 sm:mb-12">
+                <div className="text-center mb-6 sm:mb-10">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 flex flex-col sm:flex-row items-center justify-center gap-2">
+                    <Shield className="w-8 h-8 text-green-600" />
+                    <span>Complete Service Package</span>
                   </h3>
-                  <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">
                     Professional infrastructure setup and <span className="font-bold text-green-600">15 years of expert management</span> included in your investment
                   </p>
                 </div>
                 
-                <div className="grid lg:grid-cols-2 gap-8">
+                <div className="grid sm:grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
                   {offerItems.map((item, index) => (
                     <Card key={index} className="border-3 border-green-200 hover:border-green-400 transition-all duration-500 hover:shadow-2xl transform hover:scale-105 bg-gradient-to-br from-white to-green-50 group">
                       <CardContent className="p-8 relative overflow-hidden">
@@ -288,24 +288,24 @@ export const OfferSection: React.FC<OfferSectionProps> = ({
                   </div>
                   
                   {/* Key Investment Details */}
-                  <div className="bg-white border-2 border-gray-200 p-4 sm:p-6 rounded-xl">
-                    <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-4">Key Investment Details</h4>
-                    <div className="space-y-3 sm:space-y-2 text-sm sm:text-base text-gray-700">
-                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0">
-                        <span className="font-medium">Payback Period:</span>
-                        <span className="font-semibold text-green-600 sm:text-gray-900">{dynamicPaybackPeriod.toFixed(1)} years</span>
+                  <div className="bg-white border-2 border-gray-200 p-6 rounded-xl">
+                    <h4 className="text-lg font-bold text-gray-900 mb-4">Key Investment Details</h4>
+                    <div className="space-y-3 text-base">
+                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
+                        <span className="text-gray-600">Payback Period:</span>
+                        <span className="font-semibold text-gray-900">{dynamicPaybackPeriod.toFixed(1)} years</span>
                       </div>
-                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0">
-                        <span className="font-medium">Projected ROI:</span>
-                        <span className="font-semibold text-green-600 sm:text-gray-900">500% over 15 years</span>
+                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
+                        <span className="text-gray-600">Projected ROI:</span>
+                        <span className="font-semibold text-gray-900">500% over 15 years</span>
                       </div>
-                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0">
-                        <span className="font-medium">Management Period:</span>
-                        <span className="font-semibold text-green-600 sm:text-gray-900">15 years included</span>
+                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
+                        <span className="text-gray-600">Management Period:</span>
+                        <span className="font-semibold text-gray-900">15 years included</span>
                       </div>
-                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0">
-                        <span className="font-medium">Production Guarantee:</span>
-                        <span className="font-semibold text-green-600 sm:text-gray-900">2kg/plant by Year 4</span>
+                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
+                        <span className="text-gray-600">Production Guarantee:</span>
+                        <span className="font-semibold text-gray-900">2kg/plant by Year 4</span>
                       </div>
                     </div>
                   </div>
