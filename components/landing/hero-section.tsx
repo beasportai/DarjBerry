@@ -59,7 +59,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <div className="absolute bottom-12 right-6 md:right-12 text-xs md:text-sm max-w-[250px] text-right z-20 hidden md:block">
           <div className="text-base mb-2">★★★★★</div>
           <p className="leading-relaxed text-xs md:text-sm opacity-90">
-            Complete done-for-you service with 500% ROI guarantee
+            Complete done-for-you service with 500% ROI
           </p>
         </div>
 
@@ -81,21 +81,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </span>
             </h1>
           </div>
-          
+
           <div className="mt-4 md:mt-12 text-center py-3 md:py-0">
             <p className="text-sm md:text-base leading-relaxed px-2">
               <span className="block mb-2">
-                <strong>Transform your unused land</strong> into a passive income
+                <strong>Transform your unused land</strong> into a passive
+                income
               </span>
               <span className="block">
-                engine with our complete "Done-For-You" blueberry farming service
+                engine with our complete "Done-For-You" blueberry farming
+                service
               </span>
             </p>
           </div>
-          
+
           <div className="mt-4 md:mt-8 text-xs md:text-sm max-w-2xl opacity-80 text-center px-4 md:px-6 py-2 md:py-0">
             <p className="leading-relaxed">
-              Supported by expert agronomist with 25+ years of experience working for DS GROUP, IG INTERNATIONAL & FARM2FAM. Growing on over 100 acres.
+              Supported by expert agronomist with 25+ years of experience
+              working for DS GROUP, IG INTERNATIONAL & FARM2FAM. Growing on over
+              100 acres.
             </p>
           </div>
 

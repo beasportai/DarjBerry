@@ -20,7 +20,17 @@ export interface SEOPageData {
   };
   schemaMarkup: object;
   keywords: string[];
+  longtailKeywords: string[];
+  investmentKeywords: string[];
   relatedPages: string[];
+}
+
+export interface KeywordStrategy {
+  primary: string[];
+  longtail: string[];
+  investment: string[];
+  location: string[];
+  seasonal: string[];
 }
 
 export interface LocationData {
@@ -40,6 +50,26 @@ export class SEOPageGenerator {
   private static readonly NORTHEAST_STATES = [
     'Assam', 'Meghalaya', 'Sikkim', 'West Bengal', 'Arunachal Pradesh',
     'Tripura', 'Manipur', 'Nagaland', 'Mizoram'
+  ];
+
+  private static readonly LONGTAIL_KEYWORDS = [
+    // High-value farming keywords from CSV
+    'blueberry farm', 'blueberry farm near me', 'blueberry picking', 'blueberry picking near me',
+    'blueberry bush', 'blueberry bushes for sale', 'blueberry plant', 'blueberry tree',
+    'blueberry varieties', 'blueberry fertilizer', 'blueberry nutrition', 'blueberry benefits',
+    'benefits of blueberry', 'blueberry for diabetics', 'blueberry good for you', 'blueberry calories',
+    'when to plant blueberry', 'how to plant blueberry', 'which blueberry bush is best',
+    'which blueberry variety is the sweetest', 'blueberry bushes hard to grow',
+    'blueberry season', 'blueberry u pick', 'blueberry netting', 'blueberry flowers',
+    'northern highbush blueberry', 'pink lemonade blueberry', 'duke blueberry',
+    'emerald blueberry', 'jersey blueberry', 'japanese blueberry'
+  ];
+
+  private static readonly INVESTMENT_KEYWORDS = [
+    // Investment and business focused keywords
+    'agricultural investment', 'passive income farming', 'farming investment returns',
+    'blueberry farm investment', 'agricultural business opportunity', 'farming ROI',
+    'sustainable farming investment', 'agricultural asset investment'
   ];
 
   private static readonly ALL_INDIA_STATES = [

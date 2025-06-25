@@ -21,9 +21,14 @@ const Hero = () => {
           transition={{ duration: 0.3 }}
           className="text-sm text-gray-700 mt-8 md:text-xl sm:text-lg"
         >
-          Daily SIP investments in blueberry farming + fresh berries from Darjeeling
+          Daily SIP investments in blueberry farming + fresh berries from
+          Darjeeling
         </motion.p>
-        <a href="https://wa.me/your-whatsapp-number" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://wa.me/your-whatsapp-number"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <motion.button
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -40,7 +45,7 @@ const Hero = () => {
             <span className="text-gray-700 text-sm">Berry Investors</span>
           </div>
           <div>
-              <p className="text-green-800 text-3xl md:text-4xl">₹10Cr+</p>
+            <p className="text-green-800 text-3xl md:text-4xl">₹10Cr+</p>
             <span className="text-gray-700 text-sm">Investments Managed</span>
           </div>
         </div>
@@ -65,7 +70,13 @@ const Hero = () => {
             transition={{ duration: 0.5, delay: 0.5 }}
             className="absolute top-1/2 left-0 w-32 sm:w-40 rotate-180"
           >
-            <Image src={images.leaf3} alt="leaf" width={400} height={400} className="w-full h-auto" />
+            <Image
+              src={images.leaf3}
+              alt="leaf"
+              width={400}
+              height={400}
+              className="w-full h-auto"
+            />
           </motion.div>
           <motion.div
             initial={{ y: -20, opacity: 0 }}
@@ -73,7 +84,13 @@ const Hero = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="absolute top-[5%] left-[60%] w-20 md:w-20"
           >
-            <Image src={images.leaf2} alt="leaf" width={400} height={100} className="w-full h-auto" />
+            <Image
+              src={images.leaf2}
+              alt="leaf"
+              width={400}
+              height={100}
+              className="w-full h-auto"
+            />
           </motion.div>
           <motion.div
             initial={{ y: -20, opacity: 0 }}
@@ -81,7 +98,13 @@ const Hero = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="absolute top-[60%] left-[70%] w-20 md:w-20"
           >
-            <Image src={images.leaf1} alt="leaf" width={400} height={100} className="w-full h-auto" />
+            <Image
+              src={images.leaf1}
+              alt="leaf"
+              width={400}
+              height={100}
+              className="w-full h-auto"
+            />
           </motion.div>
         </motion.div>
       </div>

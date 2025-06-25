@@ -4,12 +4,14 @@ export interface InvestmentCalculation {
   totalCost: number;
   setupCost: number;
   annualOperatingCost: number;
-  expectedYield: number; // kg per year from year 2
-  expectedRevenue: number; // annual revenue from year 2
-  netProfit: number; // annual profit from year 2
+  expectedYield: number; // kg per year from year 4+
+  expectedRevenue: number; // annual revenue from year 4+
+  netProfit: number; // annual profit from year 4+
   roiYears: number;
   paybackPeriod: number;
   fiveYearProfit: number;
+  tenYearProfit: number;
+  twentyYearProfit: number;
   irr: number; // Internal Rate of Return
   breakdownCosts: {
     polyhouse: number;
@@ -45,15 +47,15 @@ export class InvestmentCalculator {
     contingency: 20000,
   };
 
-  private static readonly PLANTS_PER_ACRE = 400;
+  private static readonly PLANTS_PER_ACRE = 2200; // Updated to match CLAUDE.md (1.8 sq mt per plant)
   private static readonly ANNUAL_OPERATING_COST_PER_100_PLANTS = 144000; // ₹1.44 lakhs
-  private static readonly FURSAT_COMMISSION = 0.15; // 15%
-  private static readonly AVERAGE_PRICE_PER_KG = 900; // ₹900/kg
+  private static readonly FURSAT_COMMISSION = 0.10; // 10% as per CLAUDE.md
+  private static readonly AVERAGE_PRICE_PER_KG = 800; // ₹800/kg as per CLAUDE.md
   
-  // Production pattern (kg per plant per year)
-  private static readonly PRODUCTION_PATTERN = [0, 3, 4, 4, 4, 4]; // Year 0-5
+  // Production pattern (kg per plant per year) - Updated to match CLAUDE.md
+  private static readonly PRODUCTION_PATTERN = [0, 0.5, 1, 2, 3, 3]; // Year 0-5
 
-  static calculate(acres: number): InvestmentCalculation {
+  static calculate(acres: number, pricePerKg: number = this.AVERAGE_PRICE_PER_KG): InvestmentCalculation {
     const plants = Math.round(acres * this.PLANTS_PER_ACRE);
     const plantsGroup = Math.ceil(plants / 100); // Number of 100-plant groups
     
@@ -72,15 +74,17 @@ export class InvestmentCalculator {
     const setupCost = Object.values(breakdownCosts).reduce((a, b) => a + b, 0);
     const annualOperatingCost = this.ANNUAL_OPERATING_COST_PER_100_PLANTS * plantsGroup;
 
-    // Calculate production and revenue
-    const matureYield = plants * this.PRODUCTION_PATTERN[2]; // kg per year from year 2
-    const expectedRevenue = matureYield * this.AVERAGE_PRICE_PER_KG;
+    // Calculate production and revenue using dynamic price
+    const matureYield = plants * this.PRODUCTION_PATTERN[4]; // kg per year from year 4+ (3kg/plant)
+    const expectedRevenue = matureYield * pricePerKg;
     const fursatCommission = expectedRevenue * this.FURSAT_COMMISSION;
     const netProfit = expectedRevenue - annualOperatingCost - fursatCommission;
 
-    // Calculate 5-year projections
-    const projections = this.calculateProjections(plants, setupCost, annualOperatingCost);
-    const fiveYearProfit = projections.reduce((sum, year) => sum + year.netProfit, 0);
+    // Calculate 20-year projections with dynamic price
+    const projections = this.calculateProjections(plants, setupCost, annualOperatingCost, pricePerKg);
+    const fiveYearProfit = projections.slice(0, 5).reduce((sum, year) => sum + year.netProfit, 0);
+    const tenYearProfit = projections.slice(0, 10).reduce((sum, year) => sum + year.netProfit, 0);
+    const twentyYearProfit = projections.reduce((sum, year) => sum + year.netProfit, 0);
     
     // Calculate payback period
     const paybackPeriod = this.calculatePaybackPeriod(setupCost, projections);
@@ -100,6 +104,8 @@ export class InvestmentCalculator {
       roiYears: setupCost / netProfit,
       paybackPeriod,
       fiveYearProfit,
+      tenYearProfit,
+      twentyYearProfit,
       irr,
       breakdownCosts,
       projections,
@@ -109,15 +115,16 @@ export class InvestmentCalculator {
   private static calculateProjections(
     plants: number, 
     setupCost: number, 
-    annualOperatingCost: number
+    annualOperatingCost: number,
+    pricePerKg: number = this.AVERAGE_PRICE_PER_KG
   ): Array<{ year: number; yield: number; revenue: number; operatingCost: number; fursatCommission: number; netProfit: number; cumulativeCashFlow: number; }> {
     const projections = [];
     let cumulativeProfit = -setupCost; // Start with negative setup cost
 
-    for (let year = 1; year <= 5; year++) {
+    for (let year = 1; year <= 20; year++) {
       const yieldPerPlant = this.PRODUCTION_PATTERN[year] || this.PRODUCTION_PATTERN[this.PRODUCTION_PATTERN.length - 1];
       const totalYield = plants * yieldPerPlant;
-      const revenue = totalYield * this.AVERAGE_PRICE_PER_KG;
+      const revenue = totalYield * pricePerKg;
       const fursatCommission = revenue * this.FURSAT_COMMISSION;
       const netProfit = revenue - annualOperatingCost - fursatCommission;
       
@@ -185,7 +192,7 @@ export class InvestmentCalculator {
     };
   }
 
-  static compareWithTeaEstate(acres: number): {
+  static compareWithTeaEstate(acres: number, pricePerKg: number = this.AVERAGE_PRICE_PER_KG): {
     blueberry: InvestmentCalculation;
     teaEstate: {
       investment: number;
@@ -200,7 +207,7 @@ export class InvestmentCalculator {
       roiImprovement: number;
     };
   } {
-    const blueberry = this.calculate(acres);
+    const blueberry = this.calculate(acres, pricePerKg);
     
     // Tea estate typical figures
     const teaEstate = {
@@ -225,39 +232,59 @@ export class InvestmentCalculator {
     reason: string;
     alternatives?: string[];
   } {
-    if (acres < 0.25) {
+    if (acres < 1) {
       return {
         recommended: false,
-        reason: 'Minimum viable size is 0.25 acres (100 plants)',
+        reason: 'Minimum 1 acre required for commercial viability',
         alternatives: [
-          'Partner with neighbors to reach minimum scale',
-          'Consider container farming with 50 plants',
-          'Explore other high-value crops',
+          'Partner with neighbors to reach minimum 1 acre scale',
+          'Consider leasing additional land to reach minimum size',
+          'Start with 1 acre for optimal returns',
         ],
       };
     }
 
-    if (acres >= 0.25 && acres <= 1) {
+    if (acres >= 1 && acres <= 2) {
       return {
         recommended: true,
         reason: 'Ideal size for beginners with manageable investment',
       };
     }
 
-    if (acres > 1 && acres <= 5) {
+    if (acres > 2 && acres <= 5) {
       return {
         recommended: true,
         reason: 'Excellent scale for commercial operations',
       };
     }
 
+    if (acres > 5 && acres <= 20) {
+      return {
+        recommended: true,
+        reason: 'Large scale commercial operation - ideal for serious investors',
+      };
+    }
+
+    if (acres > 20 && acres <= 50) {
+      return {
+        recommended: true,
+        reason: 'Enterprise scale - consider phased implementation',
+        alternatives: [
+          'Implement in 3-4 phases over 2 years',
+          'Consider dedicated management team',
+          'Explore contract farming arrangements',
+        ],
+      };
+    }
+
     return {
       recommended: true,
-      reason: 'Large scale operation - consider phased implementation',
+      reason: 'Mega project scale - requires strategic planning',
       alternatives: [
-        'Start with 2-3 acres and expand based on success',
-        'Implement in phases over 2-3 years',
-        'Consider multiple varieties for risk mitigation',
+        'Develop as multiple 20-25 acre units',
+        'Consider establishing processing facility',
+        'Explore export opportunities',
+        'Implement advanced automation',
       ],
     };
   }

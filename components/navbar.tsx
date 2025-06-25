@@ -23,6 +23,7 @@ export default function Navbar() {
   const navItems = [
     { label: "ABOUT us", href: "#about" },
     { label: "HOW it WORKS", href: "#how-it-works" },
+    { label: "INSIGHTS", href: "/insights" },
     { label: "FAQs", href: "#faq" },
     { label: "CONTACT us", href: "#contact" },
   ];
@@ -37,9 +38,12 @@ export default function Navbar() {
         <button onClick={() => setIsOpen(!isOpen)}>
           <CustomMenuIcon />
         </button>
-        <div className="text-base tracking-[0.15em] font-light text-white uppercase">
+        <a 
+          href="/"
+          className="text-base tracking-[0.15em] font-light text-white uppercase hover:opacity-80 transition-opacity cursor-pointer"
+        >
           DARJBERRY
-        </div>
+        </a>
         <div className="w-6" /> {/* Spacer for centering */}
       </div>
 
@@ -56,9 +60,12 @@ export default function Navbar() {
             </a>
           ))}
         </div>
-        <div className="text-xl tracking-[0.2em] font-light text-white uppercase">
+        <a 
+          href="/"
+          className="text-xl tracking-[0.2em] font-light text-white uppercase hover:opacity-80 transition-opacity cursor-pointer"
+        >
           DARJBERRY
-        </div>
+        </a>
         <div className="flex gap-8 text-white">
           {rightItems.map((item, index) => (
             <a

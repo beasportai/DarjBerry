@@ -4,6 +4,7 @@ export { ProblemSolutionSection } from "./problem-solution-section";
 export { HowItWorksSection } from "./how-it-works-section";
 export { OfferSection } from "./offer-section";
 export { TechnologySection } from "./technology-section";
+export { WhyBlueberrySection } from "./why-blueberry-section";
 export { RoiCalculatorSection } from "./roi-calculator-section";
 export { FaqSection } from "./faq-section";
 export { CtaSection } from "./cta-section";

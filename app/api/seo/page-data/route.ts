@@ -20,14 +20,17 @@ export async function GET(request: NextRequest) {
     if (slug) {
       whereClause.slug = slug;
     } else if (state && city) {
-      whereClause.state = {
-        equals: state,
-        mode: 'insensitive'
-      };
-      whereClause.city = {
-        equals: city,
-        mode: 'insensitive'
-      };
+      // Handle case-insensitive matching by capitalizing first letter
+      const formatName = (name: string) => 
+        name.split('-').map(word => 
+          word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+        ).join(' ');
+      
+      const formattedState = formatName(state);
+      const formattedCity = formatName(city);
+      
+      whereClause.state = formattedState;
+      whereClause.city = formattedCity;
     }
 
     const page = await prisma.sEOPage.findFirst({

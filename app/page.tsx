@@ -8,6 +8,7 @@ import {
   HowItWorksSection,
   OfferSection,
   TechnologySection,
+  WhyBlueberrySection,
   RoiCalculatorSection,
   FaqSection,
   CtaSection,
@@ -65,6 +66,8 @@ const DarjberryLandingPage: NextPage = () => {
           onCtaClick={handleCtaClick}
         />
 
+        <WhyBlueberrySection />
+
         <div className="wrapper">
           <ProblemSolutionSection
             problems={problemSolutionData.problems}
@@ -75,6 +78,12 @@ const DarjberryLandingPage: NextPage = () => {
           <div id="how-it-works">
             <HowItWorksSection steps={howItWorksData.steps} />
           </div>
+
+          <div id="technology">
+            <TechnologySection features={technologyData.features} />
+          </div>
+
+          <RoiCalculatorSection />
 
           <div id="offer">
             <OfferSection
@@ -87,12 +96,6 @@ const DarjberryLandingPage: NextPage = () => {
               availabilityCount={offerData.availabilityCount}
             />
           </div>
-
-          <div id="technology">
-            <TechnologySection features={technologyData.features} />
-          </div>
-
-          <RoiCalculatorSection />
 
           <div id="faq">
             <FaqSection faqs={faqData.faqs} />

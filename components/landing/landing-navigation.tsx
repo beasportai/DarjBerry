@@ -35,17 +35,23 @@ export const LandingNavigation: React.FC<LandingNavigationProps> = ({
       {/* Mobile Nav */}
       <div className="md:hidden flex items-center justify-between w-full">
         <CustomMenuIcon />
-        <div className="text-base tracking-[0.15em] font-light text-white uppercase">
+        <a 
+          href="/"
+          className="text-base tracking-[0.15em] font-light text-white uppercase hover:opacity-80 transition-opacity cursor-pointer"
+        >
           {brandName}
-        </div>
+        </a>
         <div className="w-6" /> {/* Spacer for centering */}
       </div>
 
       {/* Desktop Nav */}
       <div className="hidden md:flex justify-center items-center w-full">
-        <div className="text-xl tracking-[0.2em] font-light text-white uppercase">
+        <a 
+          href="/"
+          className="text-xl tracking-[0.2em] font-light text-white uppercase hover:opacity-80 transition-opacity cursor-pointer"
+        >
           {brandName}
-        </div>
+        </a>
       </div>
     </nav>
   );

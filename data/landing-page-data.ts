@@ -12,28 +12,32 @@ export const heroData = {
 export const problemSolutionData = {
   problems: [
     {
-      title: "The Knowledge Gap",
+      title: "🧠 Expert Knowledge & Experience",
       description:
-        "Lacking the specific agronomic expertise for high-value crops like blueberries.",
+        "Team of expert agronomists with 25+ years experience, specializing in hydroponics and naturally ventilated polyhouses. Our low-cost polytunnel technology, proven at DS Group and IG International, eliminates the learning curve for landowners.",
+      emoji: "🧠",
     },
     {
-      title: "The Time & Effort Drain",
-      description: "No time for the day-to-day operational demands of farming.",
+      title: "⏰ Zero Time Investment Required",
+      description: "Setup @ ₹4,000 per plant. Operating expenses ₹15k per month. 10% of sales for selling and distribution. You only need to share WhatsApp location for analysis. Some signatures and everything else will be done for you - zero time investment required.",
+      emoji: "⏰",
     },
     {
-      title: "High Financial Risk",
+      title: "🛡️ De-Risked Investment",
       description:
-        "Significant upfront investment with risks of crop failure and total loss.",
+        "De-risked with experience of team working for market leaders, delivered 135 metric tonnes of fruit with 3-4 crore profit. It is a hardy bush and protected cultivation eliminates external attack vectors. <a href='https://pmfby.gov.in/faq' target='_blank' rel='noopener noreferrer' class='text-blue-600 hover:text-blue-700 underline'>Comprehensive crop insurance</a> available at 5% premium for horticultural crops under PMFBY.",
+      emoji: "🛡️",
     },
     {
-      title: "Market Access Hurdles",
+      title: "💰 Premium Sales Network",
       description:
-        "Struggling to find reliable buyers and negotiate fair prices.",
+        "Listing on Zepto, Instamart, Blinkit, Big Basket, Hyperpure (B2B for restaurants and hotels). Mandi contacts. Institutional buyers for jams, ice creams, chocolates, skincare (FMCG). In-house R&D department for high selling products. Premium buyers paying ₹800+ per kg through our proven distribution network.",
+      emoji: "💰",
     },
   ],
-  solutionTitle: "Our Solution: The Dream Outcome",
+  solutionTitle: "Our Berry Good Solution",
   solutionDescription:
-    'We deliver a 500% ROI over 15 years through a passive, tax-exempt agricultural asset, backed by expert management and guaranteed sales. It\'s a truly "stupid good" offer.',
+    'Blueberries deliver a 500% ROI (650% tax adjusted) over 15 years through a passive, tax-exempt agricultural asset. Our team of expert agronomists have worked on 100+ acres of farms at DS Group, IG International & Farm2Fam.',
 };
 
 // How It Works Section Data
@@ -73,7 +77,7 @@ export const howItWorksData = {
     },
     {
       title: "Build a Legacy",
-      description: "Enjoy a long-term, profitable, and sustainable asset.",
+      description: "Enjoy a long-term, profitable, and sustainable asset. Future option to build a retirement/vacation home from yields.",
     },
   ],
 };
@@ -84,20 +88,20 @@ export const offerData = {
     {
       title: "Turnkey Blueberry Farm",
       description:
-        "500 High-Yield Blueberry Plants with a 15-20 year lifespan.",
-      value: "₹20,00,000",
+        "2,200 High-Yield Blueberry Plants with a 15-20 year lifespan (1 acre coverage).",
+      value: "₹88,00,000",
     },
     {
       title: "Complete Infrastructure",
       description:
-        "Climate-controlled polyhouse, drip irrigation, and fogger system.",
-      value: "₹12,50,000",
+        "Climate-controlled polyhouse, drip irrigation, and fogger system for 1 acre.",
+      value: "₹55,00,000",
     },
     {
       title: "Expert Agronomy Service",
       description:
         "15 years of end-to-end management, from planting to harvest.",
-      value: "₹15,00,000",
+      value: "₹66,00,000",
     },
     {
       title: "Sales & Marketing",
@@ -125,10 +129,10 @@ export const offerData = {
       value: "Peace of Mind",
     },
   ],
-  totalValue: "₹47,75,000+",
-  investmentAmount: "₹20,00,000",
+  totalValue: "₹2,09,25,000+",
+  investmentAmount: "₹88,00,000",
   investmentNote:
-    "(for a standard 500-plant unit, flexible payment plans available)",
+    "(for a standard 1-acre unit with 2,200 plants, flexible payment plans available)",
   availabilityText: "Limited Availability!",
   availabilityCount: "9 new projects",
 };
@@ -185,6 +189,11 @@ export const faqData = {
       question: "How much of my time and effort is required?",
       answer:
         "Virtually zero. Our model is 'Done-For-You'. You provide the land and capital; we handle 100% of the work, from initial setup to harvesting and sales. You'll receive regular updates via WhatsApp and our portal, so you're always in the loop without being on the ground.",
+    },
+    {
+      question: "How do you achieve smarter farming through technology?",
+      answer:
+        "We use satellite land analysis, AI-powered soil data from global databases, historical climate viability analysis, and automated farm management with IoT sensors. Our systems monitor soil moisture, control drip irrigation, and provide 24/7 optimization to ensure maximum yields with minimal waste.",
     },
     {
       question: "What are the biggest risks and how do you mitigate them?",
