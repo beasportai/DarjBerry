@@ -75,6 +75,16 @@ export class IndiaPageGenerator extends SEOPageGenerator {
         `best location blueberry farming`,
         `agricultural investment ${city1Data.state} vs ${city2Data.state}`
       ],
+      longtailKeywords: [
+        `which is better for blueberry farming ${city1Data.city} or ${city2Data.city}`,
+        `blueberry farm investment comparison ${city1Data.state} vs ${city2Data.state}`,
+        `best place to invest in blueberry farming`
+      ],
+      investmentKeywords: [
+        `blueberry farm investment`,
+        `agricultural investment comparison`,
+        `farming location analysis`
+      ],
       relatedPages: [
         `/investment/${city1Data.state.toLowerCase()}/${city1Data.city.toLowerCase()}`,
         `/investment/${city2Data.state.toLowerCase()}/${city2Data.city.toLowerCase()}`
@@ -120,6 +130,16 @@ export class IndiaPageGenerator extends SEOPageGenerator {
         `agricultural investment returns ${locationData.state}`,
         `farming profit calculator`
       ],
+      longtailKeywords: [
+        `how much does blueberry farming cost in ${locationData.city}`,
+        `blueberry farm return on investment calculator`,
+        `${investmentType} farming calculator ${locationData.state}`
+      ],
+      investmentKeywords: [
+        `blueberry investment calculator`,
+        `farming ROI calculator`,
+        `agricultural profit analysis`
+      ],
       relatedPages: [
         `/investment/${locationData.state.toLowerCase()}/${locationData.city.toLowerCase()}`,
         `/guide/investment-planning/${locationData.state.toLowerCase()}`
@@ -160,6 +180,16 @@ export class IndiaPageGenerator extends SEOPageGenerator {
         `${state} farming opportunities`,
         `berry cultivation ${state}`,
         `${state} agriculture business`
+      ],
+      longtailKeywords: [
+        `best places for blueberry farming in ${state}`,
+        `blueberry investment opportunities ${state}`,
+        `how to start blueberry farm in ${state}`
+      ],
+      investmentKeywords: [
+        `blueberry farming investment ${state}`,
+        `agricultural investment ${state}`,
+        `farming opportunities ${state}`
       ],
       relatedPages: cities.map(city => `/investment/${state.toLowerCase()}/${city.city.toLowerCase()}`)
     };

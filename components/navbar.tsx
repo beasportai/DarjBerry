@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 const CustomMenuIcon = () => (
   <svg
@@ -38,12 +39,12 @@ export default function Navbar() {
         <button onClick={() => setIsOpen(!isOpen)}>
           <CustomMenuIcon />
         </button>
-        <a 
+        <Link 
           href="/"
           className="text-base tracking-[0.15em] font-light text-white uppercase hover:opacity-80 transition-opacity cursor-pointer"
         >
           DARJBERRY
-        </a>
+        </Link>
         <div className="w-6" /> {/* Spacer for centering */}
       </div>
 
@@ -60,12 +61,12 @@ export default function Navbar() {
             </a>
           ))}
         </div>
-        <a 
+        <Link 
           href="/"
           className="text-xl tracking-[0.2em] font-light text-white uppercase hover:opacity-80 transition-opacity cursor-pointer"
         >
           DARJBERRY
-        </a>
+        </Link>
         <div className="flex gap-8 text-white">
           {rightItems.map((item, index) => (
             <a

@@ -23,7 +23,7 @@ interface Article {
 // Static articles that exist as files
 const staticArticles: Article[] = [
   {
-    id: 1,
+    id: "1",
     slug: "global-blueberry-price-trends",
     title: "Global Blueberry Wholesale Price Trends 2025-2035",
     excerpt: "Market analysis reveals 6-7.2% CAGR growth driven by increasing global demand and health consciousness. Discover the factors shaping blueberry prices over the next decade.",
@@ -32,9 +32,10 @@ const staticArticles: Article[] = [
     category: "Market Analysis",
     image: "/images/Blueberry Lifecycle.jpg",
     tags: ["Price Trends", "Market Analysis", "Investment"],
+    source: 'static' as const,
   },
   {
-    id: 6,
+    id: "6",
     slug: "google-trends-blueberry-demand-india",
     title: "Google Trends Reveal 9% Growth in Blueberry Interest: India's Rising Opportunity",
     excerpt: "Google search data shows 8.5M monthly searches for blueberries with 9% year-over-year growth, highlighting massive untapped potential in the Indian market as global demand soars.",
@@ -43,9 +44,10 @@ const staticArticles: Article[] = [
     category: "Market Research",
     image: "/images/Blueberry Plant in a Polyhouse.jpg",
     tags: ["Google Trends", "Market Demand", "India Opportunity"],
+    source: 'static' as const,
   },
   {
-    id: 2,
+    id: "2",
     slug: "blueberry-farming-india",
     title: "Why Blueberry Farming is the Future of Agriculture in India",
     excerpt: "Explore how blueberry cultivation is transforming Indian agriculture with high returns, sustainable practices, and growing domestic demand.",
@@ -54,6 +56,7 @@ const staticArticles: Article[] = [
     category: "Farming Guide",
     image: "/images/Blueberry Rows in Polytunnel in Fruiting Phase.jpg",
     tags: ["India", "Farming", "Sustainability"],
+    source: 'static' as const,
   },
   // Coming Soon - These articles are planned but pages need to be created
   // {
@@ -90,7 +93,7 @@ const staticArticles: Article[] = [
   //   tags: ["ROI", "Financial", "Comparison"],
   // },
   {
-    id: 7,
+    id: "7",
     slug: "../tea-estate-partnership",
     title: "Tea Estate Partnership: Convert Your Tea Garden to Blueberry Farm",
     excerpt: "Transform your tea estate into a high-yield blueberry farm with 6x higher profits. Explore sub-lease, joint venture, or land sale options with 20-35% ROI.",
@@ -99,9 +102,10 @@ const staticArticles: Article[] = [
     category: "Partnership Opportunities",
     image: "/images/Blueberry Plant in a Polyhouse.jpg",
     tags: ["Tea Estate", "Partnership", "Land Conversion"],
+    source: 'static' as const,
   },
   {
-    id: 8,
+    id: "8",
     slug: "../investment/west-bengal/siliguri",
     title: "Blueberry Farming Investment in Siliguri: Complete Guide",
     excerpt: "Discover why Siliguri offers ideal conditions for blueberry farming with excellent climate, soil pH, and government support. Calculate your ROI for this emerging opportunity.",
@@ -110,9 +114,10 @@ const staticArticles: Article[] = [
     category: "Location Investment",
     image: "/images/The Life Cycle of a Blueberry.jpeg",
     tags: ["Siliguri", "West Bengal", "Investment Calculator"],
+    source: 'static' as const,
   },
   {
-    id: 9,
+    id: "9",
     slug: "../investment/assam/guwahati",
     title: "Guwahati Blueberry Farm Investment: Northeast India Opportunity",
     excerpt: "Explore blueberry farming investment opportunities in Guwahati with detailed climate analysis, soil conditions, and projected returns in Assam's agricultural hub.",
@@ -121,9 +126,10 @@ const staticArticles: Article[] = [
     category: "Location Investment",
     image: "/images/Blueberry Rows in Polytunnel in Fruiting Phase.jpg",
     tags: ["Guwahati", "Assam", "Northeast India"],
+    source: 'static' as const,
   },
   {
-    id: 10,
+    id: "10",
     slug: "../investment/meghalaya/shillong",
     title: "Shillong Blueberry Cultivation: Hill Station Farming Advantage",
     excerpt: "Leverage Shillong's unique hill climate and acidic soil for premium blueberry cultivation. Learn about Meghalaya's agricultural policies and investment incentives.",
@@ -132,9 +138,10 @@ const staticArticles: Article[] = [
     category: "Location Investment",
     image: "/images/Blueberry Plant in a Polyhouse.jpg",
     tags: ["Shillong", "Meghalaya", "Hill Station Farming"],
+    source: 'static' as const,
   },
   {
-    id: 11,
+    id: "11",
     slug: "../investment/sikkim/gangtok",
     title: "Gangtok Blueberry Farming: High-Altitude Organic Advantage",
     excerpt: "Discover why Gangtok's high-altitude climate and organic farming tradition make it perfect for premium blueberry cultivation with excellent export potential.",
@@ -143,6 +150,7 @@ const staticArticles: Article[] = [
     category: "Location Investment",
     image: "/images/Blueberry Lifecycle.jpg",
     tags: ["Gangtok", "Sikkim", "High Altitude"],
+    source: 'static' as const,
   },
 ];
 

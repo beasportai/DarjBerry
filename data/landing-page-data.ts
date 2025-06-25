@@ -12,26 +12,26 @@ export const heroData = {
 export const problemSolutionData = {
   problems: [
     {
-      title: "🧠 Expert Knowledge & Experience",
+      title: "🧠 Complete Agronomy Service",
       description:
-        "Team of expert agronomists with 25+ years experience, specializing in hydroponics and naturally ventilated polyhouses. Our low-cost polytunnel technology, proven at DS Group and IG International, eliminates the learning curve for landowners.",
+        "25+ year expert team handles everything from soil prep to harvest. Proven polytunnel technology from DS Group & IG International farms.",
       emoji: "🧠",
     },
     {
-      title: "⏰ Zero Time Investment Required",
-      description: "Setup @ ₹4,000 per plant. Operating expenses ₹15k per month. 10% of sales for selling and distribution. You only need to share WhatsApp location for analysis. Some signatures and everything else will be done for you - zero time investment required.",
+      title: "⏰ Zero Time Commitment",
+      description: "Share WhatsApp location, sign papers, collect profits. ₹4,000/plant setup + ₹15k/month operations. We handle 100% of the work.",
       emoji: "⏰",
     },
     {
-      title: "🛡️ De-Risked Investment",
+      title: "🛡️ Protected Investment",
       description:
-        "De-risked with experience of team working for market leaders, delivered 135 metric tonnes of fruit with 3-4 crore profit. It is a hardy bush and protected cultivation eliminates external attack vectors. <a href='https://pmfby.gov.in/faq' target='_blank' rel='noopener noreferrer' class='text-blue-600 hover:text-blue-700 underline'>Comprehensive crop insurance</a> available at 5% premium for horticultural crops under PMFBY.",
+        "135MT production track record. Climate-controlled polyhouses + <a href='https://pmfby.gov.in/faq' target='_blank' rel='noopener noreferrer' class='text-purple-600 hover:text-purple-700 underline'>PMFBY crop insurance</a> at 5% premium.",
       emoji: "🛡️",
     },
     {
-      title: "💰 Premium Sales Network",
+      title: "💰 Direct Market Access",
       description:
-        "Listing on Zepto, Instamart, Blinkit, Big Basket, Hyperpure (B2B for restaurants and hotels). Mandi contacts. Institutional buyers for jams, ice creams, chocolates, skincare (FMCG). In-house R&D department for high selling products. Premium buyers paying ₹800+ per kg through our proven distribution network.",
+        "Pre-contracted with Zepto, Blinkit, BigBasket + B2B hotels. Premium ₹800+/kg buyers secured. 10% commission on sales.",
       emoji: "💰",
     },
   ],

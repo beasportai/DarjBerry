@@ -25,7 +25,7 @@ Darjberry is a comprehensive managed blueberry farming platform that connects la
 - **ROI**: 500% over 15 years (₹20,000 return per plant)
 - **Tax Benefits**: Agricultural income exempt under Section 10(1) of Income Tax Act, 1961
 
-### Service Package (₹20,00,000 for 500 plants)
+### Service Package (₹88,00,000 for 1 acre / 2,200 plants)
 
 - **Infrastructure**: Climate-controlled polyhouse, drip irrigation, fogger system
 - **Management**: 15 years of expert agronomy services

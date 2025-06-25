@@ -497,6 +497,16 @@ export class SEOPageGenerator {
       content,
       schemaMarkup,
       keywords,
+      longtailKeywords: [
+        `blueberry farming investment ${locationData.city}`,
+        `how profitable is blueberry farming in ${locationData.city}`,
+        `best place to start blueberry farm ${locationData.state}`
+      ],
+      investmentKeywords: [
+        `blueberry investment ${locationData.city}`,
+        `agricultural investment ${locationData.state}`,
+        `farming business opportunity`
+      ],
       relatedPages
     };
   }
@@ -538,6 +548,16 @@ export class SEOPageGenerator {
       content,
       schemaMarkup,
       keywords,
+      longtailKeywords: [
+        `tea estate conversion to blueberry farm ${locationData.district}`,
+        `agricultural diversification ${locationData.state}`,
+        `blueberry farming vs tea cultivation`
+      ],
+      investmentKeywords: [
+        `tea estate investment`,
+        `agricultural diversification`,
+        `blueberry farming investment`
+      ],
       relatedPages: []
     };
   }
@@ -574,6 +594,16 @@ export class SEOPageGenerator {
         `blueberry farming subsidy`,
         `government scheme ${locationData.state}`,
         `${scheme} eligibility ${locationData.state}`
+      ],
+      longtailKeywords: [
+        `how to apply for ${scheme} in ${locationData.state}`,
+        `${scheme} subsidy for blueberry farming`,
+        `government support for agriculture ${locationData.state}`
+      ],
+      investmentKeywords: [
+        `agricultural subsidy`,
+        `government farming scheme`,
+        `blueberry farming support`
       ],
       relatedPages: []
     };

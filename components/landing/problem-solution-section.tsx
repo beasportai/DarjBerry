@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import React from "react";
 import { SectionTitle } from "./section-title";
 
 interface Problem {
@@ -19,29 +19,27 @@ export const ProblemSolutionSection: React.FC<ProblemSolutionSectionProps> = ({
   solutionDescription,
 }) => {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 lg:py-32 bg-gradient-to-br from-green-50 to-emerald-50">
       <div className="container mx-auto px-4">
         <SectionTitle
           title="How can landowners capitalize on the growing demand for superfruits?"
-          subtitle=""
+          subtitle="Transform your idle land into a profitable agricultural asset with zero time commitment"
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          {problems.map((problem, index) => (
-            <Card key={index} className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 border-0">
-              <CardHeader className="text-center pb-4">
-                <CardTitle className="text-lg font-semibold text-gray-800 leading-tight">
-                  {problem.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <div 
-                  className="text-gray-600 leading-relaxed text-sm"
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {problems.map((problem, index) => (
+              <div key={index} className="bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-green-100 h-full">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center">
+                  <span className="text-2xl mr-3">{problem.emoji}</span>
+                  {problem.title.replace(problem.emoji + ' ', '')}
+                </h3>
+                <p 
+                  className="text-gray-700 leading-relaxed"
                   dangerouslySetInnerHTML={{ __html: problem.description }}
                 />
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+              </div>
+            ))}
+          </div>
         <div className="mt-16 text-center">
           <h3 className="text-3xl font-bold text-green-700">Our Berry Good Solution</h3>
           <p className="mt-4 text-xl text-gray-600 max-w-4xl mx-auto">
@@ -59,6 +57,7 @@ export const ProblemSolutionSection: React.FC<ProblemSolutionSectionProps> = ({
               <span className="ml-2">→</span>
             </a>
           </div>
+        </div>
         </div>
       </div>
     </section>

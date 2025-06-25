@@ -145,8 +145,8 @@ Don't miss this opportunity to be part of India's blueberry revolution in ${city
         // Check if page already exists
         const existingPage = await prisma.sEOPage.findFirst({
           where: {
-            state: { equals: state, mode: 'insensitive' },
-            city: { equals: city, mode: 'insensitive' }
+            state: state,
+            city: city
           }
         });
 

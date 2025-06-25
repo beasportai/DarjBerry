@@ -8,14 +8,7 @@ export const WhyBlueberrySection: React.FC = () => {
       <div className="container mx-auto px-4">
         <SectionTitle
           title="Why Blueberries? The Longevity Superfruit"
-          subtitle={
-            <>
-              <a href="https://protocol.bryanjohnson.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 underline">
-                Bryan Johnson, world's leading longevity practitioner
-              </a>
-              , includes blueberries as a key component in his Blueprint diet protocol
-            </>
-          }
+          subtitle="Bryan Johnson, world's leading longevity practitioner, includes blueberries as a key component in his Blueprint diet protocol"
         />
         
         {/* Clean Bento Grid Layout */}
