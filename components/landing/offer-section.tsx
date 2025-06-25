@@ -2,6 +2,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { SectionTitle } from "./section-title";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Clock, Shield, TrendingUp, Star, Zap } from "lucide-react";
+import { InvestmentCalculator } from "@/lib/investment-calculator";
+import { DARJBERRY_CONSTANTS } from "@/lib/shared-constants";
 
 interface OfferItem {
   title: string;
@@ -40,6 +42,9 @@ export const OfferSection: React.FC<OfferSectionProps> = ({
   availabilityReason,
   scarcityFactors,
 }) => {
+  // Calculate dynamic payback period for 1 acre (standard package)
+  const standardCalculation = InvestmentCalculator.calculate(1, DARJBERRY_CONSTANTS.DEFAULT_PRICE_PER_KG);
+  const dynamicPaybackPeriod = standardCalculation.paybackPeriod;
   return (
     <section className="py-20 bg-gradient-to-br from-slate-900 via-green-900 to-emerald-900 relative overflow-hidden">
       {/* Subtle Background Pattern */}
@@ -288,7 +293,7 @@ export const OfferSection: React.FC<OfferSectionProps> = ({
                     <div className="space-y-3 sm:space-y-2 text-sm sm:text-base text-gray-700">
                       <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0">
                         <span className="font-medium">Payback Period:</span>
-                        <span className="font-semibold text-green-600 sm:text-gray-900">3.5 years</span>
+                        <span className="font-semibold text-green-600 sm:text-gray-900">{dynamicPaybackPeriod.toFixed(1)} years</span>
                       </div>
                       <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0">
                         <span className="font-medium">Projected ROI:</span>

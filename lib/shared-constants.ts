@@ -12,7 +12,7 @@ export const DARJBERRY_CONSTANTS = {
   PRODUCTION_PATTERN: [0, 0.5, 1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], // 20 years
   
   // Business Metrics
-  PAYBACK_PERIOD: 3.5, // years
+  PAYBACK_PERIOD: 3.5, // years (calculated dynamically by InvestmentCalculator)
   PROJECTED_ROI: 500, // % over 15 years
   MANAGEMENT_PERIOD: 15, // years
   PLANT_LIFESPAN: 20, // years
