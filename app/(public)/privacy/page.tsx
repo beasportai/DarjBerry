@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 const PrivacyPolicy = () => {
   return (
@@ -120,9 +121,9 @@ const PrivacyPolicy = () => {
         {/* Navigation */}
         <div className="mt-8 text-center">
           <div className="flex flex-wrap gap-4 justify-center">
-            <a href="/terms" className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">Terms & Conditions</a>
-            <a href="/refunds" className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors">Refund Policy</a>
-            <a href="/" className="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors">Back to Home</a>
+            <Link href="/terms" className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">Terms & Conditions</Link>
+            <Link href="/refunds" className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors">Refund Policy</Link>
+            <Link href="/" className="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors">Back to Home</Link>
           </div>
         </div>
 

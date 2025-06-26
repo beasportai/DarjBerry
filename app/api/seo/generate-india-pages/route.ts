@@ -70,10 +70,7 @@ export async function POST(request: Request) {
               h1Title: page.h1Title,
               content: page.content as any,
               schemaMarkup: page.schemaMarkup as any,
-              keywords: page.keywords,
-              longtailKeywords: page.longtailKeywords,
-              investmentKeywords: page.investmentKeywords,
-              relatedPages: page.relatedPages,
+              keywords: page.keywords.join(','),
               isPublished: true
             }
           });

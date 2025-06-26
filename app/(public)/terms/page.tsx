@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 const TermsAndConditions = () => {
   return (
@@ -206,9 +207,9 @@ const TermsAndConditions = () => {
         {/* Navigation */}
         <div className="mt-8 text-center">
           <div className="flex flex-wrap gap-4 justify-center">
-            <a href="/privacy" className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">Privacy Policy</a>
-            <a href="/refunds" className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors">Refund Policy</a>
-            <a href="/" className="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors">Back to Home</a>
+            <Link href="/privacy" className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">Privacy Policy</Link>
+            <Link href="/refunds" className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors">Refund Policy</Link>
+            <Link href="/" className="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors">Back to Home</Link>
           </div>
         </div>
 
