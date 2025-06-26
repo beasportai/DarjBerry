@@ -21,7 +21,7 @@ Darjberry is a comprehensive managed blueberry farming platform that connects la
 ### Financial Returns
 
 - **Investment**: ₹4,000 per plant initial cost
-- **Payback Period**: 3.5 years
+- **Payback Period**: 4.1 years
 - **ROI**: 500% over 15 years (₹20,000 return per plant)
 - **Tax Benefits**: Agricultural income exempt under Section 10(1) of Income Tax Act, 1961
 

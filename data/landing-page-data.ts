@@ -13,27 +13,27 @@ export const heroData = {
 export const problemSolutionData = {
   problems: [
     {
-      title: "🧠 Complete Agronomy Service",
+      title: "🧠 Specific Knowledge",
       description:
-        "25+ year experienced team handles everything from soil prep to harvest. Proven low cost polytunnel technology from Farm2Fam.",
+        "25+ year experienced team provides complete agronomy service from soil prep to harvest. Alongwith, proven low cost polytunnel technology from Farm2Fam in Indian climate.",
       emoji: "🧠",
     },
     {
-      title: "⏰ Zero Time Commitment",
+      title: "⏰ Daily Nutrients & Maintenance",
       description:
-        "Share WhatsApp location, sign papers, collect profits. ₹4,000/plant setup (including protected cultivation, soil, nutrients, drip irrigation, fogger systems, and imported high-yielding plants aged 1.5 years or more) + ₹15k/month operations. We handle 100% of the work.",
+        "Zero Time Commitment. Share WhatsApp location & PIN code, receive custom proposal with complete climatic profile, sign papers, pay & with each harvest collect profits.",
       emoji: "⏰",
     },
     {
-      title: "🛡️ Protected Investment",
+      title: "🛡️ Capital Protected Investment",
       description:
-        "135MT production track record by agronomists. Climate-controlled polyhouses + <a href='https://pmfby.gov.in/faq' target='_blank' rel='noopener noreferrer' class='text-purple-600 hover:text-purple-700 underline'>PMFBY crop insurance</a> at 5% premium.",
+        "Protected Investment with 135MT production track record by team of agronomists. Climate-controlled polyhouses + optional <a href='https://pmfby.gov.in/faq' target='_blank' rel='noopener noreferrer' class='text-purple-600 hover:text-purple-700 underline'>PMFBY crop insurance</a> at 5% premium. India imports 1900 tonnes of Blueberries annually.",
       emoji: "🛡️",
     },
     {
-      title: "💰 Direct Market Access",
+      title: "💰 Sell Harvested Produce",
       description:
-        "Zepto, Blinkit, BigBasket + Hyperpure (B2B hotels & restaurants). Instituitional buyers for icecream brands, jams, spreads, museli and skincare. 20% commission on sales.",
+        "We partner with Zepto, Blinkit, BigBasket + Hyperpure (B2B hotels & restaurants). Instituitional buyers for icecream brands, jams, spreads, museli and skincare. Mandi Contacts. Exports to markets like Singapore, Middle East. 20% commission on sales.",
       emoji: "💰",
     },
   ],
@@ -111,11 +111,11 @@ export const offerData = {
       included: "15-Year Marketing & Sales",
     },
     {
-      title: "🛡️ Risk Protection Package",
+      title: "🛡️ Performance Guarantee & Monitoring",
       description:
-        "Optional <a href='https://pmfby.gov.in/' target='_blank' rel='noopener noreferrer' class='text-purple-600 hover:text-purple-700 underline'>PMFBY crop insurance</a> + <a href='#faq' class='text-purple-600 hover:text-purple-700 underline'>performance guarantee</a> + <a href='#technology' class='text-purple-600 hover:text-purple-700 underline'>24/7 monitoring</a>. This is a capital protected investment.",
+        "Comprehensive <a href='#faq' class='text-blue-600 hover:text-blue-700 underline font-medium'>performance guarantee</a> + 24/7 farm monitoring + technical support. <strong>Optional:</strong> <a href='https://pmfby.gov.in/' target='_blank' rel='noopener noreferrer' class='text-blue-600 hover:text-blue-700 underline font-medium'>PMFBY crop insurance</a> available at 5% premium for additional protection.",
       value: "₹18,00,000",
-      included: "Insurance + Monitoring + Guarantee",
+      included: "Guarantee + 24/7 Monitoring + Support",
     },
   ],
   bonusItems: [
@@ -144,6 +144,12 @@ export const offerData = {
       description: `Complete documentation for 100% tax-free agricultural income. Build generational wealth without tax burden over ${DARJBERRY_CONSTANTS.PLANT_LIFESPAN} years.`,
       value: "₹20,00,000+",
       urgency: `Tax savings over ${DARJBERRY_CONSTANTS.PLANT_LIFESPAN} years`,
+    },
+    {
+      title: "🎁 BONUS #5: Optional Crop Insurance",
+      description: `<a href='https://pmfby.gov.in/' target='_blank' rel='noopener noreferrer' class='text-blue-600 hover:text-blue-700 underline font-medium'>PMFBY crop insurance</a> available at subsidized 5% premium. Protects against natural calamities, pests, and diseases. <a href='https://pmfby.gov.in/faq' target='_blank' rel='noopener noreferrer' class='text-blue-600 hover:text-blue-700 underline font-medium'>Learn more about coverage</a>.`,
+      value: "Optional Add-on",
+      urgency: "Government subsidized rates",
     },
   ],
   totalValue: "₹2,62,00,000+",
