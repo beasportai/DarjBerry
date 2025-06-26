@@ -27,7 +27,7 @@ export const problemSolutionData = {
     {
       title: "🛡️ Capital Protected Investment",
       description:
-        "Protected Investment with 135MT production track record by team of agronomists. Climate-controlled polyhouses + optional <a href='https://pmfby.gov.in/faq' target='_blank' rel='noopener noreferrer' class='text-purple-600 hover:text-purple-700 underline'>PMFBY crop insurance</a> at 5% premium. India imports 1900 tonnes of Blueberries annually.",
+        "Protected Investment with 135MT production track record by team of agronomists. Climate-controlled polyhouses + optional <a href='https://pmfby.gov.in/faq' target='_blank' rel='noopener noreferrer' class='text-purple-600 hover:text-purple-700 underline'>PMFBY crop insurance</a> at 5% premium.",
       emoji: "🛡️",
     },
     {
@@ -113,7 +113,7 @@ export const offerData = {
     {
       title: "🛡️ Performance Guarantee & Monitoring",
       description:
-        "Comprehensive <a href='#faq' class='text-blue-600 hover:text-blue-700 underline font-medium'>performance guarantee</a> + 24/7 farm monitoring + technical support. <strong>Optional:</strong> <a href='https://pmfby.gov.in/' target='_blank' rel='noopener noreferrer' class='text-blue-600 hover:text-blue-700 underline font-medium'>PMFBY crop insurance</a> available at 5% premium for additional protection.",
+        "Comprehensive <a href='#faq' class='text-blue-600 hover:text-blue-700 underline font-medium'>performance guarantee</a> + 24/7 farm monitoring + technical support.",
       value: "₹18,00,000",
       included: "Guarantee + 24/7 Monitoring + Support",
     },

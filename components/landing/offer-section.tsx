@@ -49,7 +49,6 @@ export const OfferSection: React.FC<OfferSectionProps> = ({
   return (
     <section className="py-8 sm:py-12 lg:py-16 bg-gradient-to-br from-slate-900 via-green-900 to-emerald-900 relative overflow-hidden">
       <div className="container mx-auto px-3 sm:px-4 relative z-10">
-        
         {/* Compact Header */}
         <div className="text-center mb-6 sm:mb-8">
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-3">
@@ -65,7 +64,7 @@ export const OfferSection: React.FC<OfferSectionProps> = ({
         </div>
         
         {/* Main Value Proposition Card */}
-        <Card className="shadow-2xl border-2 border-emerald-400/50 bg-white overflow-hidden mb-6">
+        <Card className="shadow-2xl border-2 border-emerald-400/50 bg-white overflow-hidden mb-6 -mt-4">
           <CardHeader className="bg-gradient-to-br from-emerald-600 via-green-600 to-emerald-700 text-white p-6 relative">
             <div className="text-center">
               <CardTitle className="text-2xl sm:text-3xl font-bold mb-3">
