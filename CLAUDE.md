@@ -80,17 +80,25 @@ Darjberry is a comprehensive managed blueberry farming platform that connects la
 
 ### Key Features to Implement
 
+**High Priority:**
+- Fix navbar 'ABOUT us' link to point to /about instead of #about
 - Automated feasibility reporting
-- WhatsApp integration for updates
 - Customer onboarding flow
+
+**Medium Priority:**
+- Set video volume to 20% in Why Blueberry section
+- WhatsApp integration for updates
 - Payment plan options (lump sum, installments, daily SIP)
 
 ## Contact Information
 
-**Fursat Farms Private Limited**
-3rd Floor, Dwarika Heights, Near Vega Circle Sevoke Road, Siliguri - 734005
-Phone: +91 7047 474 942
-Email: darjberry@gmail.com
+**Note**: Complete contact information is displayed in the website footer component (`/components/footer.tsx`):
+- **Company**: Fursat Farms Private Limited
+- **Address**: 3rd Floor, Dwarika Heights, Near Vega Circle Sevoke Road, Siliguri - 734005
+- **Phone**: +91 7047 474 942
+- **Email**: darjberry@gmail.com
+
+Avoid duplicating this contact information elsewhere on the site to maintain consistency.
 
 ## References
 

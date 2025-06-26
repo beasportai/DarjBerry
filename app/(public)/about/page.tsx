@@ -46,7 +46,7 @@ const About = () => {
 
   const milestones = [
     { year: "2019", title: "Foundation", description: "Fursat Farms Private Limited established with vision for India's largest blueberry cooperative" },
-    { year: "2020-2022", title: "Research & Development", description: "Partnership with Farm2Fam, perfecting low-cost polytunnel technology for Indian climate" },
+    { year: "2020-2022", title: "Research & Development", description: "Leveraged 25+ years agronomist experience from DS GROUP, IG INTERNATIONAL & FARM2FAM to perfect low-cost polytunnel technology for Indian climate" },
     { year: "2023", title: "Scale Operations", description: "Expanded to 100+ acres across Darjeeling and Northeast India with proven success" },
     { year: "2024", title: "Multi-State Cooperative", description: "Transformed into cooperative society - 'The Amul for Berries' model launched" },
     { year: "2025", title: "Pan-India Expansion", description: "Opening partnerships across suitable regions with 700+ location guides" }
@@ -54,46 +54,93 @@ const About = () => {
 
   return (
     <>
-      {/* Hero Section with Background */}
-      <div className="relative w-full h-[70vh] text-white overflow-hidden">
+      {/* Hero Section - Same as Landing Page */}
+      <div className="relative w-full h-screen text-white overflow-hidden font-sans">
+        {/* Mobile Background Image (Default - loads first) */}
+        <Image
+          src="/images/hero-mobile.jpg"
+          alt="Darjberry blueberry farming landscape"
+          fill
+          priority
+          className="object-cover object-center z-0 md:hidden"
+          sizes="100vw"
+        />
+        
+        {/* Desktop Background Image (Hidden on mobile) */}
         <Image
           src="/images/hero-desktop.jpg"
           alt="Darjberry blueberry farming landscape"
           fill
-          priority
-          className="object-cover object-center z-0"
+          className="object-cover object-center z-0 hidden md:block"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-black/40 z-10" />
-        
-        <div className="relative z-20 flex flex-col justify-center items-center h-full px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl"
-          >
-            <div className="flex items-center justify-center gap-2 mb-6">
-              <Star className="w-5 h-5 text-yellow-400 fill-current" />
-              <Star className="w-5 h-5 text-yellow-400 fill-current" />
-              <Star className="w-5 h-5 text-yellow-400 fill-current" />
-              <Star className="w-5 h-5 text-yellow-400 fill-current" />
-              <Star className="w-5 h-5 text-yellow-400 fill-current" />
-            </div>
-            
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              <span className="block">About</span>
-              <span className="block text-green-400 italic">Darjberry</span>
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/30 z-10" />
+
+        {/* Desktop Captions - Hidden on mobile */}
+        <div className="absolute bottom-12 left-6 md:left-12 text-xs md:text-sm max-w-[250px] z-20 hidden md:block">
+          <div className="text-base mb-2">★★★★★</div>
+          <p className="leading-relaxed text-xs md:text-sm opacity-90">
+            Transform your land into a profitable blueberry farm
+          </p>
+        </div>
+
+        <div className="absolute bottom-12 right-6 md:right-12 text-xs md:text-sm max-w-[250px] text-right z-20 hidden md:block">
+          <div className="text-base mb-2">★★★★★</div>
+          <p className="leading-relaxed text-xs md:text-sm opacity-90">
+            Complete done-for-you service with 500% ROI
+          </p>
+        </div>
+
+        {/* Mobile Star Rating - Only visible on mobile, positioned absolutely */}
+        <div className="block md:hidden absolute left-4 top-[12%] z-20 py-2">
+          <div className="text-base mb-2">★★★★★</div>
+          <p className="text-xs opacity-90 max-w-[70%] leading-relaxed">
+            Transform your land into a profitable blueberry farm
+          </p>
+        </div>
+
+        {/* Hero Text */}
+        <div className="relative z-20 flex flex-col justify-center items-center h-full px-4 md:px-6 text-center">
+          <div className="py-4 md:py-0">
+            <h1 className="text-[4rem] md:text-[7rem] leading-[0.85] font-light mb-2 md:mb-0">
+              <span className="block font-sans">About</span>
+              <span className="block font-serif italic -mt-2 md:-mt-4">
+                Darjberry
+              </span>
             </h1>
-            
-            <p className="text-xl md:text-2xl mb-8 text-green-100">
-              Revolutionizing agricultural investment through premium blueberry farming
+          </div>
+
+          <div className="mt-4 md:mt-12 text-center py-3 md:py-0">
+            <p className="text-sm md:text-base leading-relaxed px-2">
+              <span className="block mb-2">
+                <strong>Revolutionizing agricultural investment</strong> through premium
+                blueberry farming
+              </span>
+              <span className="block">
+                India's first managed farming platform with complete "Done-For-You" service
+              </span>
             </p>
-            
-            <Badge className="bg-green-600/20 text-green-300 text-lg px-6 py-2 mb-8">
-              India's First Managed Blueberry Farming Platform
-            </Badge>
-          </motion.div>
+          </div>
+
+          <div className="mt-4 md:mt-8 text-xs md:text-sm max-w-2xl opacity-80 text-center px-4 md:px-6 py-2 md:py-0">
+            <p className="leading-relaxed">
+              Operating as Multi-State Cooperative Society, transforming tea estates into profitable 
+              blueberry farms with 100% tax-free agricultural returns.
+            </p>
+          </div>
+
+          {/* CTA Button */}
+          <div className="mt-8 md:mt-8 text-center py-4 md:py-0">
+            <Button
+              size="lg"
+              className="bg-darj-accent hover:bg-darj-accent/90 text-darj-slate font-semibold py-4 px-8 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+              onClick={handleContactUs}
+            >
+              Start Your Farm Today
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -348,13 +395,6 @@ const About = () => {
               </Button>
             </div>
             
-            <div className="mt-8 text-sm text-gray-500">
-              <p>
-                <strong>Fursat Farms Private Limited</strong><br />
-                3rd Floor, Dwarika Heights, Near Vega Circle Sevoke Road, Siliguri - 734005<br />
-                Phone: +91 7047 474 942 • Email: darjberry@gmail.com
-              </p>
-            </div>
           </div>
         </motion.section>
       </div>
