@@ -21,7 +21,6 @@ import {
   navigationData,
 } from "@/data/landing-page-data";
 
-
 export default function DarjberryLandingPage() {
   const handleCtaClick = () => {
     // Redirect to WhatsApp with pre-filled message for farming inquiry
@@ -41,7 +40,6 @@ export default function DarjberryLandingPage() {
 
   return (
     <div className="bg-white w-full overflow-x-hidden">
-
       <main className="w-full">
         <LandingNavigation
           brandName={navigationData.brandName}
@@ -72,7 +70,7 @@ export default function DarjberryLandingPage() {
 
           <RoiCalculatorSection />
 
-          <div id="offer">
+          {/* <div id="offer">
             <OfferSection
               offerItems={offerData.offerItems}
               bonusItems={offerData.bonusItems}
@@ -84,7 +82,7 @@ export default function DarjberryLandingPage() {
               availabilityReason={offerData.availabilityReason}
               scarcityFactors={offerData.scarcityFactors}
             />
-          </div>
+          </div> */}
 
           <div id="faq">
             <FaqSection faqs={faqData.faqs} />
