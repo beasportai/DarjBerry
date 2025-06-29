@@ -11,11 +11,35 @@ interface FAQ {
   answer: string;
 }
 
-interface FaqSectionProps {
-  faqs: FAQ[];
-}
+const faqs: FAQ[] = [
+  {
+    question: "What is the minimum investment?",
+    answer:
+      "The minimum investment is for 100 plants, which costs ₹4,00,000. We have different tiers for growers: Hobby (100+ plants), Enthusiast (1000+ plants), Grower (10,000+ plants), and Commercial Grower (100,000+ plants).",
+  },
+  {
+    question: "Are there any government subsidies or loans available?",
+    answer:
+      "Yes, the government offers subsidies for blueberry farming under the National Horticulture Mission. Additionally, you can avail loans through the Agriculture Infrastructure Fund (AIF). We can help you with the application process for both.",
+  },
+  {
+    question: "What is the expected return on investment?",
+    answer:
+      "The expected ROI is over 500% over a 15-year period. The payback period is approximately 4.1 years. Your agricultural income is also tax-free under Section 10(1) of the Income Tax Act, 1961.",
+  },
+  {
+    question: "What does the service package include?",
+    answer:
+      "Our comprehensive service package includes a climate-controlled polyhouse, drip irrigation, a fogger system, 15 years of expert agronomy services, and complete B2B/D2C sales and marketing support. We charge 20% of the gross revenue for sales and marketing.",
+  },
+  {
+    question: "What if the plants don't produce the guaranteed yield?",
+    answer:
+      "We guarantee a minimum yield of 2kg per plant by Year 4. If this is not met, we will provide our management services for Year 5 completely free of charge.",
+  },
+];
 
-export const FaqSection: React.FC<FaqSectionProps> = ({ faqs }) => {
+export const FaqSection: React.FC = () => {
   return (
     <section className="py-20">
       <div className="container mx-auto px-4">

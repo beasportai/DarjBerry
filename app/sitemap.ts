@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
+import { prisma } from '@/lib/prisma'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://darjberry.com'
   
   // Static pages
@@ -21,20 +22,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route === '' ? 1 : 0.8,
   }))
 
-  // Investment pages for major cities
-  const investmentPages = [
-    '/investment/west-bengal/siliguri',
-    '/investment/west-bengal/darjeeling',
-    '/investment/karnataka/bangalore',
-    '/investment/tamil-nadu/chennai',
-    '/investment/maharashtra/mumbai',
-    '/investment/delhi/new-delhi',
-  ].map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
+  // Dynamically generated SEO pages from the database
+  const seoPages = await prisma.sEOPage.findMany({
+    select: {
+      slug: true,
+      updatedAt: true, // Assuming you have an updatedAt field in your model
+    },
+    where: {
+      isPublished: true, // Only include published pages
+    },
+  });
+
+  const dynamicSeoPages = seoPages.map((page) => ({
+    url: `${baseUrl}/${page.slug}`,
+    lastModified: page.updatedAt || new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.9,
-  }))
+  }));
 
-  return [...staticPages, ...investmentPages]
+  return [...staticPages, ...dynamicSeoPages]
 }

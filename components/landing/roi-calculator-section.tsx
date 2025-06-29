@@ -24,31 +24,33 @@ interface RoiCalculatorSectionProps {
 }
 
 export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = () => {
-  const [acres, setAcres] = useState<number>(1);
+  const [plants, setPlants] = useState<number>(100);
   const [pricePerKg, setPricePerKg] = useState<number>(DARJBERRY_CONSTANTS.DEFAULT_PRICE_PER_KG);
   const [calculation, setCalculation] = useState<InvestmentCalculation | null>(
     null
   );
   const [error, setError] = useState<string>("");
 
+  const acres = plants / DARJBERRY_CONSTANTS.PLANTS_PER_ACRE;
+
   useEffect(() => {
-    if (acres >= 1) {
+    if (acres >= 0.045) { // Approx 100 plants
       setError("");
       const calc = InvestmentCalculator.calculate(acres, pricePerKg);
       setCalculation(calc);
     } else {
-      setError("Minimum 1 acre required for commercial viability");
+      setError("Minimum 100 plants required for commercial viability");
       setCalculation(null);
     }
-  }, [acres, pricePerKg]);
+  }, [plants, pricePerKg, acres]);
 
-  const handleAcresChange = (value: number) => {
-    if (value < 1) {
-      setError("Minimum 1 acre required for commercial viability");
+  const handlePlantsChange = (value: number) => {
+    if (value < 100) {
+      setError("Minimum 100 plants required for commercial viability");
     } else {
       setError("");
     }
-    setAcres(value);
+    setPlants(value);
   };
 
   // Generate WhatsApp contact URL with calculation data
@@ -56,7 +58,7 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = () => {
     if (!calculation) return `https://wa.me/${DARJBERRY_CONSTANTS.WHATSAPP_NUMBER}`;
     
     return generateWhatsAppURL({
-      acres,
+      acres: acres,
       plants: calculation.plants,
       totalCost: calculation.totalCost,
       expectedRevenue: calculation.expectedRevenue,
@@ -116,36 +118,36 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = () => {
                 <div className="flex items-center gap-3 mb-4">
                   <span className="text-2xl">🏞️</span>
                   <Label
-                    htmlFor="acres"
+                    htmlFor="plants"
                     className="text-xl font-bold text-blue-100"
                   >
-                    Your Land Size (in acres)
+                    Number of Plants
                   </Label>
                 </div>
                 <div className="flex items-center gap-4 mt-4">
                   <Slider
-                    id="acres"
-                    min={1}
-                    max={100}
-                    step={0.5}
-                    value={[acres]}
-                    onValueChange={(value) => handleAcresChange(value[0])}
+                    id="plants"
+                    min={100}
+                    max={220000}
+                    step={100}
+                    value={[plants]}
+                    onValueChange={(value) => handlePlantsChange(value[0])}
                     className="flex-1"
                   />
                   <div className="flex items-center gap-2">
                     <Input
                       type="number"
-                      min={1}
-                      max={100}
-                      step={0.5}
-                      value={acres}
+                      min={100}
+                      max={220000}
+                      step={100}
+                      value={plants}
                       onChange={(e) =>
-                        handleAcresChange(Number(e.target.value))
+                        handlePlantsChange(Number(e.target.value))
                       }
                       className="w-24 bg-white/20 border-2 border-blue-400/50 text-center font-bold text-2xl text-white rounded-xl focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30"
                     />
                     <span className="text-sm text-blue-200 font-medium">
-                      acres
+                      plants
                     </span>
                   </div>
                 </div>
@@ -157,23 +159,30 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = () => {
                     </p>
                   </div>
                 )}
-                <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                  <div className="text-center p-3 bg-white/10 rounded-lg">
-                    <div className="font-semibold text-blue-200 text-sm">Beginner</div>
-                    <div className="text-blue-300 text-xs">1-2 acres</div>
-                  </div>
-                  <div className="text-center p-3 bg-white/10 rounded-lg">
-                    <div className="font-semibold text-blue-200 text-sm">
-                      Commercial
-                    </div>
-                    <div className="text-blue-300 text-xs">3-10 acres</div>
-                  </div>
-                  <div className="text-center p-3 bg-white/10 rounded-lg">
-                    <div className="font-semibold text-blue-200 text-sm">
-                      Enterprise
-                    </div>
-                    <div className="text-blue-300 text-xs">10+ acres</div>
-                  </div>
+                <div className="mt-4 grid grid-cols-1 sm:grid-cols-1 gap-3 text-xs">
+                  {(() => {
+                    let label = "";
+                    let range = "";
+                    if (plants >= 100000) {
+                      label = "Commercial Grower";
+                      range = "100,000+ plants";
+                    } else if (plants >= 10000) {
+                      label = "Grower";
+                      range = "10,000+ plants";
+                    } else if (plants >= 1000) {
+                      label = "Enthusiast";
+                      range = "1000+ plants";
+                    } else if (plants >= 100) {
+                      label = "Hobby";
+                      range = "100+ plants";
+                    }
+                    return label && (
+                      <div className="text-center p-3 bg-white/10 rounded-lg">
+                        <div className="font-semibold text-blue-200 text-sm">{label}</div>
+                        <div className="text-blue-300 text-xs">{range}</div>
+                      </div>
+                    );
+                  })()}
                 </div>
               </div>
 
@@ -216,23 +225,41 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = () => {
                     </span>
                   </div>
                 </div>
-                <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
-                  <div className="text-center p-4 bg-orange-500/20 rounded-lg border border-orange-400/30">
-                    <div className="font-semibold text-orange-200 text-lg">₹600</div>
-                    <div className="text-orange-300 text-sm">Local Market</div>
-                  </div>
-                  <div className="text-center p-4 bg-emerald-500/30 rounded-lg border-2 border-emerald-400/50">
-                    <div className="font-semibold text-emerald-200 text-lg">₹800</div>
-                    <div className="text-emerald-300 text-sm">
-                      Premium Grade
-                    </div>
-                  </div>
-                  <div className="text-center p-4 bg-purple-500/20 rounded-lg border border-purple-400/30">
-                    <div className="font-semibold text-purple-200 text-lg">₹1000+</div>
-                    <div className="text-purple-300 text-sm">
-                      Export Quality
-                    </div>
-                  </div>
+                <div className="mt-4 grid grid-cols-1 sm:grid-cols-1 gap-3 text-sm">
+                  {(() => {
+                    let label = "";
+                    let priceRange = "";
+                    let bgColor = "";
+                    let borderColor = "";
+                    let textColor = "";
+
+                    if (pricePerKg >= 1000) {
+                      label = "Export Quality";
+                      priceRange = "₹1000+";
+                      bgColor = "bg-purple-500/20";
+                      borderColor = "border-purple-400/30";
+                      textColor = "text-purple-200";
+                    } else if (pricePerKg >= 800) {
+                      label = "Premium Grade";
+                      priceRange = "₹800";
+                      bgColor = "bg-emerald-500/30";
+                      borderColor = "border-2 border-emerald-400/50";
+                      textColor = "text-emerald-200";
+                    } else if (pricePerKg >= 600) {
+                      label = "Local Market";
+                      priceRange = "₹600";
+                      bgColor = "bg-orange-500/20";
+                      borderColor = "border-orange-400/30";
+                      textColor = "text-orange-200";
+                    }
+
+                    return label && (
+                      <div className={`text-center p-4 rounded-lg ${bgColor} ${borderColor}`}>
+                        <div className={`font-semibold text-lg ${textColor}`}>{priceRange}</div>
+                        <div className={`text-sm ${textColor}`}>{label}</div>
+                      </div>
+                    );
+                  })()}
                 </div>
               </div>
 
@@ -254,12 +281,8 @@ export const RoiCalculatorSection: React.FC<RoiCalculatorSectionProps> = () => {
                       </p>
                       <div className="text-xs md:text-sm text-blue-200">
                         <div className="flex justify-between">
-                          <span>Density:</span>
-                          <span className="font-semibold">2,200/acre</span>
-                        </div>
-                        <div className="flex justify-between">
                           <span>Coverage:</span>
-                          <span className="font-semibold">{acres} acres</span>
+                          <span className="font-semibold">{calculation.coverage}</span>
                         </div>
                       </div>
                     </div>

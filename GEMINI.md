@@ -18,12 +18,21 @@ Darjberry is a comprehensive managed blueberry farming platform that connects la
 
 ## Value Proposition
 
+### Grower Tiers
+
+- **Hobby**: 100+ plants
+- **Enthusiast**: 1,000+ plants
+- **Grower**: 10,000+ plants
+- **Commercial Grower**: 100,000+ plants
+
 ### Financial Returns
 
 - **Investment**: ₹4,000 per plant initial cost
+- **Minimum Investment**: 100 plants (₹4,00,000)
 - **Payback Period**: 4.1 years
 - **ROI**: 500% over 15 years (₹20,000 return per plant)
 - **Tax Benefits**: Agricultural income exempt under Section 10(1) of Income Tax Act, 1961
+- **Government Support**: Subsidies available under the National Horticulture Mission and loans via the Agriculture Infrastructure Fund (AIF).
 
 ### Service Package (₹88,00,000 for 1 acre / 2,200 plants)
 

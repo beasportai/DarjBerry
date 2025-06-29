@@ -24,9 +24,9 @@ export const WhyBlueberrySection: React.FC = () => {
 
                 <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-xl bg-black mb-6">
                   <iframe
-                    src="https://www.youtube.com/embed/8eb_41ZpyOQ?autoplay=1&mute=0&rel=0&modestbranding=1&loop=1&playlist=8eb_41ZpyOQ"
+                    src="https://www.youtube.com/embed/8eb_41ZpyOQ?mute=0&rel=0&modestbranding=1&loop=1&playlist=8eb_41ZpyOQ"
                     title="Bryan Johnson Blueprint Diet - Blueberries for Longevity"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
                     className="w-full h-full"
                   />

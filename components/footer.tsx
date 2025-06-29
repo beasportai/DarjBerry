@@ -21,7 +21,7 @@ const Footer = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 py-12 md:py-20"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-x-8 gap-y-12 py-16 md:py-24 lg:py-32"
           id="contact"
         >
         <motion.div
@@ -32,39 +32,39 @@ const Footer = () => {
           variants={fadeInUp}
         >
           <Link href="/">
-            <div className="flex items-start gap-2.5 mb-6 md:mb-8 cursor-pointer">
+            <div className="flex items-start gap-3 mb-8 md:mb-10 cursor-pointer">
               <Image
                 src="/images/plantito-logo.svg"
                 alt="Darjberry Logo"
-                width={40}
-                height={40}
-                className="w-10 h-10"
+                width={48}
+                height={48}
+                className="w-12 h-12"
               />
-              <span className="text-2xl sm:text-3xl text-white font-bold">
+              <span className="text-3xl sm:text-4xl text-white font-bold">
                 Darjberry
               </span>
             </div>
           </Link>
 
-          <div className="mb-6">
-            <p className="text-green-100 text-sm md:text-base mb-4 leading-relaxed">
+          <div className="mb-8">
+            <p className="text-green-100 text-base leading-relaxed mb-6">
               Transform your land into a profitable, tax-free agricultural asset through turnkey blueberry farming services.
             </p>
             <div className="flex flex-wrap gap-3 mb-6">
-              <span className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs text-white">
+              <span className="bg-white/20 backdrop-blur-sm px-4 py-1.5 rounded-full text-sm text-white font-medium">
                 ✅ Tax-Free Income
               </span>
-              <span className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs text-white">
+              <span className="bg-white/20 backdrop-blur-sm px-4 py-1.5 rounded-full text-sm text-white font-medium">
                 ✅ 500% ROI
               </span>
-              <span className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs text-white">
+              <span className="bg-white/20 backdrop-blur-sm px-4 py-1.5 rounded-full text-sm text-white font-medium">
                 ✅ 15-20 Year Partnership
               </span>
             </div>
           </div>
 
           <div>
-            <ul className="flex gap-4 md:gap-6 mb-6">
+            <ul className="flex gap-5 md:gap-6 mb-6">
               <li>
                 <Link
                   className="text-white hover:text-green-200 transition-colors duration-300"
@@ -72,7 +72,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <BsInstagram className="size-5 md:size-6" />
+                  <BsInstagram className="size-6 md:size-7" />
                 </Link>
               </li>
               <li>
@@ -82,7 +82,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <BsFacebook className="size-5 md:size-6" />
+                  <BsFacebook className="size-6 md:size-7" />
                 </Link>
               </li>
               <li>
@@ -92,32 +92,32 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <BsTwitter className="size-5 md:size-6" />
+                  <BsTwitter className="size-6 md:size-7" />
                 </Link>
               </li>
             </ul>
-            <p className="text-xs md:text-sm text-green-200 leading-relaxed opacity-90">
+            <p className="text-sm text-green-200 leading-relaxed opacity-90">
               Copyright &copy; 2024 by Fursat Farms Private Limited. All rights reserved.
             </p>
           </div>
         </motion.div>
 
         <motion.div
-          className="flex flex-col"
+          className="flex flex-col lg:col-span-2"
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
           variants={fadeInUp}
         >
-          <p className="text-sm md:text-lg font-semibold mb-6 text-white">Contact Us</p>
-          <address className="not-italic text-xs md:text-sm leading-relaxed">
+          <p className="text-lg md:text-xl font-semibold mb-6 text-white">Contact Us</p>
+          <address className="not-italic text-sm leading-relaxed">
             <p className="mb-4 text-green-100 opacity-90">
               Fursat Farms Private Limited<br />
               3rd Floor, Dwarika Heights<br />
               Near Vega Circle Sevoke Road<br />
               Siliguri - 734005, West Bengal
             </p>
-            <div className="space-y-2">
+            <div className="space-y-3">
               <p>
                 <Link
                   className="text-white hover:text-green-200 transition-colors duration-300 flex items-center gap-2"
@@ -148,16 +148,15 @@ const Footer = () => {
           </address>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:col-span-3">
-          <motion.nav
-            className="flex flex-col"
+        <motion.nav
+            className="flex flex-col lg:col-span-1"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <p className="text-sm md:text-lg font-semibold mb-6 text-white">Account</p>
-            <ul className="flex flex-col gap-3 text-xs md:text-sm">
+            <p className="text-lg md:text-xl font-semibold mb-6 text-white">Account</p>
+            <ul className="flex flex-col gap-3 text-sm">
               <li>
                 <Link
                   className="text-green-100 hover:text-white transition-colors duration-300"
@@ -186,14 +185,14 @@ const Footer = () => {
           </motion.nav>
 
           <motion.nav
-            className="flex flex-col"
+            className="flex flex-col lg:col-span-1"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <p className="text-sm md:text-lg font-semibold mb-6 text-white">Company</p>
-            <ul className="flex flex-col gap-3 text-xs md:text-sm">
+            <p className="text-lg md:text-xl font-semibold mb-6 text-white">Company</p>
+            <ul className="flex flex-col gap-3 text-sm">
               <li>
                 <Link
                   className="text-green-100 hover:text-white transition-colors duration-300"
@@ -232,14 +231,14 @@ const Footer = () => {
           </motion.nav>
 
           <motion.nav
-            className="flex flex-col"
+            className="flex flex-col lg:col-span-1"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <p className="text-sm md:text-lg font-semibold mb-6 text-white">Legal</p>
-            <ul className="flex flex-col gap-3 text-xs md:text-sm">
+            <p className="text-lg md:text-xl font-semibold mb-6 text-white">Legal</p>
+            <ul className="flex flex-col gap-3 text-sm">
               <li>
                 <Link
                   className="text-green-100 hover:text-white transition-colors duration-300"

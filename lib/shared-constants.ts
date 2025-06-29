@@ -17,7 +17,8 @@ export const DARJBERRY_CONSTANTS = {
   MANAGEMENT_PERIOD: 15, // years
   PLANT_LIFESPAN: 20, // years
   MINIMUM_YIELD_GUARANTEE: 2, // kg per plant by Year 4
-  
+  SQ_MT_SPACING_PER_PLANT: 1.8, // From GEMINI.md
+
   // Contact Information
   WHATSAPP_NUMBER: "917047474942",
   COMPANY_NAME: "Fursat Farms Private Limited",

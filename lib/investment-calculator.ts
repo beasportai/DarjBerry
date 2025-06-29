@@ -1,6 +1,7 @@
 export interface InvestmentCalculation {
   acres: number;
   plants: number;
+  coverage: string;
   totalCost: number;
   setupCost: number;
   annualOperatingCost: number;
@@ -48,6 +49,9 @@ export class InvestmentCalculator {
 
   static calculate(acres: number, pricePerKg: number = this.AVERAGE_PRICE_PER_KG): InvestmentCalculation {
     const plants = Math.round(acres * this.PLANTS_PER_ACRE);
+    const coverage = acres < 1 
+      ? `${(plants * DARJBERRY_CONSTANTS.SQ_MT_SPACING_PER_PLANT * 10.7639).toFixed(0)} sq. ft.`
+      : `${acres.toFixed(2)} acres`;
     
     // Total investment is ₹88,00,000 per acre (scaled proportionally)
     const totalInvestment = this.SERVICE_PACKAGE_COST_PER_ACRE * acres;
@@ -70,8 +74,8 @@ export class InvestmentCalculator {
       contingency: acres * 100000, // Buffer
     };
 
-    // Annual operating cost based on monthly maintenance fees
-    const annualOperatingCost = this.MONTHLY_MAINTENANCE_COST * 12; // ₹15,000 * 12 = ₹1,80,000 per year
+    // Annual operating cost based on monthly maintenance fees, scaled to farm size
+    const annualOperatingCost = (this.MONTHLY_MAINTENANCE_COST * 12) * acres;
 
     // Calculate production and revenue using dynamic price
     const matureYield = plants * this.PRODUCTION_PATTERN[4]; // kg per year from year 4+ (3kg/plant)
@@ -94,6 +98,7 @@ export class InvestmentCalculator {
     return {
       acres,
       plants,
+      coverage,
       totalCost: totalInvestment, // Total package cost
       setupCost: totalInvestment,
       annualOperatingCost,
@@ -147,14 +152,14 @@ export class InvestmentCalculator {
     let cumulativeFlow = -setupCost;
     
     for (let i = 0; i < projections.length; i++) {
-      cumulativeFlow += projections[i].netProfit;
-      
-      if (cumulativeFlow >= 0) {
-        // Calculate fractional year
-        const previousFlow = cumulativeFlow - projections[i].netProfit;
-        const fractionOfYear = Math.abs(previousFlow) / projections[i].netProfit;
-        return i + fractionOfYear; // i is already 0-based, so year 1 = index 0
+      const yearlyNetProfit = projections[i].netProfit;
+      if (yearlyNetProfit <= 0) continue;
+
+      if (cumulativeFlow + yearlyNetProfit >= 0) {
+        const fractionOfYear = -cumulativeFlow / yearlyNetProfit;
+        return i + 1 + fractionOfYear - 1; // Return the payback period in years
       }
+      cumulativeFlow += yearlyNetProfit;
     }
     
     return projections.length + 1; // Beyond projection period
